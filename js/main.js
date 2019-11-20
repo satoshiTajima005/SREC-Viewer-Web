@@ -49,8 +49,12 @@ document.addEventListener('DOMContentLoaded', function () {
               break;
             case 'AIS':
             case 'AIS-temp':
-              let txt = app.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl'); 
-              o.data = {unique: txt};
+              o.data = {
+                unique: {},
+                tree: {},
+                table: {}
+              };
+              app.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl', o.data.unique);
               break;
             case 'MSDSplus':
             case 'MSDSplus-temp':
@@ -63,10 +67,9 @@ document.addEventListener('DOMContentLoaded', function () {
               o.data = o.txt;
               break;
           }
-          return;
-        })).then(()=>{
-          app.tabLeft.list = app.tabLeft.list.concat(tabObject);
-        });
+        }));
+        app.tabLeft.list = app.tabLeft.list.concat(tabObject);
+
       },
       getFileArr: async function (file, o) {
         //ファイルタイプの判定
@@ -218,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         return c
       },
-      xmlTransform: async function (xmlStr, xslPath) {
+      xmlTransform: async function (xmlStr, xslPath, insertObject) {
         if (xmlStr.charCodeAt(0) === 0xFEFF) xmlStr = xmlStr.slice(1); //BOM削除
         xmlStr = xmlStr.replace(/<DESCRIPT(.|\s)*?>/im, "<DESCRIPT>") //名前空間除去
         let xml = app.parseXML(xmlStr);
@@ -226,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let xslp = new XSLTProcessor();
         xslp.importStylesheet(xsl);
         let o = xslp.transformToFragment(xml, document); 
-        return o.textContent;
+        insertObject = o.textContent;
       },
       xhrLoad: async function (url, isXML) {
         const response = await fetch(url);

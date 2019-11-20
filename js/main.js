@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       xhrLoad: async function(url){
         try {
-          return await fetch(url);
+          return await fetch(url).text();
         } catch (e) {
           return e;
         }

@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //エラーを削除
         //ファイルテキストをオブジェクト化
-        await Promis.all(tabObject.map(function (o, index) {
+        await Promise.all(tabObject.map(function (o, index) {
           switch (o.type) {
             case 'extErr':
             case 'zipErr':

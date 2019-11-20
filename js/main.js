@@ -65,8 +65,9 @@ document.addEventListener('DOMContentLoaded', function () {
           }
           return;
         }));
-        console.log(tabObject);
         app.tabLeft.list = app.tabLeft.list.concat(tabObject);
+
+
       },
       getFileArr: async function (file, o) {
         //ファイルタイプの判定
@@ -225,7 +226,8 @@ document.addEventListener('DOMContentLoaded', function () {
         let xsl = await app.xhrLoad(xslPath, true); //xslロード e3f237838f14
         let xslp = new XSLTProcessor();
         xslp.importStylesheet(xsl);
-        return xslp.transformToFragment(xml, document);
+        let o = xslp.transformToFragment(xml, document); 
+        return o.textContent;
       },
       xhrLoad: async function (url, isXML) {
         const response = await fetch(url);

@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
             case 'IEC62474':
             case 'SHAI':
             case 'SHCI':
-              o.data = "";
+              o.data = app.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl');
               break;
             case 'JAMA':
             case 'JGP4':
@@ -215,10 +215,21 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         return c
       },
-      xmlTransform: function (xmlStr, xslPath){
+      xmlTransform: async function (xmlStr, xslPath) {
         if (xmlStr.charCodeAt(0) === 0xFEFF) xmlStr = xmlStr.slice(1); //BOM削除
         xmlStr = xmlStr.replace(/<DESCRIPT(.|\s)*?>/im, "<DESCRIPT>") //名前空間除去
-        
+        let xsl = await xhrLoad(xslPath);        //xslロード
+        xslp = new XSLTProcessor();
+        xslp.importStylesheet(xsl);
+        return xslp.transformToFragment(xml, document);
+      },
+      xhrLoad: async function(url){
+        try {
+          const response = await fetch(url);
+          return response.status;
+        } catch (e) {
+          return e;
+        }
       },
       xmlToJson: function (xml) {
         var obj = {};

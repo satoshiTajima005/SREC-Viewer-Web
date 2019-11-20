@@ -34,13 +34,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //ファイルのテキスト読み取り
         let tabObject = [];
-        let r1 = await Promise.all(files.map(function (file) {
+        await Promise.all(files.map(function (file) {
           return app.getFileArr(file, tabObject);
         }));
 
+        console.log(tabObject);
+
         //エラーを削除
         //ファイルテキストをオブジェクト化
-        tabObject = await Promise.all(tabObject.map(function (o, index) {
+        await Promise.all(tabObject.map(async function (o, index) {
           switch (o.type) {
             case 'extErr':
             case 'zipErr':
@@ -54,8 +56,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 tree: {},
                 table: {}
               };
-              app.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl', o.data.unique);
-              return o;
+              o.data.unique = await app.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl');
+              break;
             case 'MSDSplus':
             case 'MSDSplus-temp':
             case 'IEC62474':
@@ -65,10 +67,10 @@ document.addEventListener('DOMContentLoaded', function () {
             case 'JAMA':
             case 'JGP4':
               o.data = o.txt;
-              return o;
+              break;
           }
         }));
-        console.log(tabObject)
+
         //app.tabLeft.list = app.tabLeft.list.concat(tabObject);
       },
       getFileArr: async function (file, o) {
@@ -221,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         return c
       },
-      xmlTransform: async function (xmlStr, xslPath, insertObject) {
+      xmlTransform: async function (xmlStr, xslPath) {
         if (xmlStr.charCodeAt(0) === 0xFEFF) xmlStr = xmlStr.slice(1); //BOM削除
         xmlStr = xmlStr.replace(/<DESCRIPT(.|\s)*?>/im, "<DESCRIPT>") //名前空間除去
         let xml = app.parseXML(xmlStr);
@@ -229,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let xslp = new XSLTProcessor();
         xslp.importStylesheet(xsl);
         let o = xslp.transformToFragment(xml, document);
-        insertObject = o.textContent;
+        return JSON.stringify(o.textContent);
       },
       xhrLoad: async function (url, isXML) {
         const response = await fetch(url);

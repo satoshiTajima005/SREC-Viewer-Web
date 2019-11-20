@@ -40,13 +40,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //エラーを削除
         //ファイルテキストをオブジェクト化
-        tabObject.map(function (o, index) {
+        await Promis.all(tabObject.map(function (o, index) {
           switch (o.type) {
             case 'extErr':
             case 'zipErr':
             case 'xmlTypeErr':
               tabObject.splice(index, 1);
-              return;
+              break;
             case 'AIS':
             case 'AIS-temp':
             case 'MSDSplus':
@@ -54,16 +54,15 @@ document.addEventListener('DOMContentLoaded', function () {
             case 'IEC62474':
             case 'SHAI':
             case 'SHCI':
-              o.data = await app.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl');
+              o.data = app.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl');
               break;
             case 'JAMA':
             case 'JGP4':
               o.data = o.txt;
               break;
           }
-          app.tabLeft.list.push(o);
-        });
-
+        }));
+        app.tabLeft.list.concat(tabObject);
       },
       getFileArr: async function (file, o) {
         //ファイルタイプの判定
@@ -233,7 +232,6 @@ document.addEventListener('DOMContentLoaded', function () {
             throw error
           }
         }
-
         try {
           const res = await fetch(url);
           return checkStatus(res);

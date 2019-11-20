@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
         await Promise.all(files.map(function (file) {
           return app.getFileArr(file, tabObject);
         }));
-        
+
         //エラーを削除
         //ファイルテキストをオブジェクト化
         await Promise.all(tabObject.map(async function (o, index) {
@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
             case 'zipErr':
             case 'xmlTypeErr':
               //エラーなので配列にリターンしない
+              //todo 画面に何かしらの表示
               break;
             case 'AIS':
             case 'AIS-temp':
@@ -69,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         }));
 
-        //app.tabLeft.list = app.tabLeft.list.concat(tabObject);
+        app.tabLeft.list = app.tabLeft.list.concat(tabObject);
       },
       getFileArr: async function (file, o) {
         //ファイルタイプの判定
@@ -229,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let xslp = new XSLTProcessor();
         xslp.importStylesheet(xsl);
         let o = xslp.transformToFragment(xml, document);
-        return JSON.stringify(o.textContent);
+        return JSON.parse(o.textContent);
       },
       xhrLoad: async function (url, isXML) {
         const response = await fetch(url);

@@ -48,13 +48,13 @@
       <tabcol v-if="tabLeft.list.length" :class="{half: tabRight.list.length}">
         <tabs slot="ul" :target="tabLeft" :moveto="tabRight" :language="language"></tabs>
         <div slot="preview" class="preview">
-          <pre>{{tabLeft.list[tabLeft.selected].data}}</pre>
+          <pre>{{JSON.stringify(tabLeft.list[tabLeft.selected].data, null, 2)}}</pre>
         </div>
       </tabcol>
       <tabcol v-if="tabRight.list.length" :class="{half: tabLeft.list.length}">
         <tabs slot="ul" :target="tabRight" :moveTo="tabLeft" :language="language"></tabs>
         <div slot="preview" class="preview">
-          <pre>{{tabRight.list[tabRight.selected].data}}</pre>
+          <pre>{{JSON.stringify(tabLeft.list[tabLeft.selected].data, null, 2)}}</pre>
         </div>
       </tabcol>
     </div>

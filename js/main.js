@@ -34,13 +34,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //ファイルのテキスト読み取り
         let tabObject = [];
-        let r = await Promise.all(files.map(function (file) {
+        let r1 = await Promise.all(files.map(function (file) {
           return app.getFileArr(file, tabObject);
         }));
 
         //エラーを削除
         //ファイルテキストをオブジェクト化
-        r = await Promise.all(tabObject.map(function (o, index) {
+        let r2 = await Promise.all(tabObject.map(function (o, index) {
           switch (o.type) {
             case 'extErr':
             case 'zipErr':
@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
               break;
           }
         }));
+        console.log(tabObject);
         app.tabLeft.list = app.tabLeft.list.concat(tabObject);
       },
       getFileArr: async function (file, o) {
@@ -223,20 +224,19 @@ document.addEventListener('DOMContentLoaded', function () {
         return xslp.transformToFragment(xml, document);
       },
       xhrLoad: async function (url) {
-        let p = new Promise(function (resolve, reject) {
-          var request = new XMLHttpRequest();
-          request.open('GET', url, true);
-          request.responseType = "text";
-          request.onload = function () {
-            if (request.readyState == 4 || request.status == 200) {
-              resolve(request.responseText);
-            } else {
-              reject(new Error(request.statusText));
-            }
-          };
-          request.send();
-        });
-        return await p();
+        const awaitForLoad = function (target) {
+          return new Promise(function (resolve) {
+            let listener = resolve(target.responseText);
+            target.addEventListener("load", listener, {
+              once: true
+            });
+          });
+        };
+        var request = new XMLHttpRequest();
+        request.open('GET', url, true);
+        request.responseType = "text";
+        request.send();
+        return await awaitForLoad(request)
       },
       xmlToJson: function (xml) {
         var obj = {};

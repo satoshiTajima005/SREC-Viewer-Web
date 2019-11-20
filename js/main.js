@@ -40,38 +40,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //エラーを削除
         //ファイルテキストをオブジェクト化
-        app.tabLeft.list = app.tabLeft.list.concat(tabObject);
-        let r2 = await Promise.all(app.tabLeft.list.map(function (o, index) {
-          if (!o.data) {
-            switch (o.type) {
-              case 'extErr':
-              case 'zipErr':
-              case 'xmlTypeErr':
-                app.tabLeft.list.splice(index, 1);
-                break;
-              case 'AIS':
-              case 'AIS-temp':
-                o.data = {
-                  unique: {},
-                  tree: {},
-                  table: {}
-                };
-                app.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl', o.data.unique);
-                break;
-              case 'MSDSplus':
-              case 'MSDSplus-temp':
-              case 'IEC62474':
-              case 'SHAI':
-              case 'SHCI':
-                break;
-              case 'JAMA':
-              case 'JGP4':
-                o.data = o.txt;
-                break;
-            }
+        tabObject = await Promise.all(tabObject.map(function (o, index) {
+          switch (o.type) {
+            case 'extErr':
+            case 'zipErr':
+            case 'xmlTypeErr':
+              //エラーなので配列にリターンしない
+              break;
+            case 'AIS':
+            case 'AIS-temp':
+              o.data = {
+                unique: {},
+                tree: {},
+                table: {}
+              };
+              app.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl', o.data.unique);
+              return o;
+            case 'MSDSplus':
+            case 'MSDSplus-temp':
+            case 'IEC62474':
+            case 'SHAI':
+            case 'SHCI':
+              break;
+            case 'JAMA':
+            case 'JGP4':
+              o.data = o.txt;
+              return o;
           }
         }));
-
+        console.log(tabObject)
+        //app.tabLeft.list = app.tabLeft.list.concat(tabObject);
       },
       getFileArr: async function (file, o) {
         //ファイルタイプの判定
@@ -230,13 +228,13 @@ document.addEventListener('DOMContentLoaded', function () {
         let xsl = await app.xhrLoad(xslPath, true); //xslロード e3f237838f14
         let xslp = new XSLTProcessor();
         xslp.importStylesheet(xsl);
-        let o = xslp.transformToFragment(xml, document); 
+        let o = xslp.transformToFragment(xml, document);
         insertObject = o.textContent;
       },
       xhrLoad: async function (url, isXML) {
         const response = await fetch(url);
         const res = await response.text();
-        return isXML? app.parseXML(res): res;
+        return isXML ? app.parseXML(res) : res;
       },
       xmlToJson: function (xml) {
         var obj = {};
@@ -271,7 +269,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         return obj;
       },
-      parseXML: function(xmlStr){
+      parseXML: function (xmlStr) {
         return new DOMParser().parseFromString(xmlStr, "text/xml")
       }
     }

@@ -228,11 +228,9 @@ document.addEventListener('DOMContentLoaded', function () {
       xhrLoad: async function (url, isXML) {
         const response = await fetch(url);
         const res = await response.text();
-        if (isXML) {
-          const parser = new DOMParser();
-          res = parser.parseFromString(postsData, "text/xml");
-        }
-        return res;
+        return await ( res => {
+          return isXML? new DOMParser().parseFromString(postsData, "text/xml"): res;
+        })();
       },
       xmlToJson: function (xml) {
         var obj = {};

@@ -227,10 +227,9 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       xhrLoad: async function (url, isXML) {
         const response = await fetch(url);
+        const postsData = await response.text();
         if (isXML) {
-          const postsData = await response.xml();
-        }else{
-          const postsData = await response.text();
+          postsData = new DOMParser().parseFromString(postsData, "text/xml");
         }
         return postsData;
       },

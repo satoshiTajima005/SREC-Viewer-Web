@@ -238,7 +238,8 @@ document.addEventListener('DOMContentLoaded', function () {
         request.open('GET', url, true);
         request.responseType = "text";
         request.send();
-        return await awaitForLoad(request)
+        let res = await awaitForLoad(request);
+        return res;
       },
       xmlToJson: function (xml) {
         var obj = {};

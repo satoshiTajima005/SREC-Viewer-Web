@@ -37,9 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
         await Promise.all(files.map(function (file) {
           return app.getFileArr(file, tabObject);
         }));
-
-        console.log(tabObject);
-
+        
         //エラーを削除
         //ファイルテキストをオブジェクト化
         await Promise.all(tabObject.map(async function (o, index) {

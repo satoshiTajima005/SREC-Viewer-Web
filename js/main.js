@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
             case 'IEC62474':
             case 'SHAI':
             case 'SHCI':
-              o.data = app.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl');
+              o.data = await app.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl');
               break;
             case 'JAMA':
             case 'JGP4':
@@ -218,16 +218,27 @@ document.addEventListener('DOMContentLoaded', function () {
       xmlTransform: async function (xmlStr, xslPath) {
         if (xmlStr.charCodeAt(0) === 0xFEFF) xmlStr = xmlStr.slice(1); //BOM削除
         xmlStr = xmlStr.replace(/<DESCRIPT(.|\s)*?>/im, "<DESCRIPT>") //名前空間除去
-        let xsl = await app.xhrLoad(xslPath);        //xslロード
+        let xsl = await app.xhrLoad(xslPath); //xslロード e3f237838f14
         xslp = new XSLTProcessor();
         xslp.importStylesheet(xsl);
         return xslp.transformToFragment(xml, document);
       },
-      xhrLoad: async function(url){
+      xhrLoad: async function (url) {
+        function checkStatus(res) {
+          if (res.status >= 200 && res.status < 300) {
+            return res
+          } else {
+            const error = new Error(res.statusText);
+            error.response = res;
+            throw error
+          }
+        }
+
         try {
-          return await fetch(url).text();
-        } catch (e) {
-          return e;
+          const res = await fetch(url);
+          return checkStatus(res);
+        } catch (error) {
+          console.log('request failed', error)
         }
       },
       xmlToJson: function (xml) {

@@ -49,7 +49,8 @@ document.addEventListener('DOMContentLoaded', function () {
               break;
             case 'AIS':
             case 'AIS-temp':
-              o.data = app.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl').textContent;
+              let txt = app.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl'); 
+              o.data.unique = txt;
               break;
             case 'MSDSplus':
             case 'MSDSplus-temp':

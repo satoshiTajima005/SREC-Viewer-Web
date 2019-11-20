@@ -220,15 +220,16 @@ document.addEventListener('DOMContentLoaded', function () {
       xmlTransform: async function (xmlStr, xslPath) {
         if (xmlStr.charCodeAt(0) === 0xFEFF) xmlStr = xmlStr.slice(1); //BOM削除
         xmlStr = xmlStr.replace(/<DESCRIPT(.|\s)*?>/im, "<DESCRIPT>") //名前空間除去
+        let xml = app.parseXML(xmlStr);
         let xsl = await app.xhrLoad(xslPath, true); //xslロード e3f237838f14
-        xslp = new XSLTProcessor();
+        let xslp = new XSLTProcessor();
         xslp.importStylesheet(xsl);
         return xslp.transformToFragment(xml, document);
       },
       xhrLoad: async function (url, isXML) {
         const response = await fetch(url);
         const res = await response.text();
-        return isXML? new DOMParser().parseFromString(res, "text/xml"): res;
+        return isXML? app.parseXML(res): res;
       },
       xmlToJson: function (xml) {
         var obj = {};
@@ -262,6 +263,9 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         }
         return obj;
+      },
+      parseXML: function(xmlStr){
+        return new DOMParser().parseFromString(xmlStr, "text/xml")
       }
     }
   });

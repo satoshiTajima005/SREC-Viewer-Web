@@ -49,18 +49,20 @@ document.addEventListener('DOMContentLoaded', function () {
               break;
             case 'AIS':
             case 'AIS-temp':
+              o.data = app.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl');
+              break;
             case 'MSDSplus':
             case 'MSDSplus-temp':
             case 'IEC62474':
             case 'SHAI':
             case 'SHCI':
-              o.data = app.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl');
               break;
             case 'JAMA':
             case 'JGP4':
               o.data = o.txt;
               break;
           }
+          return;
         }));
         console.log(tabObject);
         app.tabLeft.list = app.tabLeft.list.concat(tabObject);

@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function () {
       xmlTransform: async function (xmlStr, xslPath) {
         if (xmlStr.charCodeAt(0) === 0xFEFF) xmlStr = xmlStr.slice(1); //BOM削除
         xmlStr = xmlStr.replace(/<DESCRIPT(.|\s)*?>/im, "<DESCRIPT>") //名前空間除去
-        let xsl = await app.xhrLoad(xslPath); //xslロード e3f237838f14
+        let xsl = await app.xhrLoad(xslPath, true); //xslロード e3f237838f14
         xslp = new XSLTProcessor();
         xslp.importStylesheet(xsl);
         return xslp.transformToFragment(xml, document);

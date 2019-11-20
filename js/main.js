@@ -64,10 +64,9 @@ document.addEventListener('DOMContentLoaded', function () {
               break;
           }
           return;
-        }));
-        app.tabLeft.list = app.tabLeft.list.concat(tabObject);
-
-
+        })).then(()=>{
+          app.tabLeft.list = app.tabLeft.list.concat(tabObject);
+        });
       },
       getFileArr: async function (file, o) {
         //ファイルタイプの判定

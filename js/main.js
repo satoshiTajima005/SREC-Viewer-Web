@@ -226,19 +226,9 @@ document.addEventListener('DOMContentLoaded', function () {
         return xslp.transformToFragment(xml, document);
       },
       xhrLoad: async function (url) {
-        const awaitForLoad = function (target) {
-          return new Promise(function (resolve) {
-            let listener = resolve;
-            target.addEventListener("loadend", listener, {
-              once: true
-            });
-          });
-        };
-        let request = new XMLHttpRequest();
-        request.open('GET', url, true);
-        request.send(null);
-        let res = await awaitForLoad(request);
-        return res.responseText;
+        return await fetch (url)
+          .then(response => response.text())
+          .then(postDate => postDate);
       },
       xmlToJson: function (xml) {
         var obj = {};

@@ -1,0 +1,68 @@
+html,
+html * {
+  font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック体', 'Yu Gothic Medium', YuGothic, 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'Meiryo UI', 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+}
+
+html {
+  background-color: #f8f8f8;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+#app {
+  margin: 10px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.header {
+  border-bottom: 1px solid #aaa;
+  margin-bottom: 10px;
+}
+
+.viewarea {
+  height: calc(100% - 70px);
+}
+
+.half {
+  max-width: 50%;
+}
+
+.tabs {
+  margin-bottom: 0!important;
+}
+
+.tabs ul{
+  border-bottom: none;
+}
+
+.tabname {
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.movetab {
+  margin-right: 5px;
+  margin-left: 15px;
+  color: #ccc;
+}
+
+.movetab:hover {
+  color: #aaa;
+}
+
+.preview {
+  padding: 10px;
+  background-color: #fff;
+  max-height: calc(100% - 70px);
+  overflow-y: scroll;
+  border: 1px solid #dbdbdb;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}

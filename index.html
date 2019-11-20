@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Noto+Sans+JP:400,700" rel="stylesheet">
+  <link href="css/css.css" rel="stylesheet">
+  <script src="https://jp.vuejs.org/js/vue.js"></script>
+  <script src="js/unzip.min.js"></script>
+  <script src="js/component.js"></script>
+  <script src="dic/language.js"></script>
+  <script src="js/main.js"></script>
+  <title>SREC-Viewer</title>
+</head>
+
+<body>
+  <div id="app">
+    <div class="header columns">
+      <div class="column is-narrow">
+        <img src="css/logo.png">
+      </div>
+      <div class="column is-2">
+        <div class="file is-link">
+          <label class="file-label">
+            <input class="file-input" type="file" @change="openFile" accept=".xml,.csv,.jgp4,.shai,.shci" multiple>
+            <span class="file-cta">
+              <span class="file-icon"><i class="far fa-folder-open"></i></span>
+              <span class="file-label">{{language.openFile}}</span>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="column">
+        <button type="button" class="button is-link" :class="{'is-light': langType!=='ja'}"
+          @click="langType='ja'">Japanese</button>
+        <button type="button" class="button is-link" :class="{'is-light': langType!=='en'}" @click="langType='en'"
+          disabled>English</button>
+        <button type="button" class="button is-link" :class="{'is-light': langType!=='zh'}" @click="langType='zh'"
+          disabled>Chinese</button>
+      </div>
+    </div>
+    <div class="viewarea columns">
+      <tabcol v-if="tabLeft.list.length" :class="{half: tabRight.list.length}">
+        <tabs slot="ul" :target="tabLeft" :moveto="tabRight" :language="language"></tabs>
+        <div slot="preview" class="preview">
+          <pre>{{tabLeft.list[tabLeft.selected].data}}</pre>
+        </div>
+      </tabcol>
+      <tabcol v-if="tabRight.list.length" :class="{half: tabLeft.list.length}">
+        <tabs slot="ul" :target="tabRight" :moveTo="tabLeft" :language="language"></tabs>
+        <div slot="preview" class="preview">
+          <pre>{{tabRight.list[tabRight.selected].data}}</pre>
+        </div>
+      </tabcol>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -225,9 +225,13 @@ document.addEventListener('DOMContentLoaded', function () {
         xslp.importStylesheet(xsl);
         return xslp.transformToFragment(xml, document);
       },
-      xhrLoad: async function (url) {
+      xhrLoad: async function (url, isXML) {
         const response = await fetch(url);
-        const postsData = await response.text();
+        if (isXML) {
+          const postsData = await response.xml();
+        }else{
+          const postsData = await response.text();
+        }
         return postsData;
       },
       xmlToJson: function (xml) {

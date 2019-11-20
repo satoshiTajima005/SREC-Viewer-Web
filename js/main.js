@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //エラーを削除
         //ファイルテキストをオブジェクト化
-        await Promise.all(tabObject.map(function (o, index) {
+        r = await Promise.all(tabObject.map(function (o, index) {
           switch (o.type) {
             case 'extErr':
             case 'zipErr':
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
               break;
           }
         }));
-        app.tabLeft.list.concat(tabObject);
+        app.tabLeft.list = app.tabLeft.list.concat(tabObject);
       },
       getFileArr: async function (file, o) {
         //ファイルタイプの判定
@@ -223,21 +223,20 @@ document.addEventListener('DOMContentLoaded', function () {
         return xslp.transformToFragment(xml, document);
       },
       xhrLoad: async function (url) {
-        function checkStatus(res) {
-          if (res.status >= 200 && res.status < 300) {
-            return res
-          } else {
-            const error = new Error(res.statusText);
-            error.response = res;
-            throw error
-          }
-        }
-        try {
-          const res = await fetch(url);
-          return checkStatus(res);
-        } catch (error) {
-          console.log('request failed', error)
-        }
+        let p = new Promise(function (resolve, reject) {
+          var request = new XMLHttpRequest();
+          request.open('GET', url, true);
+          request.responseType = "text";
+          request.onload = function () {
+            if (request.readyState == 4 || request.status == 200) {
+              resolve(request.responseText);
+            } else {
+              reject(new Error(request.statusText));
+            }
+          };
+          request.send();
+        });
+        return await p();
       },
       xmlToJson: function (xml) {
         var obj = {};

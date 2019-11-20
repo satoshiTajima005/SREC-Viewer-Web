@@ -226,9 +226,9 @@ document.addEventListener('DOMContentLoaded', function () {
         return xslp.transformToFragment(xml, document);
       },
       xhrLoad: async function (url) {
-        return await fetch (url)
-          .then(response => response.text())
-          .then(postDate => postDate);
+        const response = await fetch(url);
+        const postsData = await response.text();
+        return postsData;
       },
       xmlToJson: function (xml) {
         var obj = {};

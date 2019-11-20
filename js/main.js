@@ -41,13 +41,13 @@ document.addEventListener('DOMContentLoaded', function () {
         //エラーを削除
         //ファイルテキストをオブジェクト化
         app.tabLeft.list = app.tabLeft.list.concat(tabObject);
-        let r2 = await Promise.all(tabObject.map(function (o, index) {
+        let r2 = await Promise.all(app.tabLeft.list.map(function (o, index) {
           if (!o.data) {
             switch (o.type) {
               case 'extErr':
               case 'zipErr':
               case 'xmlTypeErr':
-                tabObject.splice(index, 1);
+                app.tabLeft.list.splice(index, 1);
                 break;
               case 'AIS':
               case 'AIS-temp':

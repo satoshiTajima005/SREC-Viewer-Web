@@ -69,11 +69,11 @@
     <xsl:choose>
       <xsl:when test="//KJE176/PROPERTY_VALUE='0' or count(.//EDK027-001)=0">
         {"rowspan":"<xsl:value-of select="$rows"/>", "value":""},
-        {"rowspan":"<xsl:value-of select="$rows"/>", "value":""}<xsl:if test="count(.//KJA028)&gt;1">,</xsl:if>
+        {"rowspan":"<xsl:value-of select="$rows"/>", "value":""},
       </xsl:when>
       <xsl:when test="count(.//KJE055)!=0">
         {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE055/PROPERTY_VALUE"/>"},
-        {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select="format-number(.//KJE057/PROPERTY_VALUE, '0.#')"/>"}<xsl:if test="count(.//KJA028)&gt;1">,</xsl:if>
+        {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select="format-number(.//KJE057/PROPERTY_VALUE, '0.#')"/>"},
       </xsl:when>
     </xsl:choose>
     <xsl:apply-templates select=".//KJA028[1]"/>

@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
             case 'zipErr':
             case 'xmlTypeErr':
               //todo エラーなので配列から削除
-              //todo 画面に何かしらの表示
+              //todo 画面に何かしらの表示 e3f237838f14
               break;
             case 'AIS':
             case 'AIS-temp':
@@ -55,8 +55,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 tree: {},
                 table: {}
               };
-              o.data.unique = await app.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl');
-              o.data.tree = await app.xmlTransform(o.txt, 'xsl/AIS_TREE.xsl');
+              o.data.unique = await JSON.parse(app.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl'));
+              o.data.tree = await JSON.parse(app.xmlTransform(o.txt, 'xsl/AIS_TREE.xsl'));
+              o.data.table = await JSON.parse(app.xmlTransform(o.txt, 'xsl/AIS_TABLE.xsl'));
               break;
             case 'MSDSplus':
             case 'MSDSplus-temp':
@@ -232,7 +233,10 @@ document.addEventListener('DOMContentLoaded', function () {
         let xslp = new XSLTProcessor();
         xslp.importStylesheet(xsl);
         let o = xslp.transformToFragment(xml, document);
-        return JSON.parse(o.textContent);
+        if (xslPath == 'xsl/AIS_TABLE.xsl'){
+          o = o.replace(/\#\[/g, ']#[').replace(/\]\#/, '').replace(/\]\#\[/g, '],[');
+        }
+        return o.textContent;
       },
       xhrLoad: async function (url, isXML) {
         const response = await fetch(url);

@@ -55,9 +55,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 tree: {},
                 table: {}
               };
-              o.data.unique = JSON.parse(await app.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl'));
-              o.data.tree = JSON.parse(await app.xmlTransform(o.txt, 'xsl/AIS_TREE.xsl'));
-              o.data.table = JSON.parse(await app.xmlTransform(o.txt, 'xsl/AIS_TABLE.xsl'));
+              o.data.unique = await app.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl');
+              o.data.tree = await app.xmlTransform(o.txt, 'xsl/AIS_TREE.xsl');
+              o.data.table = await app.xmlTransform(o.txt, 'xsl/AIS_TABLE.xsl');
               break;
             case 'MSDSplus':
             case 'MSDSplus-temp':
@@ -72,6 +72,10 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         }));
 
+        //dataをJSON.parse
+        tabObject.map(o =>{
+          o.data = JSON.parse(o.data);
+        });
         //変換後の配列をタブリストに投入
         app.tabLeft.list = app.tabLeft.list.concat(tabObject);
       },

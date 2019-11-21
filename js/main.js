@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
             case 'extErr':
             case 'zipErr':
             case 'xmlTypeErr':
-              //エラーなので配列にリターンしない
+              //todo エラーなので配列から削除
               //todo 画面に何かしらの表示
               break;
             case 'AIS':
@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 table: {}
               };
               o.data.unique = await app.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl');
+              o.data.tree = await app.xmlTransform(o.txt, 'xsl/AIS_TREE.xsl');
               break;
             case 'MSDSplus':
             case 'MSDSplus-temp':
@@ -70,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         }));
 
+        //変換後の配列をタブリストに投入
         app.tabLeft.list = app.tabLeft.list.concat(tabObject);
       },
       getFileArr: async function (file, o) {
@@ -226,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (xmlStr.charCodeAt(0) === 0xFEFF) xmlStr = xmlStr.slice(1); //BOM削除
         xmlStr = xmlStr.replace(/<DESCRIPT(.|\s)*?>/im, "<DESCRIPT>") //名前空間除去
         let xml = app.parseXML(xmlStr);
-        let xsl = await app.xhrLoad(xslPath, true); //xslロード e3f237838f14
+        let xsl = await app.xhrLoad(xslPath, true); //xslロード
         let xslp = new XSLTProcessor();
         xslp.importStylesheet(xsl);
         let o = xslp.transformToFragment(xml, document);

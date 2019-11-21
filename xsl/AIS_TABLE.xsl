@@ -199,14 +199,7 @@
     <!-- 行入力 -->
     {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE071/PROPERTY_VALUE"/>"},
     {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE070/PROPERTY_VALUE"/>"},
-    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"
-      <xsl:if test=".//KJE131/PROPERTY_VALUE!=''">
-        <xsl:call-template name="unitConvR">
-          <xsl:with-param name="rate" select=".//KJE131/PROPERTY_VALUE"/>
-          <xsl:with-param name="unit" select=".//KJE131/PROPERTY_VALUE/@unit"/>
-        </xsl:call-template>
-      </xsl:if>
-    "},
+    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:if test=".//KJE131/PROPERTY_VALUE!=''"><xsl:call-template name="unitConvR"><xsl:with-param name="rate" select=".//KJE131/PROPERTY_VALUE"/><xsl:with-param name="unit" select=".//KJE131/PROPERTY_VALUE/@unit"/></xsl:call-template></xsl:if>"},
     {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:if test=".//KJE133/PROPERTY_VALUE!=''"><xsl:value-of select="concat(.//KJE133/PROPERTY_VALUE, .//KJE133/PROPERTY_VALUE/@prefix, 'g')"/></xsl:if>"},
     {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE191/PROPERTY_VALUE"/>"},
 

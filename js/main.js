@@ -233,10 +233,11 @@ document.addEventListener('DOMContentLoaded', function () {
         let xslp = new XSLTProcessor();
         xslp.importStylesheet(xsl);
         let o = xslp.transformToFragment(xml, document);
+        let res = o.textContent;
         if (xslPath == 'xsl/AIS_TABLE.xsl'){
-          o = o.replace(/\#\[/g, ']#[').replace(/\]\#/, '').replace(/\]\#\[/g, '],[');
+          res = res.replace(/\#\[/g, ']#[').replace(/\]\#/, '').replace(/\]\#\[/g, '],[');
         }
-        return o.textContent;
+        return res;
       },
       xhrLoad: async function (url, isXML) {
         const response = await fetch(url);

@@ -34,10 +34,10 @@ body {
 }
 
 .tabs {
-  margin-bottom: 0!important;
+  margin-bottom: 0 !important;
 }
 
-.tabs ul{
+.tabs ul {
   border-bottom: none;
 }
 
@@ -73,8 +73,20 @@ body {
 
 .unique-table {
   width: 100%;
+  border-top: #2e922b;
+  border-left: #2e922b;
 }
-.unique-table th{
-  width: 15%;
+
+.unique-table th {
+  min-width: 100px;
   padding: 2px;
+  background: #47A02C;
+  color: #fff;
+  border-bottom: #2e922b;
+  border-right: #2e922b;
+}
+
+.unique-table td {
+  border-bottom: #2e922b;
+  border-right: #2e922b;
 }

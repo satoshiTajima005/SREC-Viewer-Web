@@ -1,6 +1,6 @@
-/*#366126 #47A02C #A7CC1B #95B87D*/
+/*#2e922b #47A02C #A7CC1B #95B87D*/
 .button.is-green {
-  background-color: #366126;
+  background-color: #2e922b;
   border-color: transparent;
   color: #fff
 }
@@ -32,14 +32,14 @@
 
 .button.is-green[disabled],
 fieldset[disabled] .button.is-green {
-  background-color: #366126;
+  background-color: #2e922b;
   border-color: transparent;
   box-shadow: none
 }
 
 .button.is-green.is-inverted {
   background-color: #fff;
-  color: #366126
+  color: #2e922b
 }
 
 .button.is-green.is-inverted.is-hovered,
@@ -52,7 +52,7 @@ fieldset[disabled] .button.is-green.is-inverted {
   background-color: #fff;
   border-color: transparent;
   box-shadow: none;
-  color: #366126
+  color: #2e922b
 }
 
 .button.is-green.is-loading::after {
@@ -61,21 +61,21 @@ fieldset[disabled] .button.is-green.is-inverted {
 
 .button.is-green.is-outlined {
   background-color: transparent;
-  border-color: #366126;
-  color: #366126
+  border-color: #2e922b;
+  color: #2e922b
 }
 
 .button.is-green.is-outlined.is-focused,
 .button.is-green.is-outlined.is-hovered,
 .button.is-green.is-outlined:focus,
 .button.is-green.is-outlined:hover {
-  background-color: #366126;
-  border-color: #366126;
+  background-color: #2e922b;
+  border-color: #2e922b;
   color: #fff
 }
 
 .button.is-green.is-outlined.is-loading::after {
-  border-color: transparent transparent #366126 #366126 !important
+  border-color: transparent transparent #2e922b #2e922b !important
 }
 
 .button.is-green.is-outlined.is-loading.is-focused::after,
@@ -88,9 +88,9 @@ fieldset[disabled] .button.is-green.is-inverted {
 .button.is-green.is-outlined[disabled],
 fieldset[disabled] .button.is-green.is-outlined {
   background-color: transparent;
-  border-color: #366126;
+  border-color: #2e922b;
   box-shadow: none;
-  color: #366126
+  color: #2e922b
 }
 
 .button.is-green.is-inverted.is-outlined {
@@ -104,14 +104,14 @@ fieldset[disabled] .button.is-green.is-outlined {
 .button.is-green.is-inverted.is-outlined:focus,
 .button.is-green.is-inverted.is-outlined:hover {
   background-color: #fff;
-  color: #366126
+  color: #2e922b
 }
 
 .button.is-green.is-inverted.is-outlined.is-loading.is-focused::after,
 .button.is-green.is-inverted.is-outlined.is-loading.is-hovered::after,
 .button.is-green.is-inverted.is-outlined.is-loading:focus::after,
 .button.is-green.is-inverted.is-outlined.is-loading:hover::after {
-  border-color: transparent transparent #366126 #366126 !important
+  border-color: transparent transparent #2e922b #2e922b !important
 }
 
 .button.is-green.is-inverted.is-outlined[disabled],
@@ -123,7 +123,7 @@ fieldset[disabled] .button.is-green.is-inverted.is-outlined {
 }
 
 .button.is-green.is-light {
-  background-color: #eef3fc;
+  background-color: #FBFCFA ;
   color: #95B87D 
 }
 
@@ -142,47 +142,47 @@ fieldset[disabled] .button.is-green.is-inverted.is-outlined {
 }
 
 .notification.is-green {
-  background-color: #366126;
+  background-color: #2e922b;
   color: #fff
 }
 
 
 .progress.is-green::-webkit-progress-value {
-  background-color: #366126
+  background-color: #2e922b
 }
 
 .progress.is-green::-moz-progress-bar {
-  background-color: #366126
+  background-color: #2e922b
 }
 
 .progress.is-green::-ms-fill {
-  background-color: #366126
+  background-color: #2e922b
 }
 
 .progress.is-green:indeterminate {
-  background-image: linear-gradient(to right, #366126 30%, #ededed 30%)
+  background-image: linear-gradient(to right, #2e922b 30%, #ededed 30%)
 }
 
 .table td.is-green,
 .table th.is-green {
-  background-color: #366126;
-  border-color: #366126;
+  background-color: #2e922b;
+  border-color: #2e922b;
   color: #fff
 }
 
 .tag:not(body).is-green {
-  background-color: #366126;
+  background-color: #2e922b;
   color: #fff
 }
 
 .tag:not(body).is-green.is-light {
-  background-color: #eef3fc;
+  background-color: #FBFCFA ;
   color: #95B87D 
 }
 
 .is-green.input,
 .is-green.textarea {
-  border-color: #366126
+  border-color: #2e922b
 }
 
 .is-green.input:active,
@@ -197,11 +197,11 @@ fieldset[disabled] .button.is-green.is-inverted.is-outlined {
 }
 
 .select.is-green:not(:hover)::after {
-  border-color: #366126
+  border-color: #2e922b
 }
 
 .select.is-green select {
-  border-color: #366126
+  border-color: #2e922b
 }
 
 .select.is-green select.is-hovered,
@@ -217,7 +217,7 @@ fieldset[disabled] .button.is-green.is-inverted.is-outlined {
 }
 
 .file.is-green .file-cta {
-  background-color: #366126;
+  background-color: #2e922b;
   border-color: transparent;
   color: #fff
 }
@@ -243,25 +243,25 @@ fieldset[disabled] .button.is-green.is-inverted.is-outlined {
   color: #fff
 }
 .help.is-green {
-  color: #366126
+  color: #2e922b
 }
 
 .message.is-green {
-  background-color: #eef3fc
+  background-color: #FBFCFA 
 }
 
 .message.is-green .message-header {
-  background-color: #366126;
+  background-color: #2e922b;
   color: #fff
 }
 
 .message.is-green .message-body {
-  border-color: #366126;
-  color: #95B87D 
+  border-color: #2e922b;
+  color: #333; 
 }
 
 .navbar.is-green {
-  background-color: #366126;
+  background-color: #2e922b;
   color: #fff
 }
 
@@ -326,26 +326,26 @@ fieldset[disabled] .button.is-green.is-inverted.is-outlined {
   }
 
   .navbar.is-green .navbar-dropdown a.navbar-item.is-active {
-    background-color: #366126;
+    background-color: #2e922b;
     color: #fff
   }
 }
 
 .panel.is-green .panel-heading {
-  background-color: #366126;
+  background-color: #2e922b;
   color: #fff
 }
 
 .panel.is-green .panel-tabs a.is-active {
-  border-bottom-color: #366126
+  border-bottom-color: #2e922b
 }
 
 .panel.is-green .panel-block.is-active .panel-icon {
-  color: #366126
+  color: #2e922b
 }
 
 .hero.is-green {
-  background-color: #366126;
+  background-color: #2e922b;
   color: #fff
 }
 
@@ -369,7 +369,7 @@ fieldset[disabled] .button.is-green.is-inverted.is-outlined {
 
 @media screen and (max-width: 1023px) {
   .hero.is-green .navbar-menu {
-    background-color: #366126
+    background-color: #2e922b
   }
 }
 
@@ -415,15 +415,15 @@ fieldset[disabled] .button.is-green.is-inverted.is-outlined {
 .hero.is-green .tabs.is-toggle li.is-active a:hover {
   background-color: #fff;
   border-color: #fff;
-  color: #366126
+  color: #2e922b
 }
 
 .hero.is-green.is-bold {
-  background-image: linear-gradient(141deg, #1577c6 0, #366126 71%, #4366e5 100%)
+  background-image: linear-gradient(141deg, #1577c6 0, #2e922b 71%, #4366e5 100%)
 }
 
 @media screen and (max-width: 768px) {
   .hero.is-green.is-bold .navbar-menu {
-    background-image: linear-gradient(141deg, #1577c6 0, #366126 71%, #4366e5 100%)
+    background-image: linear-gradient(141deg, #1577c6 0, #2e922b 71%, #4366e5 100%)
   }
 }

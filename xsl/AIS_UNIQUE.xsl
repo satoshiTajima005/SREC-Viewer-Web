@@ -100,10 +100,10 @@
         "KJE181":"<xsl:value-of select="//KJE181/PROPERTY_VALUE"/>",<!--材質リストVer.-->
         "KJE182":"<xsl:value-of select="//KJE182/PROPERTY_VALUE"/>"<!--物質リストVer.-->
       },
-      "AIS7":[<!--集計情報-->
+      "AIS7":{<!--集計情報-->
         "isShow": true,
-        <xsl:apply-templates select="//KJA024" />
-      ]
+        "data":[<xsl:apply-templates select="//KJA024" />]
+      }
     }
   </xsl:template>
 

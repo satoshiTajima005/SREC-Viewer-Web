@@ -180,26 +180,25 @@ Vue.component('AisUnique', {
           <span class="icon" v-if="target.AIS5.isShow"><i class="fas fa-caret-down"></i></span>
         </div>
         <div class="message-body columns" v-show="target.AIS5.isShow">
-          <div class="column">
+          <div class="column is-half">
             <table class="unique-table">
               <caption>依頼者</caption>
               <tbody>
-                <unique-tr v-for="(item,index) in target.AIS5.KJE079" :title="index" :value="item"></unique-tr>
+                <unique-tr v-for="(item,index) in target.AIS5.KJE079" :title="index+1" :value="item" :key="index"></unique-tr>
               </tbody>
             </table>
           </div>
-          <div class="column">
+          <div class="column is-half">
             <table class="unique-table">
               <caption>発行者</caption>
               <tbody>
-                <unique-tr v-for="(item,index) in target.AIS5.KJE164" :title="index" :value="item"></unique-tr>
+                <unique-tr v-for="(item,index) in target.AIS5.KJE164" :title="index+1" :value="item" :key="index"></unique-tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
 
-      
       <div class="AIS6 message is-small">
         <div class="message-header" @click="toggleDetail('AIS6')">
           <p>成型品情報</p>
@@ -252,7 +251,7 @@ Vue.component('AisUnique', {
                 <th>質量</th>
               </thead>
               <tbody>
-                <tr v-for="item in target.AIS7.data">
+                <tr v-for="(item,index) in target.AIS7.data" :key="index">
                   <td>{{item.name}}</td>
                   <td>{{item.div}}</td>
                   <td>{{item.weight}}</td>
@@ -295,6 +294,7 @@ Vue.component('Ais', {
           <li><a><span class="icon"><i class="fas fa-stream"></i></span><span>ツリー</span></a></li>
         </ul>
       </div>
+      <hr class="hr">
       <div>
         <ais-table :target="table"></ais-table>
         <ais-tree :target="tree"></ais-tree>

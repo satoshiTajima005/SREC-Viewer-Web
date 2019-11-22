@@ -50,9 +50,9 @@
         <div slot="preview" class="preview">
           <ais
             v-if="/AIS/.test(tabLeft.list[tabLeft.selected].type)"
-            v-bind:unique="{tabLeft.list[tabLeft.selected].data.unique}"
-            v-bind:table="{tabLeft.list[tabLeft.selected].data.table}"
-            v-bind:tree="{tabLeft.list[tabLeft.selected].data.tree}"
+            v-bind:unique="tabLeft.list[tabLeft.selected].data.unique"
+            v-bind:table="tabLeft.list[tabLeft.selected].data.table"
+            v-bind:tree="tabLeft.list[tabLeft.selected].data.tree"
           ></ais>
         </div>
       </tabcol>

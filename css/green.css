@@ -253,6 +253,8 @@ fieldset[disabled] .button.is-green.is-inverted.is-outlined {
 .message.is-green .message-header {
   background-color: #2e922b;
   color: #fff;
+  padding: 3px 12px;
+  font-weight: nomal;
 }
 
 .message.is-green .message-body {

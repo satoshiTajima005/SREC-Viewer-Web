@@ -16,7 +16,7 @@ Vue.component('tabs', {
       <li v-for="(item, index) in target.list" :key="item.id" :class="{'is-active': target.selected === index}" @click="clickTab(target, index)">
         <a :title="item.name">
           <span class="tabname">{{item.name}}</span>
-          <span class="icon is-small movetab" :title="language.movetab" @click="moveTab(target, item, index, moveto.list)">
+          <span class="icon movetab" :title="language.movetab" @click="moveTab(target, item, index, moveto.list)">
             <i class="fas fa-file-export"></i>
           </span>
           <button class="delete is-small" aria-label="close" :title="language.delete" @click="deleteTab(target, index)"></button>
@@ -50,7 +50,7 @@ Vue.component('AisUnique', {
   template: `
     <div class="unique">
 
-      <div class="AIS1 message is-small is-green">
+      <div class="AIS1 message is-green">
         <div class="message-header" @click="toggleDetail('AIS1')">
           <p>AISに関する情報</p>
           <span class="icon" v-if="!target.AIS1.isShow"><i class="fas fa-caret-right"></i></span>
@@ -81,7 +81,7 @@ Vue.component('AisUnique', {
         </div>
       </div>
       
-      <div class="AIS2 message is-small is-green">
+      <div class="AIS2 message is-green">
         <div class="message-header" @click="toggleDetail('AIS2')">
           <p>発行会社情報</p>
           <span class="icon" v-if="!target.AIS2.isShow"><i class="fas fa-caret-right"></i></span>
@@ -109,7 +109,7 @@ Vue.component('AisUnique', {
         </div>
       </div>
 
-      <div class="AIS3 message is-small is-green">
+      <div class="AIS3 message is-green">
         <div class="message-header" @click="toggleDetail('AIS3')">
           <p>発行/作成 部門情報</p>
           <span class="icon" v-if="!target.AIS3.isShow"><i class="fas fa-caret-right"></i></span>
@@ -138,7 +138,7 @@ Vue.component('AisUnique', {
         </div>
       </div>
 
-      <div class="AIS4 message is-small is-green">
+      <div class="AIS4 message is-green">
         <div class="message-header" @click="toggleDetail('AIS4')">
           <p>依頼者情報</p>
           <span class="icon" v-if="!target.AIS4.isShow"><i class="fas fa-caret-right"></i></span>
@@ -173,7 +173,7 @@ Vue.component('AisUnique', {
         </div>
       </div>
 
-      <div class="AIS5 message is-small is-green">
+      <div class="AIS5 message is-green">
         <div class="message-header" @click="toggleDetail('AIS5')">
           <p>型番情報</p>
           <span class="icon" v-if="!target.AIS5.isShow"><i class="fas fa-caret-right"></i></span>
@@ -199,7 +199,7 @@ Vue.component('AisUnique', {
         </div>
       </div>
 
-      <div class="AIS6 message is-small is-green">
+      <div class="AIS6 message is-green">
         <div class="message-header" @click="toggleDetail('AIS6')">
           <p>成型品情報</p>
           <span class="icon" v-if="!target.AIS6.isShow"><i class="fas fa-caret-right"></i></span>
@@ -236,7 +236,7 @@ Vue.component('AisUnique', {
         </div>
       </div>
 
-      <div class="AIS7 message is-small is-green">
+      <div class="AIS7 message is-green">
         <div class="message-header" @click="toggleDetail('AIS7')">
           <p>集計情報</p>
           <span class="icon" v-if="!target.AIS7.isShow"><i class="fas fa-caret-right"></i></span>
@@ -246,13 +246,13 @@ Vue.component('AisUnique', {
           <div class="column">
             <table class="unique-table">
               <thead>
-                <th>名称</th>
-                <th>分類記号</th>
-                <th>質量</th>
+                <th style="text-align:left; width:auto;">名称</th>
+                <th style="text-align:left; width:auto;">分類記号</th>
+                <th style="text-align:left; width:auto;">質量</th>
               </thead>
               <tbody>
                 <tr v-for="(item,index) in target.AIS7.data" :key="index">
-                  <td>{{item.name}}</td>
+                  <td style="text-align:left; width:auto;">{{item.name}}</td>
                   <td>{{item.div}}</td>
                   <td>{{item.weight}}</td>
                 </tr>

@@ -67,6 +67,10 @@ body {
   border-bottom-right-radius: 7px;
 }
 
+.message-body.columns {
+  padding: 0.5em 1.25em;
+}
+
 .message-body .column {
   padding-bottom: 0;
 }
@@ -75,16 +79,16 @@ body {
   width: 100%;
 }
 
-.unique-table tr{
+.unique-table tr {
   border-bottom: #2e922b;
 }
 
 .unique-table th {
   width: 120px;
   padding: 3px 10px;
-  color: #47502C;
+  color: #111;
   font-weight: normal;
-  text-align: right!important;
+  text-align: right !important;
 }
 
 .unique-table td {

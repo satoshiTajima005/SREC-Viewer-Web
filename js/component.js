@@ -50,12 +50,12 @@ Vue.component('AisUnique', {
   template: `
     <div class="unique">
       <div class="AIS1 message">
-        <div class="message-header">
+        <div class="message-header" @click="showDetail(target.AIS1)">
           <p>AISに関する情報</p>
-          <span class="icon" v-if="target.AIS1.isShow"><i class="fas fa-caret-right"></i></span>
-          <span class="icon" v-if="!target.AIS1.isShow"><i class="fas fa-caret-down"></i></span>
+          <span class="icon" v-if="!target.AIS1.isShow"><i class="fas fa-caret-right"></i></span>
+          <span class="icon" v-if="target.AIS1.isShow"><i class="fas fa-caret-down"></i></span>
         </div>
-        <div class="message-body columns">
+        <div class="message-body columns" v-show="target.AIS1.isShow">
           <div class="column">
             <table class="unique-table">
               <tbody>
@@ -70,17 +70,116 @@ Vue.component('AisUnique', {
           <div class="column">
             <table class="unique-table">
               <tbody>
-                <tr><th>提出日</th><td></td></tr>
-                <tr><th>作成日</th><td></td></tr>
-                <tr><th>改訂日</th><td></td></tr>
-                <tr><th>改訂履歴</th><td></td></tr>
+                <unique-tr title="提出日" :value="target.AIS1.KJE137"></unique-tr>
+                <unique-tr title="作成日" :value="target.AIS1.KJE016"></unique-tr>
+                <unique-tr title="改訂日" :value="target.AIS1.KJE017"></unique-tr>
+                <unique-tr title="改訂履歴" :value="target.AIS1.KJE014"></unique-tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
+      
+      <div class="AIS2 message">
+        <div class="message-header" @click="showDetail(target.AIS2)">
+          <p>発行会社情報</p>
+          <span class="icon" v-if="!target.AIS2.isShow"><i class="fas fa-caret-right"></i></span>
+          <span class="icon" v-if="target.AIS2.isShow"><i class="fas fa-caret-down"></i></span>
+        </div>
+        <div class="message-body columns" v-show="target.AIS2.isShow">
+          <div class="column">
+            <table class="unique-table">
+              <tbody>
+                <unique-tr title="登録機関ID" :value="target.AIS1.KJE138"></unique-tr>
+                <unique-tr title="会社ID" :value="target.AIS1.KJE011"></unique-tr>
+                <unique-tr title="JAMP ID" :value="target.AIS1.KJE141"></unique-tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="column">
+            <table class="unique-table">
+              <tbody>
+                <unique-tr title="会社名(英)" :value="target.AIS1.KJE012"></unique-tr>
+                <unique-tr title="会社名(母)" :value="target.AIS1.KJE297"></unique-tr>
+                <unique-tr title="追加情報" :value="target.AIS1.KJE142"></unique-tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="AIS3 message">
+        <div class="message-header" @click="showDetail(target.AIS3)">
+          <p>発行/作成 部門情報</p>
+          <span class="icon" v-if="!target.AIS3.isShow"><i class="fas fa-caret-right"></i></span>
+          <span class="icon" v-if="target.AIS3.isShow"><i class="fas fa-caret-down"></i></span>
+        </div>
+        <div class="message-body columns" v-show="target.AIS3.isShow">
+          <div class="column">
+            <table class="unique-table">
+              <tbody>
+                <unique-tr title="発行:部門名" :value="target.AIS1.KJE143"></unique-tr>
+                <unique-tr title="発行:住所" :value="target.AIS1.KJE144"></unique-tr>
+                <unique-tr title="発行:電話" :value="target.AIS1.KJE145"></unique-tr>
+                <unique-tr title="発行:FAX" :value="target.AIS1.KJE146"></unique-tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="column">
+            <table class="unique-table">
+              <tbody>
+                <unique-tr title="発行:E-Mail" :value="target.AIS1.KJE147"></unique-tr>
+                <unique-tr title="作成:部門名" :value="target.AIS1.KJE093"></unique-tr>
+                <unique-tr title="作成:電話" :value="target.AIS1.KJE124"></unique-tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="AIS4 message">
+        <div class="message-header" @click="showDetail(target.AIS4)">
+          <p>依頼者情報</p>
+          <span class="icon" v-if="!target.AIS4.isShow"><i class="fas fa-caret-right"></i></span>
+          <span class="icon" v-if="target.AIS4.isShow"><i class="fas fa-caret-down"></i></span>
+        </div>
+        <div class="message-body columns" v-show="target.AIS4.isShow">
+          <div class="column">
+            <table class="unique-table">
+              <tbody>
+                <unique-tr title="登録機関ID" :value="target.AIS1.KJE149"></unique-tr>
+                <unique-tr title="会社ID" :value="target.AIS1.KJE150"></unique-tr>
+                <unique-tr title="JAMP ID" :value="target.AIS1.KJE153"></unique-tr>
+                <unique-tr title="会社名" :value="target.AIS1.KJE078"></unique-tr>
+                <unique-tr title="部門名" :value="target.AIS1.KJE154"></unique-tr>
+                <unique-tr title="住所" :value="target.AIS1.KJE155"></unique-tr>
+                <unique-tr title="担当者氏名" :value="target.AIS1.KJE090"></unique-tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="column">
+            <table class="unique-table">
+              <tbody>
+                <unique-tr title="電話" :value="target.AIS1.KJE156"></unique-tr>
+                <unique-tr title="FAX" :value="target.AIS1.KJE157"></unique-tr>
+                <unique-tr title="E-Mail" :value="target.AIS1.KJE091"></unique-tr>
+                <unique-tr title="備考 1" :value="target.AIS1.KJE158"></unique-tr>
+                <unique-tr title="備考 2" :value="target.AIS1.KJE159"></unique-tr>
+                <unique-tr title="備考 3" :value="target.AIS1.KJE160"></unique-tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
     </div>
-  `
+  </div>
+  `,
+  method: {
+    showDetail: function(target){
+      target.isShow = !target.isShow;
+    }
+  }
 });
 Vue.component('AisTable', {
   props: {target:{type: Object} },

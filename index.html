@@ -48,7 +48,7 @@
       <tabcol v-if="tabLeft.list.length" :class="{half: tabRight.list.length}">
         <tabs slot="ul" :target="tabLeft" :moveto="tabRight" :language="language"></tabs>
         <div slot="preview" class="preview">
-          <ais v-if="/AIS/.test(tabLeft.list[tabLeft.selected].type)" :taget="tabLeft.list[tabLeft.selected].data"></ais>
+          <ais v-if="/AIS/.test(tabLeft.list[tabLeft.selected].type)" :target="tabLeft.list[tabLeft.selected].data"></ais>
         </div>
       </tabcol>
       <tabcol v-if="tabRight.list.length" :class="{half: tabLeft.list.length}">

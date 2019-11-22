@@ -245,7 +245,9 @@ document.addEventListener('DOMContentLoaded', function () {
         xslp.importStylesheet(xsl);
         let o = xslp.transformToFragment(xml, document);
         let res = o.textContent;
+        
         //XSLT変換不足対応
+        res = res.replace(/\n\s*/igm,'');
         if (xslPath == 'xsl/AIS_TABLE.xsl'){
           res = res.replace(/\#\[/g, '],[').replace(/\@\[/, '[');
         }

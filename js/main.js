@@ -249,7 +249,10 @@ document.addEventListener('DOMContentLoaded', function () {
         //XSLT変換不足対応
         res = res.replace(/\n\s*/igm,'');
         if (xslPath == 'xsl/AIS_TABLE.xsl'){
-          res = res.replace(/\#\[/g, '],[').replace(/\@\[/, '[');
+          res = res
+            .replace(/\#\[/g, '],[')
+            .replace(/\@\[/, '[')
+            .replace(/\}\{/g, '},{');
         }
         return res;
       },

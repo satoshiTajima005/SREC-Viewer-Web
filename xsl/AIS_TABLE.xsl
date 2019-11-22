@@ -68,12 +68,12 @@
     @[
     <xsl:choose>
       <xsl:when test="//KJE176/PROPERTY_VALUE='0' or count(.//EDK027-001)=0">
-        {"rowspan":"<xsl:value-of select="$rows"/>", "value":""},
-        {"rowspan":"<xsl:value-of select="$rows"/>", "value":""},
+        {"rowspan":"<xsl:value-of select="$rows"/>", "value":""}
+        {"rowspan":"<xsl:value-of select="$rows"/>", "value":""}
       </xsl:when>
       <xsl:when test="count(.//KJE055)!=0">
-        {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE055/PROPERTY_VALUE"/>"},
-        {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select="format-number(.//KJE057/PROPERTY_VALUE, '0.#')"/>"},
+        {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE055/PROPERTY_VALUE"/>"}
+        {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select="format-number(.//KJE057/PROPERTY_VALUE, '0.#')"/>"}
       </xsl:when>
     </xsl:choose>
     <xsl:apply-templates select=".//KJA028[1]"/>
@@ -104,27 +104,27 @@
     </xsl:variable>
 
     <!-- 行入力 -->
-    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE059/PROPERTY_VALUE"/>"},
-    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select="format-number(.//KJE185/PROPERTY_VALUE, '0.#')"/>"}<xsl:if test="count(.//KJA029)!=0">,</xsl:if>
+    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE059/PROPERTY_VALUE"/>"}
+    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select="format-number(.//KJE185/PROPERTY_VALUE, '0.#')"/>"}
     <xsl:apply-templates select=".//KJA029[1]"/>
 
     <xsl:if test="count(.//KJA029)=0">
-      ,{"value":""}
-      ,{"value":""}
-      ,{"value":""}
-      ,{"value":""}
-      ,{"value":""}
-      ,{"value":""}
-      ,{"value":""}
-      ,{"value":""}
-      ,{"value":""}
-      ,{"value":""}
-      ,{"value":""}
-      ,{"value":""}
-      ,{"value":""}
-      ,{"value":""}
+      {"value":""}
+      {"value":""}
+      {"value":""}
+      {"value":""}
+      {"value":""}
+      {"value":""}
+      {"value":""}
+      {"value":""}
+      {"value":""}
+      {"value":""}
+      {"value":""}
+      {"value":""}
+      {"value":""}
+      {"value":""}
       <xsl:if test="$ver='4'">
-        ,{"value":""}
+        {"value":""}
       </xsl:if>
     </xsl:if>
     <xsl:if test="count(.//KJA029)!=0">
@@ -152,26 +152,26 @@
     </xsl:variable>
 
     <!-- 行入力 -->
-    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select="number(substring(.//KJE187/PROPERTY_VALUE, 1, 2))"/>"},
-    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select="string(.//KJE189/PROPERTY_VALUE)"/>"},
-    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE189/PROPERTY_VALUE"/>"},
-    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE190/PROPERTY_VALUE"/>"},
+    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select="number(substring(.//KJE187/PROPERTY_VALUE, 1, 2))"/>"}
+    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select="string(.//KJE189/PROPERTY_VALUE)"/>"}
+    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE189/PROPERTY_VALUE"/>"}
+    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE190/PROPERTY_VALUE"/>"}
     {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:if test=".//KJE128/PROPERTY_VALUE!=''"><xsl:value-of select="concat(.//KJE128/PROPERTY_VALUE, .//KJE128/PROPERTY_VALUE/@prefix, 'g')"/></xsl:if>"}
     <xsl:if test="$ver='3' and count(.//KJA030)!=0">,</xsl:if>
     <xsl:if test="$ver='4'">
-      ,{"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE296/PROPERTY_VALUE"/>"}<xsl:if test="count(.//KJA030)!=0">,</xsl:if>
+      {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE296/PROPERTY_VALUE"/>"}
     </xsl:if>
     <xsl:apply-templates select=".//KJA030[1]"/>
     <xsl:if test="count(.//KJA030)=0">
-      ,{"value":""}
-      ,{"value":""}
-      ,{"value":""}
-      ,{"value":""}
-      ,{"value":""}
-      ,{"value":""}
-      ,{"value":""}
-      ,{"value":""}
-      ,{"value":""}
+      {"value":""}
+      {"value":""}
+      {"value":""}
+      {"value":""}
+      {"value":""}
+      {"value":""}
+      {"value":""}
+      {"value":""}
+      {"value":""}
     </xsl:if>
     <xsl:if test="count(.//KJA030)!=0">
       <xsl:for-each select=".//KJA030[position()!=1]">
@@ -197,18 +197,18 @@
     </xsl:variable>
 
     <!-- 行入力 -->
-    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE071/PROPERTY_VALUE"/>"},
-    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE070/PROPERTY_VALUE"/>"},
-    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:if test=".//KJE131/PROPERTY_VALUE!=''"><xsl:call-template name="unitConvR"><xsl:with-param name="rate" select=".//KJE131/PROPERTY_VALUE"/><xsl:with-param name="unit" select=".//KJE131/PROPERTY_VALUE/@unit"/></xsl:call-template></xsl:if>"},
-    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:if test=".//KJE133/PROPERTY_VALUE!=''"><xsl:value-of select="concat(.//KJE133/PROPERTY_VALUE, .//KJE133/PROPERTY_VALUE/@prefix, 'g')"/></xsl:if>"},
-    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE191/PROPERTY_VALUE"/>"},
+    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE071/PROPERTY_VALUE"/>"}
+    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE070/PROPERTY_VALUE"/>"}
+    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:if test=".//KJE131/PROPERTY_VALUE!=''"><xsl:call-template name="unitConvR"><xsl:with-param name="rate" select=".//KJE131/PROPERTY_VALUE"/><xsl:with-param name="unit" select=".//KJE131/PROPERTY_VALUE/@unit"/></xsl:call-template></xsl:if>"}
+    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:if test=".//KJE133/PROPERTY_VALUE!=''"><xsl:value-of select="concat(.//KJE133/PROPERTY_VALUE, .//KJE133/PROPERTY_VALUE/@prefix, 'g')"/></xsl:if>"}
+    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE191/PROPERTY_VALUE"/>"}
 
     <xsl:if test="$ver='3'">
       <xsl:apply-templates select=".//KJA031[1]" /><!--<xsl:if test="count(.//KJA031)=1">],</xsl:if>-->
       <xsl:if test="count(.//KJA031)=0">
-        {"value":""},
-        {"value":""},
-        {"value":""},
+        {"value":""}
+        {"value":""}
+        {"value":""}
         {"value":""}
       </xsl:if>
       <xsl:if test="count(.//KJA031)!=0">
@@ -220,9 +220,9 @@
     <xsl:if test="$ver='4'">
       <xsl:apply-templates select=".//KJA031[count(.//KJE278)!=0][1]"/><!--<xsl:if test="count(.//KJE278)=1">],</xsl:if>-->
       <xsl:if test="count(.//KJE278)=0">
-        {"value":""},
-        {"value":""},
-        {"value":""},
+        {"value":""}
+        {"value":""}
+        {"value":""}
         {"value":""}
       </xsl:if>
       <xsl:if test="count(.//KJE278)!=0">
@@ -239,13 +239,13 @@
     <xsl:variable name="ver" select="number(substring(//PROPERTY_SNAME[.='Use format']/following-sibling::node()/text(), 5, 1))"/>
 
     <!-- 行入力 -->
-    {"value":"<xsl:value-of select=".//KJE192/PROPERTY_VALUE"/>"},
-    {"value":"<xsl:value-of select=".//KJE192/PROPERTY_VALUE"/>"},
+    {"value":"<xsl:value-of select=".//KJE192/PROPERTY_VALUE"/>"}
+    {"value":"<xsl:value-of select=".//KJE192/PROPERTY_VALUE"/>"}
     <xsl:if test="$ver='3'">
-      {"value":"<xsl:value-of select=".//KJE194/PROPERTY_VALUE"/>"},
+      {"value":"<xsl:value-of select=".//KJE194/PROPERTY_VALUE"/>"}
     </xsl:if>
     <xsl:if test="$ver='4'">
-      {"value":"<xsl:value-of select=".//KJE278/PROPERTY_VALUE"/>"},
+      {"value":"<xsl:value-of select=".//KJE278/PROPERTY_VALUE"/>"}
     </xsl:if>
     {"value":"<xsl:value-of select=".//KJE195/PROPERTY_VALUE"/>"}
   </xsl:template>

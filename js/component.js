@@ -38,14 +38,14 @@ Vue.component('tabs', {
     }
   }
 });
-Vue.component('uniquetr', {
+Vue.component('UniqueTr', {
   props: ['title', 'value'],
   template: `<tr><th>{{title}}</th><td>{{value}}</td></tr>`
 });
 Vue.component('JGPSSI', {
   template: ``
 });
-Vue.component('AISunique', {
+Vue.component('AisUnique', {
   props: ['target'],
   template: `
     <div class="unique">
@@ -59,11 +59,11 @@ Vue.component('AISunique', {
           <div class="column">
             <table class="unique-table">
               <tbody>
-                <uniquetr title="言語" :value="target.AIS1.LANG"></uniquetr>
-                <uniquetr title="文書GPID" :value="target.AIS1.KJE134"></uniquetr>
-                <uniquetr title="文書種類" :value="target.AIS1.KJE135"></uniquetr>
-                <uniquetr title="文書番号" :value="target.AIS1.KJE098"></uniquetr>
-                <uniquetr title="フォーマットVer." :value="target.AIS1.KJE136"></uniquetr>
+                <unique-tr title="言語" :value="target.AIS1.LANG"></unique-tr>
+                <unique-tr title="文書GPID" :value="target.AIS1.KJE134"></unique-tr>
+                <unique-tr title="文書種類" :value="target.AIS1.KJE135"></unique-tr>
+                <unique-tr title="文書番号" :value="target.AIS1.KJE098"></unique-tr>
+                <unique-tr title="フォーマットVer." :value="target.AIS1.KJE136"></unique-tr>
               </tbody>
             </table>
           </div>
@@ -82,19 +82,19 @@ Vue.component('AISunique', {
     </div>
   `
 });
-Vue.component('AIStable', {
+Vue.component('AisTable', {
   props: ['target'],
   template: `<div class="table"></div>`
 });
-Vue.component('AIStree', {
+Vue.component('AisTree', {
   props: ['target'],
   template: `<div class="tree"></div>`
 });
-Vue.component('AIS', {
+Vue.component('ais', {
   props: ['target'],
   template: `
     <div>
-      <AISunique :target="target.unique"></AISunique>
+      <ais-unique :target="target.unique"></ais-unique>
       <div class="tabs">
         <ul>
           <li class="is-active"><a><span class="icon"><i class="fas fa-table"></i></span><span>テーブル</span></a></li>
@@ -102,8 +102,8 @@ Vue.component('AIS', {
         </ul>
       </div>
       <div>
-        <AIStable :target="target"></AIStable>
-        <AIStree :target="target"></AIStree>
+        <ais-table :target="target"></ais-table>
+        <ais-tree :target="target"></ais-tree>
       </div>
     </div>
   `

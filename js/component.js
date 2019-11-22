@@ -91,10 +91,14 @@ Vue.component('AisTree', {
   template: `<div class="tree"></div>`
 });
 Vue.component('Ais', {
-  props: {target:{type: Object} },
+  props: {
+    unique:{type: Object},
+    table:{type: Object},
+    tree:{type: Object}
+  },
   template: `
     <div>
-      <ais-unique :target="target.unique"></ais-unique>
+      <ais-unique :target="unique"></ais-unique>
       <div class="tabs">
         <ul>
           <li class="is-active"><a><span class="icon"><i class="fas fa-table"></i></span><span>テーブル</span></a></li>
@@ -102,8 +106,8 @@ Vue.component('Ais', {
         </ul>
       </div>
       <div>
-        <ais-table :target="target.table"></ais-table>
-        <ais-tree :target="target.tree"></ais-tree>
+        <ais-table :target="table"></ais-table>
+        <ais-tree :target="tree"></ais-tree>
       </div>
     </div>
   `

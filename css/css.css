@@ -73,17 +73,16 @@ body {
 
 .unique-table {
   width: 100%;
-  border-top: #2e922b;
-  border-left: #2e922b;
+}
+
+.unique-table tr{
+  border-bottom: #2e922b;
 }
 
 .unique-table th {
-  min-width: 100px;
+  width: 100px;
   padding: 2px;
-  background: #47A02C;
-  color: #fff;
-  border-bottom: #2e922b;
-  border-right: #2e922b;
+  color: #47A02C;
 }
 
 .unique-table td {

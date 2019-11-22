@@ -51,7 +51,7 @@ Vue.component('AisUnique', {
     <div class="unique">
 
       <div class="AIS1 message">
-        <div class="message-header" @click="toggleDetail(target.AIS1.isShow)">
+        <div class="message-header" @click="toggleDetail('AIS1')">
           <p>AISに関する情報</p>
           <span class="icon" v-if="!target.AIS1.isShow"><i class="fas fa-caret-right"></i></span>
           <span class="icon" v-if="target.AIS1.isShow"><i class="fas fa-caret-down"></i></span>
@@ -82,7 +82,7 @@ Vue.component('AisUnique', {
       </div>
       
       <div class="AIS2 message">
-        <div class="message-header" @click="toggleDetail(target.AIS2.isShow)">
+        <div class="message-header" @click="toggleDetail('AIS2')">
           <p>発行会社情報</p>
           <span class="icon" v-if="!target.AIS2.isShow"><i class="fas fa-caret-right"></i></span>
           <span class="icon" v-if="target.AIS2.isShow"><i class="fas fa-caret-down"></i></span>
@@ -110,7 +110,7 @@ Vue.component('AisUnique', {
       </div>
 
       <div class="AIS3 message">
-        <div class="message-header" @click="toggleDetail(target.AIS3.isShow)">
+        <div class="message-header" @click="toggleDetail('AIS3')">
           <p>発行/作成 部門情報</p>
           <span class="icon" v-if="!target.AIS3.isShow"><i class="fas fa-caret-right"></i></span>
           <span class="icon" v-if="target.AIS3.isShow"><i class="fas fa-caret-down"></i></span>
@@ -139,7 +139,7 @@ Vue.component('AisUnique', {
       </div>
 
       <div class="AIS4 message">
-        <div class="message-header" @click="toggleDetail(target.AIS4.isShow)">
+        <div class="message-header" @click="toggleDetail('AIS4')">
           <p>依頼者情報</p>
           <span class="icon" v-if="!target.AIS4.isShow"><i class="fas fa-caret-right"></i></span>
           <span class="icon" v-if="target.AIS4.isShow"><i class="fas fa-caret-down"></i></span>
@@ -178,8 +178,8 @@ Vue.component('AisUnique', {
   `,
   methods: {
     toggleDetail: function(prop){
-      prop  = !prop;
-    }    
+      this.$emit('toggleUnique', prop);
+    }
   }
 });
 Vue.component('AisTable', {
@@ -210,7 +210,12 @@ Vue.component('Ais', {
         <ais-tree :target="tree"></ais-tree>
       </div>
     </div>
-  `
+  `,
+  methods: {
+    toggleDetail: function(prop){
+      this.unique[prop].isShow = !this.unique[prop].isShow;
+    }
+  }
 });
 Vue.component('MSDSplus', {
   template: ``

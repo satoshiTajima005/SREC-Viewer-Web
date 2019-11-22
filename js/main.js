@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       parseXML: function (xmlStr) {
         return new DOMParser().parseFromString(xmlStr, "text/xml")
-      }
+      },
     }
   });
   app.$nextTick(function () {

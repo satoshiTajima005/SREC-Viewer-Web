@@ -65,7 +65,7 @@
     </xsl:variable>
 
     <!-- 行入力 -->
-    #[
+    @[
     <xsl:choose>
       <xsl:when test="//KJE176/PROPERTY_VALUE='0' or count(.//EDK027-001)=0">
         {"rowspan":"<xsl:value-of select="$rows"/>", "value":""},

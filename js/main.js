@@ -74,10 +74,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //dataをJSON.parse
         tabObject.map(o =>{
-          if (o.data.unique) o.data.unique = JSON.parse(o.data.unique);
-          if (o.data.tree) o.data.tree = JSON.parse(o.data.tree);
-          if (o.data.table) o.data.table = JSON.parse(o.data.table);
-          if (o.data.item) o.data.item = JSON.parse(o.data.item);
+          try {
+            if (o.data.unique) o.data.unique = JSON.parse(o.data.unique);
+            if (o.data.tree) o.data.tree = JSON.parse(o.data.tree);
+            if (o.data.table) o.data.table = JSON.parse(o.data.table);
+            if (o.data.item) o.data.item = JSON.parse(o.data.item);
+          }catch(e){
+            console.log(o.data);
+          }
         });
         //変換後の配列をタブリストに投入
         app.tabLeft.list = app.tabLeft.list.concat(tabObject);
@@ -244,7 +248,6 @@ document.addEventListener('DOMContentLoaded', function () {
         //XSLT変換不足対応
         if (xslPath == 'xsl/AIS_TABLE.xsl'){
           res = res.replace(/\#\[/g, '],[').replace(/\@\[/, '[');
-          console.log(res);
         }
         return res;
       },

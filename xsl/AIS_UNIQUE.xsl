@@ -23,11 +23,8 @@
         "KJE138":"<xsl:value-of select="//KJE138/PROPERTY_VALUE"/>",<!--登録機関ID-->
         "KJE011":"<xsl:value-of select="//KJE011/PROPERTY_VALUE"/>",<!--会社ID-->
         "KJE141":"<xsl:value-of select="//KJE141/PROPERTY_VALUE"/>",<!--JAMP ID-->
-      <xsl:if test="$ver='3'">
         "KJE012":"<xsl:value-of select="//KJE012/PROPERTY_VALUE"/>",<!--会社名 -->
-      </xsl:if>
       <xsl:if test="$ver='4'">
-        "KJE012":"<xsl:value-of select="//KJE012/PROPERTY_VALUE"/>",<!--会社名(英)-->
         "KJE297":"<xsl:value-of select="//KJE297/PROPERTY_VALUE"/>",<!--会社名(母)-->
       </xsl:if>
         "KJE142":"<xsl:value-of select="//KJE142/PROPERTY_VALUE"/>"<!--追加情報-->
@@ -80,11 +77,8 @@
       "AIS6":{<!--成型品情報-->
         "isShow": true,
         "KJE101":"<xsl:value-of select="//KJE101/PROPERTY_VALUE"/>",<!--製造会社-->
-        <xsl:if test="$ver='3'">
-          "KJE018":"<xsl:value-of select="//KJE018/PROPERTY_VALUE"/>",<!--発行者型番-->
-        </xsl:if>
+        "KJE018":"<xsl:value-of select="//KJE018/PROPERTY_VALUE"/>",<!--発行者型番-->
         <xsl:if test="$ver='4'">
-          "KJE018":"<xsl:value-of select="//KJE018/PROPERTY_VALUE"/>",<!--発行者型番(英)-->
           "KJE298":"<xsl:value-of select="//KJE298/PROPERTY_VALUE"/>",<!--発行者型番(母)-->
         </xsl:if>
         "KJE172":"<xsl:value-of select="//KJE172/PROPERTY_VALUE"/>",<!--一般商品名-->

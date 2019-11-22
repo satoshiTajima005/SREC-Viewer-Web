@@ -50,7 +50,7 @@ Vue.component('AisUnique', {
   template: `
     <div class="unique">
 
-      <div class="AIS1 message">
+      <div class="AIS1 message is-small">
         <div class="message-header" @click="toggleDetail('AIS1')">
           <p>AISに関する情報</p>
           <span class="icon" v-if="!target.AIS1.isShow"><i class="fas fa-caret-right"></i></span>
@@ -81,7 +81,7 @@ Vue.component('AisUnique', {
         </div>
       </div>
       
-      <div class="AIS2 message">
+      <div class="AIS2 message is-small">
         <div class="message-header" @click="toggleDetail('AIS2')">
           <p>発行会社情報</p>
           <span class="icon" v-if="!target.AIS2.isShow"><i class="fas fa-caret-right"></i></span>
@@ -109,7 +109,7 @@ Vue.component('AisUnique', {
         </div>
       </div>
 
-      <div class="AIS3 message">
+      <div class="AIS3 message is-small">
         <div class="message-header" @click="toggleDetail('AIS3')">
           <p>発行/作成 部門情報</p>
           <span class="icon" v-if="!target.AIS3.isShow"><i class="fas fa-caret-right"></i></span>
@@ -138,7 +138,7 @@ Vue.component('AisUnique', {
         </div>
       </div>
 
-      <div class="AIS4 message">
+      <div class="AIS4 message is-small">
         <div class="message-header" @click="toggleDetail('AIS4')">
           <p>依頼者情報</p>
           <span class="icon" v-if="!target.AIS4.isShow"><i class="fas fa-caret-right"></i></span>
@@ -173,12 +173,102 @@ Vue.component('AisUnique', {
         </div>
       </div>
 
+      <div class="AIS5 message is-small">
+        <div class="message-header" @click="toggleDetail('AIS5')">
+          <p>型番情報</p>
+          <span class="icon" v-if="!target.AIS5.isShow"><i class="fas fa-caret-right"></i></span>
+          <span class="icon" v-if="target.AIS5.isShow"><i class="fas fa-caret-down"></i></span>
+        </div>
+        <div class="message-body columns" v-show="target.AIS5.isShow">
+          <div class="column">
+            <table class="unique-table">
+              <caption>依頼者</caption>
+              <tbody>
+                <unique-tr v-for="(item,index) in target.AIS5.KJE079" :title="index" :value="item"></unique-tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="column">
+            <table class="unique-table">
+              <caption>発行者</caption>
+              <tbody>
+                <unique-tr v-for="(item,index) in target.AIS5.KJE164" :title="index" :value="item"></unique-tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="AIS6 message is-small">
+        <div class="message-header" @click="toggleDetail('AIS6')">
+          <p>成型品情報</p>
+          <span class="icon" v-if="!target.AIS6.isShow"><i class="fas fa-caret-right"></i></span>
+          <span class="icon" v-if="target.AIS6.isShow"><i class="fas fa-caret-down"></i></span>
+        </div>
+        <div class="message-body columns" v-show="target.AIS6.isShow">
+          <div class="column">
+            <table class="unique-table">
+              <tbody>
+                <unique-tr title="製造会社" :value="target.AIS6.KJE101"></unique-tr>
+                <unique-tr title="発行者型番(英)" :value="target.AIS6.KJE018"></unique-tr>
+                <unique-tr title="発行者型番(母)" :value="target.AIS6.KJE298"></unique-tr>
+                <unique-tr title="一般商品名" :value="target.AIS6.KJE172"></unique-tr>
+                <unique-tr title="シリーズ名" :value="target.AIS6.KJE173"></unique-tr>
+                <unique-tr title="発行者備考" :value="target.AIS6.KJE174"></unique-tr>
+                <unique-tr title="引用等" :value="target.AIS6.KJE183"></unique-tr>
+                <unique-tr title="集合化" :value="target.AIS6.KJE176"></unique-tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="column">
+            <table class="unique-table">
+              <tbody>
+                <unique-tr title="単位" :value="target.AIS6.KJE177"></unique-tr>
+                <unique-tr title="質量" :value="target.AIS6.KJE023"></unique-tr>
+                <unique-tr title="GADSL" :value="target.AIS6.KJE178"></unique-tr>
+                <unique-tr title="JIG" :value="target.AIS6.KJE179"></unique-tr>
+                <unique-tr title="含有確認" :value="target.AIS6.KJE180"></unique-tr>
+                <unique-tr title="材質リストVer." :value="target.AIS6.KJE181"></unique-tr>
+                <unique-tr title="物質リストVer." :value="target.AIS6.KJE182"></unique-tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="AIS7 message is-small">
+        <div class="message-header" @click="toggleDetail('AIS7')">
+          <p>集計情報</p>
+          <span class="icon" v-if="!target.AIS7.isShow"><i class="fas fa-caret-right"></i></span>
+          <span class="icon" v-if="target.AIS7.isShow"><i class="fas fa-caret-down"></i></span>
+        </div>
+        <div class="message-body columns" v-show="target.AIS7.isShow">
+          <div class="column">
+            <table class="unique-table">
+              <thead>
+                <th>名称</th>
+                <th>分類記号</th>
+                <th>質量</th>
+              </thead>
+              <tbody>
+                <tr v-for="item in target.AIS7.data">
+                  <td>{{item.name}}</td>
+                  <td>{{item.div}}</td>
+                  <td>{{item.weight}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
   `,
   methods: {
     toggleDetail: function(prop){
-      this.$emit('toggleDetail', prop);
+      this.target[prop].isShow = !this.target[prop].isShow;
     }
   }
 });
@@ -210,12 +300,7 @@ Vue.component('Ais', {
         <ais-tree :target="tree"></ais-tree>
       </div>
     </div>
-  `,
-  methods: {
-    toggleDetail: function(prop){
-      this.unique[prop].isShow = !this.unique[prop].isShow;
-    }
-  }
+  `
 });
 Vue.component('MSDSplus', {
   template: ``

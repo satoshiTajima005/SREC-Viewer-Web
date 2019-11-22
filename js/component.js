@@ -178,7 +178,7 @@ Vue.component('AisUnique', {
   `,
   methods: {
     toggleDetail: function(prop){
-      this.$emit('toggleUnique', prop);
+      this.$emit('toggleDetail', prop);
     }
   }
 });

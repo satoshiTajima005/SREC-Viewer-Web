@@ -102,8 +102,8 @@ Vue.component('ais', {
         </ul>
       </div>
       <div>
-        <ais-table :target="target"></ais-table>
-        <ais-tree :target="target"></ais-tree>
+        <ais-table :target="target.table"></ais-table>
+        <ais-tree :target="target.tree"></ais-tree>
       </div>
     </div>
   `

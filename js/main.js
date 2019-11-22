@@ -3,7 +3,12 @@ let list = {
   id: 0, //読み込んだファイル数のインクリメント
   type: "", //AIS, AIS-temp, MSDSplus, MSDSplus-temp, IEC62474, SHAI, SHCI, JAMA, JGP4
   txt: "", //読み込んだ生のテキストデータ
-  data: {} //JSON変換したデータ
+  data: {//JSON変換したデータ
+    unique:{},
+    table:{},
+    tree:{},
+    item:{}
+  } 
 }
 
 Vue.config.productionTip = false
@@ -80,6 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (o.data.table) o.data.table = JSON.parse(o.data.table);
             if (o.data.item) o.data.item = JSON.parse(o.data.item);
           }catch(e){
+            console.log('JSON parse error');
             console.log(o.data);
           }
         });

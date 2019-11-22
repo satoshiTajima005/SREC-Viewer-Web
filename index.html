@@ -48,7 +48,36 @@
       <tabcol v-if="tabLeft.list.length" :class="{half: tabRight.list.length}">
         <tabs slot="ul" :target="tabLeft" :moveto="tabRight" :language="language"></tabs>
         <div slot="preview" class="preview">
-          <pre>{{JSON.stringify(tabLeft.list[tabLeft.selected].data, null, 2)}}</pre>
+          <AIS v-if="/AIS/.test(tabLeft.list[tabLeft.selected].type)"></AIS>
+          <div class="AIS1 message">
+            <div class="message-header">
+              <span class="icon"><i class="fas fa-caret-right"></i></span>
+              <p>AISに関する情報</p>
+            </div>
+            <div class="message-body columns">
+              <div class="column">
+                <table class="unique-table">
+                  <tbody>
+                    <tr><th>言語</th><td></td></tr>
+                    <tr><th>文書GPID</th><td></td></tr>
+                    <tr><th>文書種類</th><td></td></tr>
+                    <tr><th>文書番号</th><td></td></tr>
+                    <tr><th>フォーマットVer.</th><td></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="column">
+                <table class="unique-table">
+                  <tbody>
+                    <tr><th>提出日</th><td></td></tr>
+                    <tr><th>作成日</th><td></td></tr>
+                    <tr><th>改訂日</th><td></td></tr>
+                    <tr><th>改訂履歴</th><td></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </tabcol>
       <tabcol v-if="tabRight.list.length" :class="{half: tabLeft.list.length}">

@@ -46,7 +46,7 @@ Vue.component('JGPSSI', {
   template: ``
 });
 Vue.component('AisUnique', {
-  props: {target:{type: object} },
+  props: { target:{ type: Object } },
   template: `
     <div class="unique">
       <div class="AIS1 message">
@@ -83,15 +83,15 @@ Vue.component('AisUnique', {
   `
 });
 Vue.component('AisTable', {
-  props: {target:{type: object} },
+  props: {target:{type: Object} },
   template: `<div class="table"></div>`
 });
 Vue.component('AisTree', {
-  props: {target:{type: object} },
+  props: {target:{type: Object} },
   template: `<div class="tree"></div>`
 });
 Vue.component('Ais', {
-  props: {target:{type: object} },
+  props: {target:{type: Object} },
   template: `
     <div>
       <ais-unique :target="target.unique"></ais-unique>

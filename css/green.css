@@ -1,12 +1,13 @@
+/*#366126 #47A02C #A7CC1B #95B87D*/
 .button.is-green {
-  background-color: #3273dc;
+  background-color: #366126;
   border-color: transparent;
   color: #fff
 }
 
 .button.is-green.is-hovered,
 .button.is-green:hover {
-  background-color: #276cda;
+  background-color: #47A02C;
   border-color: transparent;
   color: #fff
 }
@@ -19,26 +20,26 @@
 
 .button.is-green.is-focused:not(:active),
 .button.is-green:focus:not(:active) {
-  box-shadow: 0 0 0 .125em rgba(50, 115, 220, .25)
+  box-shadow: 0 0 0 .125em rgba(50, 220, 78, 0.25)
 }
 
 .button.is-green.is-active,
 .button.is-green:active {
-  background-color: #2366d1;
+  background-color: #47A02C;
   border-color: transparent;
   color: #fff
 }
 
 .button.is-green[disabled],
 fieldset[disabled] .button.is-green {
-  background-color: #3273dc;
+  background-color: #366126;
   border-color: transparent;
   box-shadow: none
 }
 
 .button.is-green.is-inverted {
   background-color: #fff;
-  color: #3273dc
+  color: #366126
 }
 
 .button.is-green.is-inverted.is-hovered,
@@ -51,7 +52,7 @@ fieldset[disabled] .button.is-green.is-inverted {
   background-color: #fff;
   border-color: transparent;
   box-shadow: none;
-  color: #3273dc
+  color: #366126
 }
 
 .button.is-green.is-loading::after {
@@ -60,21 +61,21 @@ fieldset[disabled] .button.is-green.is-inverted {
 
 .button.is-green.is-outlined {
   background-color: transparent;
-  border-color: #3273dc;
-  color: #3273dc
+  border-color: #366126;
+  color: #366126
 }
 
 .button.is-green.is-outlined.is-focused,
 .button.is-green.is-outlined.is-hovered,
 .button.is-green.is-outlined:focus,
 .button.is-green.is-outlined:hover {
-  background-color: #3273dc;
-  border-color: #3273dc;
+  background-color: #366126;
+  border-color: #366126;
   color: #fff
 }
 
 .button.is-green.is-outlined.is-loading::after {
-  border-color: transparent transparent #3273dc #3273dc !important
+  border-color: transparent transparent #366126 #366126 !important
 }
 
 .button.is-green.is-outlined.is-loading.is-focused::after,
@@ -87,9 +88,9 @@ fieldset[disabled] .button.is-green.is-inverted {
 .button.is-green.is-outlined[disabled],
 fieldset[disabled] .button.is-green.is-outlined {
   background-color: transparent;
-  border-color: #3273dc;
+  border-color: #366126;
   box-shadow: none;
-  color: #3273dc
+  color: #366126
 }
 
 .button.is-green.is-inverted.is-outlined {
@@ -103,14 +104,14 @@ fieldset[disabled] .button.is-green.is-outlined {
 .button.is-green.is-inverted.is-outlined:focus,
 .button.is-green.is-inverted.is-outlined:hover {
   background-color: #fff;
-  color: #3273dc
+  color: #366126
 }
 
 .button.is-green.is-inverted.is-outlined.is-loading.is-focused::after,
 .button.is-green.is-inverted.is-outlined.is-loading.is-hovered::after,
 .button.is-green.is-inverted.is-outlined.is-loading:focus::after,
 .button.is-green.is-inverted.is-outlined.is-loading:hover::after {
-  border-color: transparent transparent #3273dc #3273dc !important
+  border-color: transparent transparent #366126 #366126 !important
 }
 
 .button.is-green.is-inverted.is-outlined[disabled],
@@ -123,65 +124,65 @@ fieldset[disabled] .button.is-green.is-inverted.is-outlined {
 
 .button.is-green.is-light {
   background-color: #eef3fc;
-  color: #2160c4
+  color: #95B87D 
 }
 
 .button.is-green.is-light.is-hovered,
 .button.is-green.is-light:hover {
   background-color: #e3ecfa;
   border-color: transparent;
-  color: #2160c4
+  color: #95B87D 
 }
 
 .button.is-green.is-light.is-active,
 .button.is-green.is-light:active {
   background-color: #d8e4f8;
   border-color: transparent;
-  color: #2160c4
+  color: #95B87D 
 }
 
 .notification.is-green {
-  background-color: #3273dc;
+  background-color: #366126;
   color: #fff
 }
 
 
 .progress.is-green::-webkit-progress-value {
-  background-color: #3273dc
+  background-color: #366126
 }
 
 .progress.is-green::-moz-progress-bar {
-  background-color: #3273dc
+  background-color: #366126
 }
 
 .progress.is-green::-ms-fill {
-  background-color: #3273dc
+  background-color: #366126
 }
 
 .progress.is-green:indeterminate {
-  background-image: linear-gradient(to right, #3273dc 30%, #ededed 30%)
+  background-image: linear-gradient(to right, #366126 30%, #ededed 30%)
 }
 
 .table td.is-green,
 .table th.is-green {
-  background-color: #3273dc;
-  border-color: #3273dc;
+  background-color: #366126;
+  border-color: #366126;
   color: #fff
 }
 
 .tag:not(body).is-green {
-  background-color: #3273dc;
+  background-color: #366126;
   color: #fff
 }
 
 .tag:not(body).is-green.is-light {
   background-color: #eef3fc;
-  color: #2160c4
+  color: #95B87D 
 }
 
 .is-green.input,
 .is-green.textarea {
-  border-color: #3273dc
+  border-color: #366126
 }
 
 .is-green.input:active,
@@ -192,38 +193,38 @@ fieldset[disabled] .button.is-green.is-inverted.is-outlined {
 .is-green.is-focused.textarea,
 .is-green.textarea:active,
 .is-green.textarea:focus {
-  box-shadow: 0 0 0 .125em rgba(50, 115, 220, .25)
+  box-shadow: 0 0 0 .125em rgba(50, 220, 75, .25)
 }
 
 .select.is-green:not(:hover)::after {
-  border-color: #3273dc
+  border-color: #366126
 }
 
 .select.is-green select {
-  border-color: #3273dc
+  border-color: #366126
 }
 
 .select.is-green select.is-hovered,
 .select.is-green select:hover {
-  border-color: #2366d1
+  border-color: #47A02C
 }
 
 .select.is-green select.is-active,
 .select.is-green select.is-focused,
 .select.is-green select:active,
 .select.is-green select:focus {
-  box-shadow: 0 0 0 .125em rgba(50, 115, 220, .25)
+  box-shadow: 0 0 0 .125em rgba(50, 220, 75, .25)
 }
 
 .file.is-green .file-cta {
-  background-color: #3273dc;
+  background-color: #366126;
   border-color: transparent;
   color: #fff
 }
 
 .file.is-green.is-hovered .file-cta,
 .file.is-green:hover .file-cta {
-  background-color: #276cda;
+  background-color: #47A02C;
   border-color: transparent;
   color: #fff
 }
@@ -231,18 +232,18 @@ fieldset[disabled] .button.is-green.is-inverted.is-outlined {
 .file.is-green.is-focused .file-cta,
 .file.is-green:focus .file-cta {
   border-color: transparent;
-  box-shadow: 0 0 .5em rgba(50, 115, 220, .25);
+  box-shadow: 0 0 .5em rgba(50, 220, 75, .25);
   color: #fff
 }
 
 .file.is-green.is-active .file-cta,
 .file.is-green:active .file-cta {
-  background-color: #2366d1;
+  background-color: #47A02C;
   border-color: transparent;
   color: #fff
 }
 .help.is-green {
-  color: #3273dc
+  color: #366126
 }
 
 .message.is-green {
@@ -250,17 +251,17 @@ fieldset[disabled] .button.is-green.is-inverted.is-outlined {
 }
 
 .message.is-green .message-header {
-  background-color: #3273dc;
+  background-color: #366126;
   color: #fff
 }
 
 .message.is-green .message-body {
-  border-color: #3273dc;
-  color: #2160c4
+  border-color: #366126;
+  color: #95B87D 
 }
 
 .navbar.is-green {
-  background-color: #3273dc;
+  background-color: #366126;
   color: #fff
 }
 
@@ -275,7 +276,7 @@ fieldset[disabled] .button.is-green.is-inverted.is-outlined {
 .navbar.is-green .navbar-brand>a.navbar-item.is-active,
 .navbar.is-green .navbar-brand>a.navbar-item:focus,
 .navbar.is-green .navbar-brand>a.navbar-item:hover {
-  background-color: #2366d1;
+  background-color: #47A02C;
   color: #fff
 }
 
@@ -308,7 +309,7 @@ fieldset[disabled] .button.is-green.is-inverted.is-outlined {
   .navbar.is-green .navbar-start>a.navbar-item.is-active,
   .navbar.is-green .navbar-start>a.navbar-item:focus,
   .navbar.is-green .navbar-start>a.navbar-item:hover {
-    background-color: #2366d1;
+    background-color: #47A02C;
     color: #fff
   }
 
@@ -320,31 +321,31 @@ fieldset[disabled] .button.is-green.is-inverted.is-outlined {
   .navbar.is-green .navbar-item.has-dropdown.is-active .navbar-link,
   .navbar.is-green .navbar-item.has-dropdown:focus .navbar-link,
   .navbar.is-green .navbar-item.has-dropdown:hover .navbar-link {
-    background-color: #2366d1;
+    background-color: #47A02C;
     color: #fff
   }
 
   .navbar.is-green .navbar-dropdown a.navbar-item.is-active {
-    background-color: #3273dc;
+    background-color: #366126;
     color: #fff
   }
 }
 
 .panel.is-green .panel-heading {
-  background-color: #3273dc;
+  background-color: #366126;
   color: #fff
 }
 
 .panel.is-green .panel-tabs a.is-active {
-  border-bottom-color: #3273dc
+  border-bottom-color: #366126
 }
 
 .panel.is-green .panel-block.is-active .panel-icon {
-  color: #3273dc
+  color: #366126
 }
 
 .hero.is-green {
-  background-color: #3273dc;
+  background-color: #366126;
   color: #fff
 }
 
@@ -368,7 +369,7 @@ fieldset[disabled] .button.is-green.is-inverted.is-outlined {
 
 @media screen and (max-width: 1023px) {
   .hero.is-green .navbar-menu {
-    background-color: #3273dc
+    background-color: #366126
   }
 }
 
@@ -381,7 +382,7 @@ fieldset[disabled] .button.is-green.is-inverted.is-outlined {
 .hero.is-green .navbar-link:hover,
 .hero.is-green a.navbar-item.is-active,
 .hero.is-green a.navbar-item:hover {
-  background-color: #2366d1;
+  background-color: #47A02C;
   color: #fff
 }
 
@@ -414,15 +415,15 @@ fieldset[disabled] .button.is-green.is-inverted.is-outlined {
 .hero.is-green .tabs.is-toggle li.is-active a:hover {
   background-color: #fff;
   border-color: #fff;
-  color: #3273dc
+  color: #366126
 }
 
 .hero.is-green.is-bold {
-  background-image: linear-gradient(141deg, #1577c6 0, #3273dc 71%, #4366e5 100%)
+  background-image: linear-gradient(141deg, #1577c6 0, #366126 71%, #4366e5 100%)
 }
 
 @media screen and (max-width: 768px) {
   .hero.is-green.is-bold .navbar-menu {
-    background-image: linear-gradient(141deg, #1577c6 0, #3273dc 71%, #4366e5 100%)
+    background-image: linear-gradient(141deg, #1577c6 0, #366126 71%, #4366e5 100%)
   }
 }

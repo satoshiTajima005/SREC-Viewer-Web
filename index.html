@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
   <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Noto+Sans+JP:400,700" rel="stylesheet">
+  <link href="css/green.css" rel="stylesheet">
   <link href="css/css.css" rel="stylesheet">
   <script src="https://jp.vuejs.org/js/vue.js"></script>
   <script src="js/unzip.min.js"></script>
@@ -25,7 +26,7 @@
         <img src="css/logo.png">
       </div>
       <div class="column is-2">
-        <div class="file is-link">
+        <div class="file is-green">
           <label class="file-label">
             <input class="file-input" type="file" @change="openFile" accept=".xml,.csv,.jgp4,.shai,.shci" multiple>
             <span class="file-cta">
@@ -36,11 +37,11 @@
         </div>
       </div>
       <div class="column">
-        <button type="button" class="button is-link" :class="{'is-light': langType!=='ja'}"
+        <button type="button" class="button is-green" :class="{'is-light': langType!=='ja'}"
           @click="langType='ja'">Japanese</button>
-        <button type="button" class="button is-link" :class="{'is-light': langType!=='en'}" @click="langType='en'"
+        <button type="button" class="button is-green" :class="{'is-light': langType!=='en'}" @click="langType='en'"
           disabled>English</button>
-        <button type="button" class="button is-link" :class="{'is-light': langType!=='zh'}" @click="langType='zh'"
+        <button type="button" class="button is-green" :class="{'is-light': langType!=='zh'}" @click="langType='zh'"
           disabled>Chinese</button>
       </div>
     </div>

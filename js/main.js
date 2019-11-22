@@ -3,6 +3,7 @@ let list = {
   id: 0, //読み込んだファイル数のインクリメント
   type: "", //AIS, AIS-temp, MSDSplus, MSDSplus-temp, IEC62474, SHAI, SHCI, JAMA, JGP4
   txt: "", //読み込んだ生のテキストデータ
+  detail: "", //詳細表示のパターン[tree, table, itemNo]
   data: {//JSON変換したデータ
     unique:{},
     table:{},

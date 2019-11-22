@@ -66,3 +66,15 @@ body {
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;
 }
+
+.message-body .column {
+  padding-bottom: 0;
+}
+
+.unique-table {
+  width: 100%;
+}
+.unique-table th{
+  width: 15%;
+  padding: 2px;
+}

@@ -58,7 +58,7 @@ body {
 }
 
 .preview {
-  padding: 10px;
+  padding: 15px 15px 20px 15px;
   background-color: #fff;
   max-height: calc(100% - 70px);
   overflow-y: scroll;

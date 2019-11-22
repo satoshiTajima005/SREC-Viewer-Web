@@ -43,7 +43,67 @@ Vue.component('JGPSSI', {
   template: ``
 });
 Vue.component('AIS', {
-  template: ``
+  props: ['target'],
+  template: `
+    <div>
+      <AISunique :target="target"></AISunique>
+      <div class="tabs">
+        <ul>
+          <li class="is-active"><a>Pictures</a></li>
+          <li><a>Music</a></li>
+        </ul>
+      </div>
+      <div>
+        <AIStable :target="target"></AIStable>
+        <AIStree :target="target"></AIStree>
+      </div>
+    </div>
+  `
+});
+Vue.component('AISunique', {
+  props: ['target'],
+  template: `
+    <div class="unique">
+      <div class="AIS1 message">
+        <div class="message-header">
+          <p>AISに関する情報</p>
+          <span class="icon" v-if="target.unique.AIS1.isShow"><i class="fas fa-caret-right"></i></span>
+          <span class="icon" v-if="!target.unique.AIS1.isShow"><i class="fas fa-caret-down"></i></span>
+        </div>
+        <div class="message-body columns">
+          <div class="column">
+            <table class="unique-table">
+              <tbody>
+                <tr><th>言語</th><td></td></tr>
+                <tr><th>文書GPID</th><td></td></tr>
+                <tr><th>文書種類</th><td></td></tr>
+                <tr><th>文書番号</th><td></td></tr>
+                <tr><th>フォーマットVer.</th><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="column">
+            <table class="unique-table">
+              <tbody>
+                <tr><th>提出日</th><td></td></tr>
+                <tr><th>作成日</th><td></td></tr>
+                <tr><th>改訂日</th><td></td></tr>
+                <tr><th>改訂履歴</th><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  `
+});
+Vue.component('AIStable', {
+  props: ['target'],
+  template: `<div class="table"></div>`
+});
+Vue.component('AIStree', {
+  props: ['target'],
+  template: `<div class="tree"></div>`
 });
 Vue.component('MSDSplus', {
   template: ``

@@ -49,8 +49,9 @@ Vue.component('AisUnique', {
   props: { target:{ type: Object } },
   template: `
     <div class="unique">
+
       <div class="AIS1 message">
-        <div class="message-header" @click="showDetail(target.AIS1)">
+        <div class="message-header" @click="toggleDetail(target.AIS1.isShow)">
           <p>AISに関する情報</p>
           <span class="icon" v-if="!target.AIS1.isShow"><i class="fas fa-caret-right"></i></span>
           <span class="icon" v-if="target.AIS1.isShow"><i class="fas fa-caret-down"></i></span>
@@ -81,7 +82,7 @@ Vue.component('AisUnique', {
       </div>
       
       <div class="AIS2 message">
-        <div class="message-header" @click="showDetail(target.AIS2)">
+        <div class="message-header" @click="toggleDetail(target.AIS2.isShow)">
           <p>発行会社情報</p>
           <span class="icon" v-if="!target.AIS2.isShow"><i class="fas fa-caret-right"></i></span>
           <span class="icon" v-if="target.AIS2.isShow"><i class="fas fa-caret-down"></i></span>
@@ -109,7 +110,7 @@ Vue.component('AisUnique', {
       </div>
 
       <div class="AIS3 message">
-        <div class="message-header" @click="showDetail(target.AIS3)">
+        <div class="message-header" @click="toggleDetail(target.AIS3.isShow)">
           <p>発行/作成 部門情報</p>
           <span class="icon" v-if="!target.AIS3.isShow"><i class="fas fa-caret-right"></i></span>
           <span class="icon" v-if="target.AIS3.isShow"><i class="fas fa-caret-down"></i></span>
@@ -138,7 +139,7 @@ Vue.component('AisUnique', {
       </div>
 
       <div class="AIS4 message">
-        <div class="message-header" @click="showDetail(target.AIS4)">
+        <div class="message-header" @click="toggleDetail(target.AIS4.isShow)">
           <p>依頼者情報</p>
           <span class="icon" v-if="!target.AIS4.isShow"><i class="fas fa-caret-right"></i></span>
           <span class="icon" v-if="target.AIS4.isShow"><i class="fas fa-caret-down"></i></span>
@@ -175,10 +176,10 @@ Vue.component('AisUnique', {
     </div>
   </div>
   `,
-  method: {
-    showDetail: function(target){
-      target.isShow = !target.isShow;
-    }
+  methods: {
+    toggleDetail: function(prop){
+      prop  = !prop;
+    }    
   }
 });
 Vue.component('AisTable', {

@@ -243,7 +243,7 @@ Vue.component('AisUnique', {
         </div>
         <div class="message-body columns" v-show="target.AIS7.isShow">
           <div class="column">
-            <table class="unique-table">
+            <table class="unique-table table is-bordered is-narrow">
               <thead>
                 <th style="text-align:left; width:auto;">名称</th>
                 <th style="text-align:left; width:auto;">分類記号</th>
@@ -322,7 +322,9 @@ Vue.component('AisTable', {
 });
 Vue.component('AisTree', {
   props: {target:{type: Object} },
-  template: `<div class="tree"></div>`
+  template: `<div class="tree">
+
+  </div>`
 });
 Vue.component('Ais', {
   props: {

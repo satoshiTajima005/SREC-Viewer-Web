@@ -335,10 +335,10 @@ Vue.component('Ais', {
       <hr class="hr">
       <div class="tabs">
         <ul>
-          <li :class="{'is-active': detail=='table'}" @click="changeDetail('table')">
+          <li :class="{'is-active': detail=='table'}" @click="detail='table'">
             <a><span class="icon"><i class="fas fa-table"></i></span><span>テーブル</span></a>
           </li>
-          <li :class="{'is-active': detail=='tree'}" @click="changeDetail('tree')">
+          <li :class="{'is-active': detail=='tree'}" @click="detail='tree'">
             <a><span class="icon"><i class="fas fa-stream"></i></span><span>ツリー</span></a>
           </li>
         </ul>
@@ -349,9 +349,9 @@ Vue.component('Ais', {
       </div>
     </div>
   `,
-  methods: {
-    changeDetail: function(prop){
-      this.detail = prop;
+  data: function () {
+    return {
+      detail: this.detail
     }
   }
 });

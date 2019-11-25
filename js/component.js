@@ -57,7 +57,7 @@ Vue.component('AisUnique', {
         </div>
         <div class="message-body columns" v-show="target.AIS1.isShow">
           <div class="column">
-            <table class="unique-table">
+            <table class="unique-table table is-bordered is-narrow">
               <tbody>
                 <unique-tr title="言語" :value="target.AIS1.LANG"></unique-tr>
                 <unique-tr title="文書GPID" :value="target.AIS1.KJE134"></unique-tr>
@@ -68,7 +68,7 @@ Vue.component('AisUnique', {
             </table>
           </div>
           <div class="column">
-            <table class="unique-table">
+            <table class="unique-table table is-bordered is-narrow">
               <tbody>
                 <unique-tr title="提出日" :value="target.AIS1.KJE137"></unique-tr>
                 <unique-tr title="作成日" :value="target.AIS1.KJE016"></unique-tr>
@@ -88,7 +88,7 @@ Vue.component('AisUnique', {
         </div>
         <div class="message-body columns" v-show="target.AIS2.isShow">
           <div class="column">
-            <table class="unique-table">
+            <table class="unique-table table is-bordered is-narrow">
               <tbody>
                 <unique-tr title="登録機関ID" :value="target.AIS2.KJE138"></unique-tr>
                 <unique-tr title="会社ID" :value="target.AIS2.KJE011"></unique-tr>
@@ -97,7 +97,7 @@ Vue.component('AisUnique', {
             </table>
           </div>
           <div class="column">
-            <table class="unique-table">
+            <table class="unique-table table is-bordered is-narrow">
               <tbody>
                 <unique-tr title="会社名" :value="target.AIS2.KJE012"></unique-tr>
                 <unique-tr title="会社名(母)" :value="target.AIS2.KJE297"></unique-tr>
@@ -116,7 +116,7 @@ Vue.component('AisUnique', {
         </div>
         <div class="message-body columns" v-show="target.AIS3.isShow">
           <div class="column">
-            <table class="unique-table">
+            <table class="unique-table table is-bordered is-narrow">
               <tbody>
                 <unique-tr title="発行:部門名" :value="target.AIS3.KJE143"></unique-tr>
                 <unique-tr title="発行:住所" :value="target.AIS3.KJE144"></unique-tr>
@@ -126,7 +126,7 @@ Vue.component('AisUnique', {
             </table>
           </div>
           <div class="column">
-            <table class="unique-table">
+            <table class="unique-table table is-bordered is-narrow">
               <tbody>
                 <unique-tr title="発行:E-Mail" :value="target.AIS3.KJE147"></unique-tr>
                 <unique-tr title="作成:部門名" :value="target.AIS3.KJE093"></unique-tr>
@@ -145,7 +145,7 @@ Vue.component('AisUnique', {
         </div>
         <div class="message-body columns" v-show="target.AIS4.isShow">
           <div class="column">
-            <table class="unique-table">
+            <table class="unique-table table is-bordered is-narrow">
               <tbody>
                 <unique-tr title="登録機関ID" :value="target.AIS4.KJE149"></unique-tr>
                 <unique-tr title="会社ID" :value="target.AIS4.KJE150"></unique-tr>
@@ -158,7 +158,7 @@ Vue.component('AisUnique', {
             </table>
           </div>
           <div class="column">
-            <table class="unique-table">
+            <table class="unique-table table is-bordered is-narrow">
               <tbody>
                 <unique-tr title="電話" :value="target.AIS4.KJE156"></unique-tr>
                 <unique-tr title="FAX" :value="target.AIS4.KJE157"></unique-tr>
@@ -180,7 +180,7 @@ Vue.component('AisUnique', {
         </div>
         <div class="message-body columns" v-show="target.AIS5.isShow">
           <div class="column is-half">
-            <table class="unique-table">
+            <table class="unique-table table is-bordered is-narrow">
               <caption>依頼者</caption>
               <tbody>
                 <unique-tr v-for="(item,index) in target.AIS5.KJE079" :title="index+1" :value="item" :key="index"></unique-tr>
@@ -188,7 +188,7 @@ Vue.component('AisUnique', {
             </table>
           </div>
           <div class="column is-half">
-            <table class="unique-table">
+            <table class="unique-table table is-bordered is-narrow">
               <caption>発行者</caption>
               <tbody>
                 <unique-tr v-for="(item,index) in target.AIS5.KJE164" :title="index+1" :value="item" :key="index"></unique-tr>
@@ -206,7 +206,7 @@ Vue.component('AisUnique', {
         </div>
         <div class="message-body columns" v-show="target.AIS6.isShow">
           <div class="column">
-            <table class="unique-table">
+            <table class="unique-table table is-bordered is-narrow">
               <tbody>
                 <unique-tr title="製造会社" :value="target.AIS6.KJE101"></unique-tr>
                 <unique-tr title="発行者型番(英)" :value="target.AIS6.KJE018"></unique-tr>
@@ -220,7 +220,7 @@ Vue.component('AisUnique', {
             </table>
           </div>
           <div class="column">
-            <table class="unique-table">
+            <table class="unique-table table is-bordered is-narrow">
               <tbody>
                 <unique-tr title="単位" :value="getKJE177(target.AIS6.KJE177)"></unique-tr>
                 <unique-tr title="質量" :value="target.AIS6.KJE023"></unique-tr>
@@ -243,7 +243,7 @@ Vue.component('AisUnique', {
         </div>
         <div class="message-body columns" v-show="target.AIS7.isShow">
           <div class="column">
-            <table class="unique-table table is-bordered is-narrow">
+            <table class="table is-bordered is-narrow">
               <thead>
                 <th style="text-align:left; width:auto;">名称</th>
                 <th style="text-align:left; width:auto;">分類記号</th>

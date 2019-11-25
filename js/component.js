@@ -335,23 +335,23 @@ Vue.component('Ais', {
       <hr class="hr">
       <div class="tabs">
         <ul>
-          <li :class="{'is-active': detail=='table'}" @click="detail='table'">
+          <li :class="{'is-active': undertab=='table'}" @click="undertab='table'">
             <a><span class="icon"><i class="fas fa-table"></i></span><span>テーブル</span></a>
           </li>
-          <li :class="{'is-active': detail=='tree'}" @click="detail='tree'">
+          <li :class="{'is-active': undertab=='tree'}" @click="undertab='tree'">
             <a><span class="icon"><i class="fas fa-stream"></i></span><span>ツリー</span></a>
           </li>
         </ul>
       </div>
       <div>
-        <ais-table :target="table" v-if="detail=='table'"></ais-table>
-        <ais-tree :target="tree" v-if="detail=='tree'"></ais-tree>
+        <ais-table :target="table" v-if="undertab=='table'"></ais-table>
+        <ais-tree :target="tree" v-if="undertab=='tree'"></ais-tree>
       </div>
     </div>
   `,
   data: function () {
     return {
-      detail: this.detail
+      undertab: this.detail
     }
   }
 });

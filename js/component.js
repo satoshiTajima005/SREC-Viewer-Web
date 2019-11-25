@@ -333,17 +333,15 @@ Vue.component('AisTable', {
     </div>`
 });
 Vue.component('AisTreeChild', {
-  props: {item:{type: Object} },
+  props: {node:{type: Object} },
   template: `
     <li>
-      <div>
-        {{ item.name }}
-      </div>
-      <ul v-show="isOpen" v-if="">
-        <ais-tree-child v-for="(child, index) in item.children" :key="index":item="child"></ais-tree-child>
+      <span>{{ node.name }}</span>
+      <ul v-if="children.length">
+        <ais-tree-child v-for="(child, index) in node.children" :key="index":node="child"></ais-tree-child>
       </ul>
     </li>
-    `,
+  `,
 });
 Vue.component('AisTree', {
   props: {target:{type: Object} },
@@ -352,7 +350,7 @@ Vue.component('AisTree', {
       <div class="columns">
         <div class="column">
           <ul>
-            <li></li>
+            <ais-tree-child v-for="(child, index) in node.children" :key="index":node="child" :node="child"></ais-tree-child>
           </ul>
         </div>
         <div class="column">

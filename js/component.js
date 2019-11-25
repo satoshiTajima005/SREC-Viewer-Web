@@ -302,7 +302,21 @@ Vue.component('AisUnique', {
 });
 Vue.component('AisTable', {
   props: {target:{type: Object} },
-  template: `<div class="table"></div>`
+  template:
+    `<div class="table">
+      <table>
+        <thead>
+          <tr v-for="th in target.thead">
+            <th :colspan="th.colspan">{{th.value}}</th>
+          </tr>
+        </tead>
+        <tbody>
+          <tr v-for="td in target.tbody">
+            <td :rowspan="td.rowspan">{{td.value}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>`
 });
 Vue.component('AisTree', {
   props: {target:{type: Object} },

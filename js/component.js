@@ -316,7 +316,9 @@ Vue.component('AisTable', {
           </tr>
         </tbody>
       </table>
-    </div>`
+    </div>`,
+  methods: {
+  }
 });
 Vue.component('AisTree', {
   props: {target:{type: Object} },

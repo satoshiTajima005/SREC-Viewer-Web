@@ -39,7 +39,7 @@ Vue.component('tabs', {
 });
 Vue.component('UniqueTr', {
   props: ['title', 'value'],
-  template: `<tr><th>{{title}}</th><td>{{value}}</td></tr>`
+  template: `<tr><th :style="/^[1-6]$/.test(title)?'width:50px':''">{{title}}</th><td>{{value}}</td></tr>`
 });
 Vue.component('JGPSSI', {
   template: ``

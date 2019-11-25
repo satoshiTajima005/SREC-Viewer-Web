@@ -303,7 +303,7 @@ Vue.component('AisUnique', {
 Vue.component('AisTable', {
   props: {target:{type: Object} },
   template:
-    `<div class="table">
+    `<div class="table is-bordered is-narrow">
       <table>
         <thead>
           <tr v-for="tr in target.thead">

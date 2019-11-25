@@ -8,7 +8,6 @@ Vue.component('tabcol', {
     </div>
   `
 });
-
 Vue.component('tabs', {
   props: ['target', 'moveto', 'language'],
   template: `
@@ -100,7 +99,7 @@ Vue.component('AisUnique', {
           <div class="column">
             <table class="unique-table">
               <tbody>
-                <unique-tr title="会社名(英)" :value="target.AIS2.KJE012"></unique-tr>
+                <unique-tr title="会社名" :value="target.AIS2.KJE012"></unique-tr>
                 <unique-tr title="会社名(母)" :value="target.AIS2.KJE297"></unique-tr>
                 <unique-tr title="追加情報" :value="target.AIS2.KJE142"></unique-tr>
               </tbody>
@@ -216,18 +215,18 @@ Vue.component('AisUnique', {
                 <unique-tr title="シリーズ名" :value="target.AIS6.KJE173"></unique-tr>
                 <unique-tr title="発行者備考" :value="target.AIS6.KJE174"></unique-tr>
                 <unique-tr title="引用等" :value="target.AIS6.KJE183"></unique-tr>
-                <unique-tr title="集合化" :value="target.AIS6.KJE176"></unique-tr>
+                <unique-tr title="集合化" :value="getKJE176(target.AIS6.KJE176)"></unique-tr>
               </tbody>
             </table>
           </div>
           <div class="column">
             <table class="unique-table">
               <tbody>
-                <unique-tr title="単位" :value="target.AIS6.KJE177"></unique-tr>
+                <unique-tr title="単位" :value="getKJE177(target.AIS6.KJE177)"></unique-tr>
                 <unique-tr title="質量" :value="target.AIS6.KJE023"></unique-tr>
-                <unique-tr title="GADSL" :value="target.AIS6.KJE178"></unique-tr>
-                <unique-tr title="JIG" :value="target.AIS6.KJE179"></unique-tr>
-                <unique-tr title="含有確認" :value="target.AIS6.KJE180"></unique-tr>
+                <unique-tr title="GADSL" :value="getCoveredRow(target.AIS6.KJE178)"></unique-tr>
+                <unique-tr title="JIG" :value="getCoveredRow(target.AIS6.KJE179")></unique-tr>
+                <unique-tr title="含有確認" :value="getContained(target.AIS6.KJE180)"></unique-tr>
                 <unique-tr title="材質リストVer." :value="target.AIS6.KJE181"></unique-tr>
                 <unique-tr title="物質リストVer." :value="target.AIS6.KJE182"></unique-tr>
               </tbody>
@@ -268,6 +267,36 @@ Vue.component('AisUnique', {
   methods: {
     toggleDetail: function(prop){
       this.target[prop].isShow = !this.target[prop].isShow;
+    },
+    getKJE176: function(id){
+      switch (id){
+        case '0': return '無し';
+        case '1': return '複合化';
+        case '2': return '単純化';
+      }
+    },
+    getKJE177: function(id){
+      switch (id){
+        case 'PC': return '個';
+        case 'MTR': return 'm';
+        case 'MTK': return 'm2';
+        case 'MTQ': return 'm3';
+        case 'CMT': return 'cm';
+        case 'CMK': return 'cm2';
+        case 'CMQ': return 'cm3';
+      }
+    },
+    getCoveredRow(id){  //KJE178 KJE179 KJE267 KJE268 KJE269
+      switch(id){
+        case '0': return '対象としない';
+        case '1': return '対象とする';
+      }
+    },
+    getContained(id){ //KJE180 KJE270
+      switch (id){
+        case '0': return '含有あり';
+        case '1': return '含有なし';
+      }
     }
   }
 });

@@ -95,8 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       getFileArr: async function (file, o) {
         //ファイルタイプの判定
-        let f = [],
-          type = '';
+        let f = [], type = '', detail = '';
         switch (file.name.slice(-4).toUpperCase()) {
           case '.XML': //AIS・MSDSplus・IEC62474判定
             f = await app.readFile(file);
@@ -105,18 +104,22 @@ document.addEventListener('DOMContentLoaded', function () {
           case '.CSV': //文字コード
             f = await app.readFile(file, 'shift_jis');
             type = 'JAMA';
+            detail = 'tree';
             break;
           case 'JGP4': //文字コード
             f = await app.readFile(file, 'shift_jis');
             type = 'JGP4';
+            detail = 'item';
             break;
           case 'SHAI': //ZIP
             f = await app.readFile(file, null, true);
             type = 'SHAI';
+            detail = 'tree';
             break;
           case 'SHCI': //ZIP
             f = await app.readFile(file, null, true);
             type = 'SHCI';
+            detail = 'tree';
             break;
           default:
             //拡張子エラー
@@ -141,24 +144,31 @@ document.addEventListener('DOMContentLoaded', function () {
             switch (true) {
               case (/MSDSplus-temp/.test(fres)):
                 type = 'MSDSplus-temp';
+                detail = 'table';
                 break;
               case (/AIS-temp/.test(fres)):
                 type = 'AIS-temp';
+                detail = 'table';
                 break;
               case (/MSDSplus/.test(fres)):
                 type = 'MSDSplus';
+                detail = 'table';
                 break;
               case (/AIS/.test(fres)):
                 type = 'AIS';
+                detail = 'table';
                 break;
               case (/chemSHERPA-A/.test(fres)):
                 type = 'SHAI';
+                detail = 'tree';
                 break;
               case (/chemSHERPA-C/.test(fres)):
                 type = 'SHCI';
+                detail = 'tree';
                 break;
               case (/IEC62474/.test(fres)):
                 type = 'IEC62474';
+                detail = 'tree';
                 break;
               default:
                 o.push({
@@ -175,7 +185,8 @@ document.addEventListener('DOMContentLoaded', function () {
             id: id,
             type: type,
             name: file.name,
-            txt: fres
+            txt: fres,
+            detail: detail
           });
         });
         return;

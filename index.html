@@ -51,6 +51,7 @@
         <div slot="preview" class="preview">
           <ais
             v-if="/AIS/.test(tabLeft.list[tabLeft.selected].type)"
+            :detail="tabLeft.list[tabLeft.selected].detail"
             :unique="tabLeft.list[tabLeft.selected].data.unique"
             :table="tabLeft.list[tabLeft.selected].data.table"
             :tree="tabLeft.list[tabLeft.selected].data.tree"
@@ -62,6 +63,7 @@
         <div slot="preview" class="preview">
             <ais
             v-if="/AIS/.test(tabRight.list[tabRight.selected].type)"
+            :detail="tabRight.list[tabRight.selected].detail"
             :unique="tabRight.list[tabRight.selected].data.unique"
             :table="tabRight.list[tabRight.selected].data.table"
             :tree="tabRight.list[tabRight.selected].data.tree"

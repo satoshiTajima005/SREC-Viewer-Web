@@ -324,6 +324,7 @@ Vue.component('AisTree', {
 });
 Vue.component('Ais', {
   props: {
+    detail:{type: String}, 
     unique:{type: Object},
     table:{type: Object},
     tree:{type: Object}
@@ -334,13 +335,17 @@ Vue.component('Ais', {
       <hr class="hr">
       <div class="tabs">
         <ul>
-          <li class="is-active"><a><span class="icon"><i class="fas fa-table"></i></span><span>テーブル</span></a></li>
-          <li><a><span class="icon"><i class="fas fa-stream"></i></span><span>ツリー</span></a></li>
+          <li :class="{'is-active': detail=='table'}" @click="detail='table'">
+            <a><span class="icon"><i class="fas fa-table"></i></span><span>テーブル</span></a>
+          </li>
+          <li :class="{'is-active': detail=='tree'}" @click="detail='tree'">
+            <a><span class="icon"><i class="fas fa-stream"></i></span><span>ツリー</span></a>
+          </li>
         </ul>
       </div>
       <div>
-        <ais-table :target="table"></ais-table>
-        <ais-tree :target="tree"></ais-tree>
+        <ais-table :target="table" v-if="detail=='table'"></ais-table>
+        <ais-tree :target="tree" v-if="detail=='tree'"></ais-tree>
       </div>
     </div>
   `

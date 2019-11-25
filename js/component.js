@@ -225,7 +225,7 @@ Vue.component('AisUnique', {
                 <unique-tr title="単位" :value="getKJE177(target.AIS6.KJE177)"></unique-tr>
                 <unique-tr title="質量" :value="target.AIS6.KJE023"></unique-tr>
                 <unique-tr title="GADSL" :value="getCoveredRow(target.AIS6.KJE178)"></unique-tr>
-                <unique-tr title="JIG" :value="getCoveredRow(target.AIS6.KJE179")></unique-tr>
+                <unique-tr title="JIG" :value="getCoveredRow(target.AIS6.KJE179)"></unique-tr>
                 <unique-tr title="含有確認" :value="getContained(target.AIS6.KJE180)"></unique-tr>
                 <unique-tr title="材質リストVer." :value="target.AIS6.KJE181"></unique-tr>
                 <unique-tr title="物質リストVer." :value="target.AIS6.KJE182"></unique-tr>

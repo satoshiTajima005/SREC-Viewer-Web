@@ -303,7 +303,7 @@ Vue.component('AisUnique', {
 Vue.component('AisTable', {
   props: {target:{type: Object} },
   template:
-    `<div class="table is-bordered is-narrow">
+    `<div class="table is-bordered is-narrow" style="margin: 10px;">
       <table>
         <thead>
           <tr v-for="tr in target.thead">
@@ -316,15 +316,36 @@ Vue.component('AisTable', {
           </tr>
         </tbody>
       </table>
-    </div>`,
-  methods: {
-  }
+    </div>`
+});
+Vue.component('AisTreeChild', {
+  props: {item:{type: Object} },
+  template: `
+    <li>
+      <div>
+        {{ item.name }}
+      </div>
+      <ul v-show="isOpen" v-if="">
+        <ais-tree-child v-for="(child, index) in item.children" :key="index":item="child"></ais-tree-child>
+      </ul>
+    </li>
+    `,
 });
 Vue.component('AisTree', {
   props: {target:{type: Object} },
-  template: `<div class="tree">
-
-  </div>`
+  template: `
+    <div class="tree">
+      <div class="columns">
+        <div class="column">
+          <ul>
+            <li></li>
+          </ul>
+        </div>
+        <div class="column">
+        </div>
+      </div>
+    </div>
+    `,
 });
 Vue.component('Ais', {
   props: {
@@ -337,7 +358,7 @@ Vue.component('Ais', {
     <div>
       <ais-unique :target="unique"></ais-unique>
       <hr class="hr">
-      <div class="tabs">
+      <div class="tabs is-boxed">
         <ul>
           <li :class="{'is-active': undertab=='table'}" @click="undertab='table'">
             <a><span class="icon"><i class="fas fa-table"></i></span><span>テーブル</span></a>

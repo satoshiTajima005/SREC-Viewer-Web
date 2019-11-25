@@ -79,20 +79,15 @@ body {
   width: 100%;
 }
 
-.unique-table tr {
-  border-bottom: #2e922b;
-}
-
 .unique-table th {
   width: 140px;
   padding: 3px 10px;
   color: #111;
   font-weight: normal;
   text-align: right !important;
+  vertical-align: middle;
 }
 
 .unique-table td {
-  border-bottom: #2e922b;
-  border-right: #2e922b;
   padding: 3px 10px;
 }

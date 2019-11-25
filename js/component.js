@@ -55,7 +55,7 @@ Vue.component('AisUnique', {
           <span class="icon" v-if="!target.AIS1.isShow"><i class="fas fa-caret-right"></i></span>
           <span class="icon" v-if="target.AIS1.isShow"><i class="fas fa-caret-down"></i></span>
         </div>
-        <transition name="slide">
+        <transition name="fade">
           <div class="message-body columns" v-show="target.AIS1.isShow">
             <div class="column">
               <table class="unique-table table is-bordered is-narrow">
@@ -88,7 +88,7 @@ Vue.component('AisUnique', {
           <span class="icon" v-if="!target.AIS2.isShow"><i class="fas fa-caret-right"></i></span>
           <span class="icon" v-if="target.AIS2.isShow"><i class="fas fa-caret-down"></i></span>
         </div>
-        <transition name="slide">
+        <transition name="fade">
           <div class="message-body columns" v-show="target.AIS2.isShow">
             <div class="column">
               <table class="unique-table table is-bordered is-narrow">
@@ -118,7 +118,7 @@ Vue.component('AisUnique', {
           <span class="icon" v-if="!target.AIS3.isShow"><i class="fas fa-caret-right"></i></span>
           <span class="icon" v-if="target.AIS3.isShow"><i class="fas fa-caret-down"></i></span>
         </div>
-        <transition name="slide">
+        <transition name="fade">
           <div class="message-body columns" v-show="target.AIS3.isShow">
             <div class="column">
               <table class="unique-table table is-bordered is-narrow">
@@ -149,7 +149,7 @@ Vue.component('AisUnique', {
           <span class="icon" v-if="!target.AIS4.isShow"><i class="fas fa-caret-right"></i></span>
           <span class="icon" v-if="target.AIS4.isShow"><i class="fas fa-caret-down"></i></span>
         </div>
-        <transition name="slide">
+        <transition name="fade">
           <div class="message-body columns" v-show="target.AIS4.isShow">
             <div class="column">
               <table class="unique-table table is-bordered is-narrow">
@@ -186,7 +186,7 @@ Vue.component('AisUnique', {
           <span class="icon" v-if="!target.AIS5.isShow"><i class="fas fa-caret-right"></i></span>
           <span class="icon" v-if="target.AIS5.isShow"><i class="fas fa-caret-down"></i></span>
         </div>
-        <transition name="slide">
+        <transition name="fade">
           <div class="message-body columns" v-show="target.AIS5.isShow">
             <div class="column is-half">
               <table class="unique-table table is-bordered is-narrow">
@@ -214,7 +214,7 @@ Vue.component('AisUnique', {
           <span class="icon" v-if="!target.AIS6.isShow"><i class="fas fa-caret-right"></i></span>
           <span class="icon" v-if="target.AIS6.isShow"><i class="fas fa-caret-down"></i></span>
         </div>
-        <transition name="slide">
+        <transition name="fade">
           <div class="message-body columns" v-show="target.AIS6.isShow">
             <div class="column">
               <table class="unique-table table is-bordered is-narrow">
@@ -253,7 +253,7 @@ Vue.component('AisUnique', {
           <span class="icon" v-if="!target.AIS7.isShow"><i class="fas fa-caret-right"></i></span>
           <span class="icon" v-if="target.AIS7.isShow"><i class="fas fa-caret-down"></i></span>
         </div>
-        <transition name="slide">
+        <transition name="fade">
           <div class="message-body columns" v-show="target.AIS7.isShow">
             <div class="column">
               <table class="table is-bordered is-narrow">

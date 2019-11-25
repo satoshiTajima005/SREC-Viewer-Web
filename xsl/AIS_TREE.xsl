@@ -40,9 +40,9 @@
       "type": "parts",
       "name": "<xsl:value-of select=".//KJE059/PROPERTY_VALUE"/>",
       "prop": {
-        <input class="tag" id="KJE059_{generate-id()}" value="{.//KJE059/PROPERTY_VALUE}" />
-        <input class="tag" id="KJE185_{generate-id()}" value="{format-number(.//KJE185/PROPERTY_VALUE, '0.#')}" />
-        <input class="tag" id="KJE186_{generate-id()}" value="{.//KJE186/PROPERTY_VALUE}" />
+        "KJE059": "<xsl:value-of select=".//KJE059/PROPERTY_VALUE" />",
+        "KJE185": "<xsl:value-of select="format-number(.//KJE185/PROPERTY_VALUE, '0.#')" />",
+        "KJE186": "<xsl:value-of select=".//KJE186/PROPERTY_VALUE" />"
       }
       <xsl:if test="count(.//KJA029)!=0">
         ,"children":[

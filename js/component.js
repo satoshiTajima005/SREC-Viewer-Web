@@ -306,13 +306,13 @@ Vue.component('AisTable', {
     `<div class="table">
       <table>
         <thead>
-          <tr v-for="th in target.thead">
-            <th :colspan="th.colspan">{{th.value}}</th>
+          <tr v-for="tr in target.thead">
+            <th v-for="th in tr" :colspan="th.colspan">{{th.value}}</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="td in target.tbody">
-            <td :rowspan="td.rowspan">{{td.value}}</td>
+          <tr v-for="tr in target.tbody">
+            <td v-for="td in tr" :rowspan="td.rowspan">{{td.value}}</td>
           </tr>
         </tbody>
       </table>

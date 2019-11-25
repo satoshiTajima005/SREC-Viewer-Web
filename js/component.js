@@ -309,7 +309,7 @@ Vue.component('AisTable', {
           <tr v-for="th in target.thead">
             <th :colspan="th.colspan">{{th.value}}</th>
           </tr>
-        </tead>
+        </thead>
         <tbody>
           <tr v-for="td in target.tbody">
             <td :rowspan="td.rowspan">{{td.value}}</td>
@@ -335,10 +335,10 @@ Vue.component('Ais', {
       <hr class="hr">
       <div class="tabs">
         <ul>
-          <li :class="{'is-active': detail=='table'}" @click="detail='table'">
+          <li :class="{'is-active': detail=='table'}" @click="changeDetail('table')">
             <a><span class="icon"><i class="fas fa-table"></i></span><span>テーブル</span></a>
           </li>
-          <li :class="{'is-active': detail=='tree'}" @click="detail='tree'">
+          <li :class="{'is-active': detail=='tree'}" @click="changeDetail('tree')">
             <a><span class="icon"><i class="fas fa-stream"></i></span><span>ツリー</span></a>
           </li>
         </ul>
@@ -348,7 +348,12 @@ Vue.component('Ais', {
         <ais-tree :target="tree" v-if="detail=='tree'"></ais-tree>
       </div>
     </div>
-  `
+  `,
+  methods: {
+    changeDetail: function(prop){
+      this.detail = prop;
+    }
+  }
 });
 Vue.component('MSDSplus', {
   template: ``

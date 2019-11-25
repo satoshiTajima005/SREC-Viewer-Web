@@ -333,11 +333,11 @@ Vue.component('AisTable', {
     </div>`
 });
 Vue.component('AisTreeChild', {
-  props: {node:{type: Object} },
+  props: {item:{type: Object} },
   template: `
     <li>
       <span>{{ node.name }}</span>
-      <ul v-if="node.children.length">
+      <ul v-if="node.children">
         <ais-tree-child v-for="(child, index) in node.children" :key="index":node="child"></ais-tree-child>
       </ul>
     </li>

@@ -91,3 +91,12 @@ body {
 .unique-table td {
   padding: 3px 10px;
 }
+
+/**/
+.slide-enter-active, .fade-leave-active {
+  transition: all .5s;
+}
+.slide-enter, .slide-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  transform: translateY(100px);
+  opacity: 0;
+}

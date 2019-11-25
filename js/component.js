@@ -337,7 +337,7 @@ Vue.component('AisTreeChild', {
   template: `
     <li>
       <span>{{ node.name }}</span>
-      <ul v-if="children.length">
+      <ul v-if="node.children.length">
         <ais-tree-child v-for="(child, index) in node.children" :key="index":node="child"></ais-tree-child>
       </ul>
     </li>

@@ -45,37 +45,6 @@ Vue.component('tabs', {
     }
   }
 });
-/*
-Vue.component('tabs', {
-  props: ['target', 'moveto', 'language'],
-  template: `
-    <ul style="overflow:hidden;">
-      <li v-for="(item, index) in target.list" :key="item.id" :class="{'is-active': target.selected === index}" @click="clickTab(target, index)">
-        <a :title="item.name">
-          <span class="tabname">{{item.name}}</span>
-          <span class="icon movetab" :title="language.movetab" @click="moveTab(target, item, index, moveto.list)">
-            <i class="fas fa-file-export"></i>
-          </span>
-          <button class="delete is-small" aria-label="close" :title="language.delete" @click="deleteTab(target, index)"></button>
-        </a>
-      </li>
-    </ul>
-  `,
-  methods: {
-    clickTab: function(target, index){
-      target.selected = index;
-    },
-    deleteTab: function(target, index){
-      target.list.splice( index, 1 );
-    },
-    moveTab: function(target, item, index, moveTo){
-      target.selected = 0;
-      moveTo.push(Object.create(item));
-      this.deleteTab(target, index);
-    }
-  }
-});
-*/
 Vue.component('UniqueTr', {
   props: ['title', 'value'],
   template: `<tr><th :style="/^[1-6]$/.test(title)?'width:50px;text-arign:center;':''">{{title}}</th><td>{{value}}</td></tr>`
@@ -485,7 +454,7 @@ Vue.component('Ais', {
   },
   methods: {
     changeView: function(arg){
-      this.undertab==arg;
+      this.undertab = arg;
     }
   }
 });

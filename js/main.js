@@ -12,7 +12,7 @@ let list = {
   } 
 }
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true;
 let app;
 let id = 0; //ファイルID
 

@@ -335,9 +335,9 @@ Vue.component('AisTable', {
 Vue.component('AisTreeChild', {
   props: {item:{type: Object} },
   template: `
-    <li>
+    <li class="item">
       <span>{{ item.name }}</span>
-      <ul v-if="item.children">
+      <ul class="node" v-if="item.children">
         <ais-tree-child v-for="(child, index) in item.children" :key="index":item="child"></ais-tree-child>
       </ul>
     </li>

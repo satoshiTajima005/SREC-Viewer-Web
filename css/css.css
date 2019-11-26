@@ -93,6 +93,16 @@ body {
 }
 
 /**/
+.tree .item {
+  cursor: pointer;
+}
+.tree .node {
+  padding-left: 1em;
+  line-height: 1.5em;
+  list-style-type: none;
+}
+
+/**/
 .fade-enter-active, .fade-leave-active {
   transition: all .3s;
 }

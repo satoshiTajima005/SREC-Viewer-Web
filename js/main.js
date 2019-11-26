@@ -100,26 +100,26 @@ document.addEventListener('DOMContentLoaded', function () {
         let f = [], type = '', detail = '';
         switch (file.name.slice(-4).toUpperCase()) {
           case '.XML': //AIS・MSDSplus・IEC62474判定
-            f = await app.readFile(file);
+            f = await this.readFile(file);
             type = 'XML';
             break;
           case '.CSV': //文字コード
-            f = await app.readFile(file, 'shift_jis');
+            f = await this.readFile(file, 'shift_jis');
             type = 'JAMA';
             detail = 'tree';
             break;
           case 'JGP4': //文字コード
-            f = await app.readFile(file, 'shift_jis');
+            f = await this.readFile(file, 'shift_jis');
             type = 'JGP4';
             detail = 'item';
             break;
           case 'SHAI': //ZIP
-            f = await app.readFile(file, null, true);
+            f = await this.readFile(file, null, true);
             type = 'SHAI';
             detail = 'tree';
             break;
           case 'SHCI': //ZIP
-            f = await app.readFile(file, null, true);
+            f = await this.readFile(file, null, true);
             type = 'SHCI';
             detail = 'tree';
             break;
@@ -194,6 +194,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       },
       readFile: async function (file, encode, isZip) {
+        const me = this;
         const awaitForLoad = function (target) {
           return new Promise(function (resolve) {
             let listener = resolve;
@@ -213,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let res2 = [];
             unzip.getFilenames().map(function (zipf) {
               let utf8arr = unzip.decompress(zipf);
-              res2.push(app.Utf8ArrayToStr(utf8arr));
+              res2.push(me.Utf8ArrayToStr(utf8arr));
             });
             return res2; //配列戻し
           } catch (e) {
@@ -259,8 +260,8 @@ document.addEventListener('DOMContentLoaded', function () {
       xmlTransform: async function (xmlStr, xslPath) {
         if (xmlStr.charCodeAt(0) === 0xFEFF) xmlStr = xmlStr.slice(1); //BOM削除
         xmlStr = xmlStr.replace(/<DESCRIPT(.|\s)*?>/im, "<DESCRIPT>") //名前空間除去
-        let xml = app.parseXML(xmlStr);
-        let xsl = await app.xhrLoad(xslPath, true); //xslロード
+        let xml = this.parseXML(xmlStr);
+        let xsl = await this.xhrLoad(xslPath, true); //xslロード
         let xslp = new XSLTProcessor();
         xslp.importStylesheet(xsl);
         let o = xslp.transformToFragment(xml, document);
@@ -279,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function () {
       xhrLoad: async function (url, isXML) {
         const response = await fetch(url);
         const res = await response.text();
-        return isXML ? app.parseXML(res) : res;
+        return isXML ? this.parseXML(res) : res;
       },
       xmlToJson: function (xml) {
         var obj = {};
@@ -301,14 +302,14 @@ document.addEventListener('DOMContentLoaded', function () {
             var item = xml.childNodes.item(i);
             var nodeName = item.nodeName;
             if (typeof (obj[nodeName]) == "undefined") {
-              obj[nodeName] = app.xmlToJson(item);
+              obj[nodeName] = this.xmlToJson(item);
             } else {
               if (typeof (obj[nodeName].push) == "undefined") {
                 var old = obj[nodeName];
                 obj[nodeName] = [];
                 obj[nodeName].push(old);
               }
-              obj[nodeName].push(app.xmlToJson(item));
+              obj[nodeName].push(this.xmlToJson(item));
             }
           }
         }
@@ -318,8 +319,5 @@ document.addEventListener('DOMContentLoaded', function () {
         return new DOMParser().parseFromString(xmlStr, "text/xml")
       },
     }
-  });
-  app.$nextTick(function () {
-
   });
 });

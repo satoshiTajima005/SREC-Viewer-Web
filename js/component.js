@@ -333,27 +333,40 @@ Vue.component('AisTable', {
     </div>`
 });
 Vue.component('AisTreeChild', {
-  props: {item:{type: Object} },
+  props: {item:{type: Object}, counter:{type: Number} },
   template: `
     <li class="item">
       <span>
         <span class="icon" @click="toggle" v-if="!node.isOpen"><i class="fas fa-caret-right"></i></span>
         <span class="icon" @click="toggle" v-if="node.isOpen"><i class="fas fa-caret-down"></i></span>
-        <span>{{ node.name }}</span>
+        <span @click="select">
+          <span v-if="node.type=='product'></span>
+          <span v-if="node.type=='layer'></span>
+          <span v-if="node.type=='parts'></span>
+          <span v-if="node.type=='material'></span>
+          <span v-if="node.type=='substance'></span>
+          <span v-if="node.type=='law'></span>
+          <span :class="{'is-selected': node.isSelected}">{{ node.name }}</span>
+        </span>
       </span>
-      <ul v-show="node.isOpen" v-if="node.children">
-        <ais-tree-child v-for="(child, index) in node.children" :key="index":item="child"></ais-tree-child>
+      <ul class="node" v-show="node.isOpen" v-if="node.children">
+        <ais-tree-child v-for="(child, index) in node.children" :key="index":item="child" :counter="counter * (index * 10)"></ais-tree-child>
       </ul>
     </li>
   `,
   data: function(){
     return {
-      node: this.item
+      node: this.item,
+      isSelected: false
     }
   },
   methods: {
     toggle: function(){
       this.node.isOpen = !this.node.isOpen;
+    },
+    select: function(){
+      console.log(this.counter);
+      this.$emit('select', this.counter);
     }
   }
 });
@@ -364,7 +377,7 @@ Vue.component('AisTree', {
       <div class="columns">
         <div class="column">
           <ul>
-            <ais-tree-child v-for="(child, index) in target.children" :key="index" :item="child"></ais-tree-child>
+            <ais-tree-child v-for="(child, index) in o.children" :key="index" :item="child" :counter="0"></ais-tree-child>
           </ul>
         </div>
         <div class="column">
@@ -372,6 +385,22 @@ Vue.component('AisTree', {
       </div>
     </div>
   `,
+  data: function(){
+    return {
+      o: this.target
+    }
+  },
+  methiods: {
+    select: function(counter){
+      let spred = function(node){
+        node.isSelected = counter==node.counter;
+        node.children.map(function(n){
+          spred(n);
+        })
+      }
+      spred(this.o);
+    }
+  }
 });
 Vue.component('Ais', {
   props: {

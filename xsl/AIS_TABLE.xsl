@@ -240,7 +240,7 @@
 
     <!-- 行入力 -->
     {"value":"<xsl:value-of select=".//KJE192/PROPERTY_VALUE"/>"}
-    {"value":"<xsl:call-template name="getRawName"><xsl:with-param name="id" select=".//KJE192/PROPERTY_VALUE"/></xsl:call-template>"}
+    {"value":"<xsl:call-template name="getLawName"><xsl:with-param name="id" select=".//KJE192/PROPERTY_VALUE"/></xsl:call-template>"}
     <xsl:if test="$ver='3'">
       {"value":"<xsl:value-of select=".//KJE194/PROPERTY_VALUE"/>"}
     </xsl:if>
@@ -419,7 +419,7 @@
 ##########################################################################################
 		法令名取得関数
 ##########################################################################################-->
-	<xsl:template name="getRawName">
+	<xsl:template name="getLawName">
 		<xsl:param name="id" />
 		
 		<xsl:if test="$id=''"></xsl:if>

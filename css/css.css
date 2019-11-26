@@ -97,8 +97,8 @@ body {
   cursor: pointer;
 }
 .tree .node {
-  padding-left: 1em;
-  line-height: 1.5em;
+  padding-left: 1em!important;
+  line-height: 1.5em!important;
   list-style-type: none;
 }
 

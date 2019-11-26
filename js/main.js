@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         });
         //変換後の配列をタブリストに投入
-        app.tabLeft.list = app.tabLeft.list.concat(tabObject);
+        this.tabLeft.list = this.tabLeft.list.concat(tabObject);
       },
       getFileArr: async function (file, o) {
         //ファイルタイプの判定

@@ -366,14 +366,13 @@ Vue.component('AisTreeChild', {
     },
     select: function(){
       console.log(this.treeID);
-      this.$emit('nodeclick', this.treeID);
     }
   }
 });
 Vue.component('AisTree', {
   props: {target:{type: Object} },
   template: `
-    <div class="tree" @nodeclick="select">
+    <div class="tree">
       <div class="columns">
         <div class="column">
           <ul>
@@ -384,23 +383,7 @@ Vue.component('AisTree', {
         </div>
       </div>
     </div>
-  `,
-  data: function(){
-    return {
-      o: this.target
-    }
-  },
-  methiods: {
-    select: function(treeID){
-      let spred = function(node){
-        node.isSelected = treeID == node.treeID;
-        node.children.map(function(n){
-          spred(n);
-        })
-      }
-      spred(this.o);
-    }
-  }
+  `
 });
 Vue.component('Ais', {
   props: {

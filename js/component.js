@@ -349,7 +349,7 @@ Vue.component('AisTreeChild', {
   },
   methods: {
     toggle: function(){
-      node.isOpen = !node.isOpen;
+      this.node.isOpen = !this.node.isOpen;
     }
   }
 });

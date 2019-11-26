@@ -366,6 +366,7 @@ Vue.component('AisTreeChild', {
     },
     select: function(){
       console.log(this.treeID);
+      this.$emit('cd', this.node.props);
     }
   }
 });
@@ -375,15 +376,33 @@ Vue.component('AisTree', {
     <div class="tree">
       <div class="columns">
         <div class="column">
-          <ul>
+          <ul @cd="showDetail">
             <ais-tree-child v-for="(child, index) in target.children" :key="index" :item="child" treeID="tree"></ais-tree-child>
           </ul>
         </div>
         <div class="column">
+          <table class="table">
+            <tr v-for="(row, index) in selected.props">
+              <th>{{row.title}}</th>
+              <td>{{row.value}}</td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
-  `
+  `,
+  data: function(){
+    return {
+      selected: []
+    }
+    }
+  },
+  methods: {
+    showDetail: function(arg){
+      console.log(arg);
+      //this.selected = arg;
+    }
+  }
 });
 Vue.component('Ais', {
   props: {

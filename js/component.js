@@ -375,12 +375,12 @@ Vue.component('AisTree', {
   template: `
     <div class="tree">
       <div class="columns">
-        <div class="column">
+        <div class="column" style="border:1px solid #666; border-radius:7px;">
           <ul @cd="showDetail">
             <ais-tree-child v-for="(child, index) in target.children" :key="index" :item="child" treeID="tree"></ais-tree-child>
           </ul>
         </div>
-        <div class="column">
+        <div class="column" style="border:1px solid #666; border-radius:7px;">
           <table class="table">
             <tr v-for="(row, index) in selected.props">
               <th>{{row.title}}</th>

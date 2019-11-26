@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
             case 'zipErr':
             case 'xmlTypeErr':
               //todo エラーなので配列から削除
-              //todo 画面に何かしらの表示 e3f237838f14
+              //todo 画面に何かしらの表示
               break;
             case 'AIS':
             case 'AIS-temp':

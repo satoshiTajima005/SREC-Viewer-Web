@@ -366,7 +366,7 @@ Vue.component('AisTreeChild', {
     },
     select: function(arg){
       if (this.$parent.showDetail){
-        this.$emit('cd', arg);
+        this.$parent.showDetail(arg);
       }else{
         this.$parent.select(arg);
       }
@@ -381,7 +381,7 @@ Vue.component('AisTree', {
       <div class="columns">
         <div class="column">
           <div  style="border:1px solid #666; border-radius:7px;">
-            <ul @cd="showDetail">
+            <ul>
               <ais-tree-child v-for="(child, index) in target.children" :key="index" :item="child" treeID="tree"></ais-tree-child>
             </ul>
           </div>
@@ -407,7 +407,7 @@ Vue.component('AisTree', {
   methods: {
     showDetail: function(arg){
       console.log(arg);
-      //this.selected = arg;
+      this.selected = arg;
     }
   }
 });

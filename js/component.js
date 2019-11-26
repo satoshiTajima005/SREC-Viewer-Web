@@ -336,9 +336,9 @@ Vue.component('AisTreeChild', {
   props: {item:{type: Object} },
   template: `
     <li>
-      <span>{{ node.name }}</span>
-      <ul v-if="node.children">
-        <ais-tree-child v-for="(child, index) in node.children" :key="index":node="child"></ais-tree-child>
+      <span>{{ item.name }}</span>
+      <ul v-if="item.children">
+        <ais-tree-child v-for="(child, index) in item.children" :key="index":item="child"></ais-tree-child>
       </ul>
     </li>
   `,
@@ -350,14 +350,14 @@ Vue.component('AisTree', {
       <div class="columns">
         <div class="column">
           <ul>
-            <ais-tree-child v-for="(child, index) in target.children" :key="index" :node="child"></ais-tree-child>
+            <ais-tree-child v-for="(child, index) in target.children" :key="index" :item="child"></ais-tree-child>
           </ul>
         </div>
         <div class="column">
         </div>
       </div>
     </div>
-    `,
+  `,
 });
 Vue.component('Ais', {
   props: {

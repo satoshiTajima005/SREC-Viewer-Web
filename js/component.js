@@ -350,7 +350,7 @@ Vue.component('AisTreeChild', {
         </span>
       </span>
       <ul class="node" v-show="node.isOpen" v-if="node.children">
-        <ais-tree-child v-for="(child, index) in node.children" :key="index":item="child" :treeID="id+''+index"></ais-tree-child>
+        <ais-tree-child v-for="(child, index) in node.children" :key="index":item="child" :treeID="treeID+''+index"></ais-tree-child>
       </ul>
     </li>
   `,
@@ -365,8 +365,8 @@ Vue.component('AisTreeChild', {
       this.node.isOpen = !this.node.isOpen;
     },
     select: function(){
-      console.log(this.counter);
-      this.$emit('nodeclick', this.counter);
+      console.log(this.treeID);
+      this.$emit('nodeclick', this.treeID);
     }
   }
 });

@@ -33,6 +33,8 @@ document.addEventListener('DOMContentLoaded', function () {
     },
     methods: {
       openFile: async function (e) {
+        let me = this;
+
         if (!(window.File && window.FileReader && window.FileList && window.Blob)) return;
         let files = [];
         //FileListを配列化
@@ -41,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
         //ファイルのテキスト読み取り
         let tabObject = [];
         await Promise.all(files.map(function (file) {
-          return this.getFileArr(file, tabObject);
+          return me.getFileArr(file, tabObject);
         }));
 
         //エラーを削除
@@ -61,9 +63,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 tree: {},
                 table: {}
               };
-              o.data.unique = await this.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl');
-              o.data.tree = await this.xmlTransform(o.txt, 'xsl/AIS_TREE.xsl');
-              o.data.table = await this.xmlTransform(o.txt, 'xsl/AIS_TABLE.xsl');
+              o.data.unique = await me.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl');
+              o.data.tree = await me.xmlTransform(o.txt, 'xsl/AIS_TREE.xsl');
+              o.data.table = await me.xmlTransform(o.txt, 'xsl/AIS_TABLE.xsl');
               break;
             case 'MSDSplus':
             case 'MSDSplus-temp':

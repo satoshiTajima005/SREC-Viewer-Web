@@ -337,8 +337,8 @@ Vue.component('AisTreeChild', {
   template: `
     <li class="item">
       <span>
-        <span class="icon" @click="toggle" v-if="!node.isOpen"><i class="fas fa-caret-right"></i></span>
-        <span class="icon" @click="toggle" v-if="node.isOpen"><i class="fas fa-caret-down"></i></span>
+        <span class="icon" @click="toggle" v-if="node.children && !node.isOpen"><i class="fas fa-caret-right"></i></span>
+        <span class="icon" @click="toggle" v-if="node.children && node.isOpen"><i class="fas fa-caret-down"></i></span>
         <span @click="select">
           <span v-if="node.type=='product'"><img src="css/ticon_product.png"></span>
           <span v-if="node.type=='layer'"><img src="css/ticon_layer.png"></span>
@@ -375,18 +375,22 @@ Vue.component('AisTree', {
   template: `
     <div class="tree">
       <div class="columns">
-        <div class="column" style="border:1px solid #666; border-radius:7px;">
-          <ul @cd="showDetail">
-            <ais-tree-child v-for="(child, index) in target.children" :key="index" :item="child" treeID="tree"></ais-tree-child>
-          </ul>
+        <div class="column">
+          <div  style="border:1px solid #666; border-radius:7px;">
+            <ul @cd="showDetail">
+              <ais-tree-child v-for="(child, index) in target.children" :key="index" :item="child" treeID="tree"></ais-tree-child>
+            </ul>
+          </div>
         </div>
-        <div class="column" style="border:1px solid #666; border-radius:7px;">
-          <table class="table">
-            <tr v-for="(row, index) in selected.props">
-              <th>{{row.title}}</th>
-              <td>{{row.value}}</td>
-            </tr>
-          </table>
+        <div class="column">
+          <div style="border:1px solid #666; border-radius:7px;">
+            <table class="table">
+              <tr v-for="(row, index) in selected.props">
+                <th>{{row.title}}</th>
+                <td>{{row.value}}</td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
     </div>

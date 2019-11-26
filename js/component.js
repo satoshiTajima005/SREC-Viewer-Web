@@ -18,6 +18,7 @@ Vue.component('tabs', {
       <div class="preview">
         <ais
           v-if="/AIS/.test(tabObject.list[tabObject.selected].type)"
+          ref="ais"
           :detail="tabObject.list[tabObject.selected].detail"
           :unique="tabObject.list[tabObject.selected].data.unique"
           :table="tabObject.list[tabObject.selected].data.table"
@@ -48,9 +49,6 @@ Vue.component('tabs', {
 Vue.component('UniqueTr', {
   props: ['title', 'value'],
   template: `<tr><th :style="/^[1-6]$/.test(title)?'width:50px;text-arign:center;':''">{{title}}</th><td>{{value}}</td></tr>`
-});
-Vue.component('JGPSSI', {
-  template: ``
 });
 Vue.component('AisUnique', {
   props: { target:{ type: Object } },
@@ -459,6 +457,9 @@ Vue.component('Ais', {
   }
 });
 Vue.component('MSDSplus', {
+  template: ``
+});
+Vue.component('JGPSSI', {
   template: ``
 });
 Vue.component('JAMA', {

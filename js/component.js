@@ -340,12 +340,12 @@ Vue.component('AisTreeChild', {
         <span class="icon" @click="toggle" v-if="!node.isOpen"><i class="fas fa-caret-right"></i></span>
         <span class="icon" @click="toggle" v-if="node.isOpen"><i class="fas fa-caret-down"></i></span>
         <span @click="select">
-          <span v-if="node.type=='product'></span>
-          <span v-if="node.type=='layer'></span>
-          <span v-if="node.type=='parts'></span>
-          <span v-if="node.type=='material'></span>
-          <span v-if="node.type=='substance'></span>
-          <span v-if="node.type=='law'></span>
+          <span v-if="node.type='product'"><img src="css/ticon_product.png"></span>
+          <span v-if="node.type='layer'"><img src="css/ticon_layer.png"></span>
+          <span v-if="node.type='parts'"><img src="css/ticon_parts.png"></span>
+          <span v-if="node.type='material'"><img src="css/ticon_material.png"></span>
+          <span v-if="node.type='substance'"><img src="css/ticon_law.png"></span>
+          <span v-if="node.type='law'"></span>
           <span :class="{'is-selected': node.isSelected}">{{ node.name }}</span>
         </span>
       </span>

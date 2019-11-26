@@ -1,13 +1,51 @@
-Vue.component('tabcol', {
+Vue.component('tabs', {
+  props: ['target', 'moveto', 'language'],
   template: `
     <div class="column">
       <div class="tabs is-boxed">
-        <slot name="ul"></slot>
+        <ul style="overflow:hidden;">
+          <li v-for="(item, index) in tabObject.list" :key="item.id" :class="{'is-active': tabObject.selected === index}" @click="clickTab(tabObject, index)">
+            <a :title="item.name">
+              <span class="tabname">{{item.name}}</span>
+              <span class="icon movetab" :title="language.movetab" @click="moveTab(tabObject, item, index, moveto.list)">
+                <i class="fas fa-file-export"></i>
+              </span>
+              <button class="delete is-small" aria-label="close" :title="language.delete" @click="deleteTab(tabObject, index)"></button>
+            </a>
+          </li>
+        </ul>
       </div>
-      <slot name="preview"></slot>
+      <div class="preview">
+        <ais
+          v-if="/AIS/.test(tabObject.list[tabObject.selected].type)"
+          :detail="tabObject.list[tabObject.selected].detail"
+          :unique="tabObject.list[tabObject.selected].data.unique"
+          :table="tabObject.list[tabObject.selected].data.table"
+          :tree="tabObject.list[tabObject.selected].data.tree">
+        </ais>
+      </div>
     </div>
-  `
+  `,
+  data: function(){
+    return {
+      tabObject: this.target
+    }
+  },
+  methods: {
+    clickTab: function(target, index){
+      target.selected = index;
+    },
+    deleteTab: function(target, index){
+      target.list.splice( index, 1 );
+    },
+    moveTab: function(target, item, index, moveTo){
+      target.selected = 0;
+      moveTo.push(Object.create(item));
+      this.deleteTab(target, index);
+    }
+  }
 });
+/*
 Vue.component('tabs', {
   props: ['target', 'moveto', 'language'],
   template: `
@@ -37,6 +75,7 @@ Vue.component('tabs', {
     }
   }
 });
+*/
 Vue.component('UniqueTr', {
   props: ['title', 'value'],
   template: `<tr><th :style="/^[1-6]$/.test(title)?'width:50px;text-arign:center;':''">{{title}}</th><td>{{value}}</td></tr>`
@@ -408,7 +447,6 @@ Vue.component('AisTree', {
   },
   methods: {
     showDetail: function(arg){
-      console.log(arg);
       this.selected = arg.props;
     }
   }
@@ -426,10 +464,10 @@ Vue.component('Ais', {
       <hr class="hr">
       <div class="tabs is-boxed">
         <ul>
-          <li :class="{'is-active': undertab=='table'}" @click="undertab='table'">
+          <li :class="{'is-active': undertab=='table'}" @click="changeView('table')">
             <a><span class="icon"><i class="fas fa-table"></i></span><span>テーブル</span></a>
           </li>
-          <li :class="{'is-active': undertab=='tree'}" @click="undertab='tree'">
+          <li :class="{'is-active': undertab=='tree'}" @click="changeView('tree')">
             <a><span class="icon"><i class="fas fa-stream"></i></span><span>ツリー</span></a>
           </li>
         </ul>
@@ -443,6 +481,11 @@ Vue.component('Ais', {
   data: function () {
     return {
       undertab: this.detail
+    }
+  },
+  methods: {
+    changeView: function(arg){
+      this.undertab==arg;
     }
   }
 });

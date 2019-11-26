@@ -46,30 +46,8 @@
       </div>
     </div>
     <div class="viewarea columns">
-      <tabcol v-if="tabLeft.list.length" :class="{half: tabRight.list.length}">
-        <tabs slot="ul" :target="tabLeft" :moveto="tabRight" :language="language"></tabs>
-        <div slot="preview" class="preview">
-          <ais
-            v-if="/AIS/.test(tabLeft.list[tabLeft.selected].type)"
-            :detail="tabLeft.list[tabLeft.selected].detail"
-            :unique="tabLeft.list[tabLeft.selected].data.unique"
-            :table="tabLeft.list[tabLeft.selected].data.table"
-            :tree="tabLeft.list[tabLeft.selected].data.tree"
-          ></ais>
-        </div>
-      </tabcol>
-      <tabcol v-if="tabRight.list.length" :class="{half: tabLeft.list.length}">
-        <tabs slot="ul" :target="tabRight" :moveTo="tabLeft" :language="language"></tabs>
-        <div slot="preview" class="preview">
-            <ais
-            v-if="/AIS/.test(tabRight.list[tabRight.selected].type)"
-            :detail="tabRight.list[tabRight.selected].detail"
-            :unique="tabRight.list[tabRight.selected].data.unique"
-            :table="tabRight.list[tabRight.selected].data.table"
-            :tree="tabRight.list[tabRight.selected].data.tree"
-          ></ais>
-        </div>
-      </tabcol>
+      <tabs v-if="tabLeft.list.length" :class="{half: tabRight.list.length}" :target="tabLeft" :moveto="tabRight" :language="language"></tabs>
+      <tabs v-if="tabRight.list.length" :class="{half: tabLeft.list.length}" :target="tabRight" :moveTo="tabLeft" :language="language"></tabs>
     </div>
   </div>
 </body>

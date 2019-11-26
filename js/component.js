@@ -336,12 +336,22 @@ Vue.component('AisTreeChild', {
   props: {item:{type: Object} },
   template: `
     <li class="item">
-      <span>{{ item.name }}</span>
-      <ul class="node" v-if="item.children">
-        <ais-tree-child v-for="(child, index) in item.children" :key="index":item="child"></ais-tree-child>
+      <span @click="toggle">{{ node.name }}</span>
+      <ul v-show="node.isOpen" v-if="node.children">
+        <ais-tree-child v-for="(child, index) in node.children" :key="index":item="child"></ais-tree-child>
       </ul>
     </li>
   `,
+  data: function(){
+    return {
+      node: this.item
+    }
+  },
+  methods: {
+    toggle: function(){
+      node.isOpen = !node.isOpen;
+    }
+  }
 });
 Vue.component('AisTree', {
   props: {target:{type: Object} },

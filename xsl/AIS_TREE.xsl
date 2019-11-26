@@ -4,6 +4,7 @@
 <!-- ********************************** AIS *********************************************************************** -->
   <xsl:template match="/">
     {
+      "isOpen": true,
       "type": "product",
       "name": "<xsl:value-of select="//KJE018/PROPERTY_VALUE"/>",
       "children":[
@@ -14,6 +15,7 @@
   <!-- ************************************************階層部***************************************************** -->
   <xsl:template match="KJA027">
     {
+      "isOpen": true,
       "type": "layer",
       "name": 
       <xsl:choose>
@@ -37,6 +39,7 @@
   <!-- ************************************************部品部***************************************************** -->
   <xsl:template match="KJA028">
     {
+      "isOpen": true,
       "type": "parts",
       "name": "<xsl:value-of select=".//KJE059/PROPERTY_VALUE"/>",
       "prop": {
@@ -55,6 +58,7 @@
   <xsl:template match="KJA029">
     <xsl:variable name="ver" select="number(substring(//PROPERTY_SNAME[.='Use format']/following-sibling::node()/text(), 5, 1))"/>
     {  
+      "isOpen": true,
       "type": "material",
       "name": "<xsl:value-of select="number(substring(.//KJE187/PROPERTY_VALUE, 1, 2))"/>",
       "prop":{
@@ -78,6 +82,7 @@
   <xsl:template match="KJA030">
     <xsl:variable name="ver" select="number(substring(//PROPERTY_SNAME[.='Use format']/following-sibling::node()/text(), 5, 1))"/>
     {
+      "isOpen": true,
       "type": "substance",
       "name": "<xsl:value-of select=".//KJE070/PROPERTY_VALUE"/>",
       "prop": {
@@ -107,6 +112,7 @@
   <xsl:template match="KJA031">
     <xsl:variable name="ver" select="number(substring(//PROPERTY_SNAME[.='Use format']/following-sibling::node()/text(), 5, 1))"/>
     {
+      "isOpen": true,
       "type": "law",
       "name": "<xsl:value-of select="string(.//KJE192/PROPERTY_VALUE)"/>",
       "prop": {

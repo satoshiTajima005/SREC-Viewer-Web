@@ -395,7 +395,6 @@ Vue.component('AisTree', {
     return {
       selected: []
     }
-    }
   },
   methods: {
     showDetail: function(arg){

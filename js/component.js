@@ -376,7 +376,7 @@ Vue.component('AisTree', {
       <div class="columns">
         <div class="column">
           <ul>
-            <ais-tree-child v-for="(child, index) in target.children" :key="index" :item="child" :treeID="0"></ais-tree-child>
+            <ais-tree-child v-for="(child, index) in target.children" :key="index" :item="child" :treeID="tree0"></ais-tree-child>
           </ul>
         </div>
         <div class="column">

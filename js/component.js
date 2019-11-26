@@ -391,8 +391,8 @@ Vue.component('AisTree', {
         <div class="column">
           <div style="border:1px solid #666; border-radius:7px;">
             <table class="table">
-              <tr v-for="(row, index) in selected.props">
-                <th>{{row.title}}</th>
+              <tr v-for="(row, index) in selected">
+                <th>{{row.name}}</th>
                 <td>{{row.value}}</td>
               </tr>
             </table>

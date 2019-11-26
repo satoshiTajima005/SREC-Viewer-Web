@@ -339,7 +339,7 @@ Vue.component('AisTreeChild', {
       <span>
         <span class="icon" @click="toggle" v-if="node.children && !node.isOpen"><i class="fas fa-caret-right"></i></span>
         <span class="icon" @click="toggle" v-if="node.children && node.isOpen"><i class="fas fa-caret-down"></i></span>
-        <span @click="select({id: treeID, props: node.props})">
+        <span @click="select({id: treeID, props: node.props, counter:0})">
           <span v-if="node.type=='product'"><img src="css/ticon_product.png"></span>
           <span v-if="node.type=='layer'"><img src="css/ticon_layer.png"></span>
           <span v-if="node.type=='parts'"><img src="css/ticon_parts.png"></span>
@@ -365,6 +365,8 @@ Vue.component('AisTreeChild', {
       this.node.isOpen = !this.node.isOpen;
     },
     select: function(arg){
+      this.isSelected = arg.counter==0;
+      arg.counter++;
       if (this.$parent.showDetail){
         this.$parent.showDetail(arg);
       }else{
@@ -407,7 +409,7 @@ Vue.component('AisTree', {
   methods: {
     showDetail: function(arg){
       console.log(arg);
-      this.selected = arg;
+      this.selected = arg.props;
     }
   }
 });

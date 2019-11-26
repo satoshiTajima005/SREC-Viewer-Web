@@ -35,7 +35,7 @@ Vue.component('tabs', {
   methods: {
     clickTab: function(target, index){
       target.selected = index;
-      if (this.$refs.ais) this.$refs.ais.changeView('tree');
+      if (this.$refs.ais) this.$refs.ais.changeView('table');
     },
     deleteTab: function(target, index){
       target.list.splice( index, 1 );

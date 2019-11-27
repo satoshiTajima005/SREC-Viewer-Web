@@ -24,7 +24,7 @@
           "<xsl:value-of select=".//KJE055/PROPERTY_VALUE"/>",
           "props":[
             {"name": "名称", "value": "<xsl:value-of select=".//KJE055/PROPERTY_VALUE" />"},<!--KJE055-->
-            {"name": "員数", "value": "<xsl:value-of select="format-number(.//KJE057/PROPERTY_VALUE, '0.#')" />"},<!--KJE057-->>
+            {"name": "員数", "value": "<xsl:value-of select="format-number(.//KJE057/PROPERTY_VALUE, '0.#')" />"},<!--KJE057-->
             {"name": "レベル", "value": "<xsl:value-of select=".//KJE184/PROPERTY_VALUE" />"}<!--KJE184-->
           ]
         </xsl:when>
@@ -45,7 +45,7 @@
       "props": [
         {"name": "名称", "value": "<xsl:value-of select=".//KJE059/PROPERTY_VALUE" />"},<!--KJE159-->
         {"name": "員数", "value": "<xsl:value-of select="format-number(.//KJE185/PROPERTY_VALUE, '0.#')" />"},<!--KJE185-->
-        {"name": "レベル", "value": "<xsl:value-of select=".//KJE186/PROPERTY_VALUE" />"}<!--KJE186-->>
+        {"name": "レベル", "value": "<xsl:value-of select=".//KJE186/PROPERTY_VALUE" />"}<!--KJE186-->
       ]
       <xsl:if test="count(.//KJA029)!=0">
         ,"children":[

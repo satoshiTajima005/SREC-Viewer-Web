@@ -438,8 +438,4 @@
 		<xsl:if test="$id='OT01'">ESIS PBT</xsl:if>
 	</xsl:template>
 
-  <!--
-  <xsl:include href="xsl/function.xsl"/>
-  <xsl:include href="xsl/dicJAMP.xsl"/>
-  -->
 </xsl:stylesheet>

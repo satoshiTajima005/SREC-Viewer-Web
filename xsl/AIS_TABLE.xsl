@@ -11,8 +11,8 @@
           {"colspan":"2", "value": "階層"},
           {"colspan":"2", "value": "部品"},
           {"colspan":"<xsl:value-of select="$ver+2"/>", "value": "材料"},
-          {"colspan":"5", "value": "物質"},
-          {"colspan":"4", "value": "法令"}
+          {"colspan":"<xsl:value-of select="$ver+1"/>", "value": "物質"},
+          {"colspan":"<xsl:value-of select="$ver"/>", "value": "法令"}
         ],[
           {"value":"名称"},<!--名称-->
           {"value":"員数"},<!--員数-->
@@ -205,7 +205,7 @@
     {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE070/PROPERTY_VALUE"/>"}
     {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:if test=".//KJE131/PROPERTY_VALUE!=''"><xsl:call-template name="unitConvR"><xsl:with-param name="rate" select=".//KJE131/PROPERTY_VALUE"/><xsl:with-param name="unit" select=".//KJE131/PROPERTY_VALUE/@unit"/></xsl:call-template></xsl:if>"}
     {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:if test=".//KJE133/PROPERTY_VALUE!=''"><xsl:value-of select="concat(.//KJE133/PROPERTY_VALUE, .//KJE133/PROPERTY_VALUE/@prefix, 'g')"/></xsl:if>"}
-    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE191/PROPERTY_VALUE"/>"}
+    <xsl:if test="$ver='4'">{"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE191/PROPERTY_VALUE"/>"}</xsl:if>
 
     <xsl:if test="$ver='3'">
       <xsl:apply-templates select=".//KJA031[1]" /><!--<xsl:if test="count(.//KJA031)=1">],</xsl:if>-->
@@ -224,6 +224,7 @@
     <xsl:if test="$ver='4'">
       <xsl:apply-templates select=".//KJA031[count(.//KJE278)!=0][1]"/><!--<xsl:if test="count(.//KJE278)=1">],</xsl:if>-->
       <xsl:if test="count(.//KJE278)=0">
+        {"value":""}
         {"value":""}
         {"value":""}
         {"value":""}
@@ -250,8 +251,8 @@
     </xsl:if>
     <xsl:if test="$ver='4'">
       {"value":"<xsl:value-of select=".//KJE278/PROPERTY_VALUE"/>"}
+      {"value":"<xsl:value-of select=".//KJE195/PROPERTY_VALUE"/>"}
     </xsl:if>
-    {"value":"<xsl:value-of select=".//KJE195/PROPERTY_VALUE"/>"}
   </xsl:template>
 
   <!-- ************************************************関数郡***************************************************** -->

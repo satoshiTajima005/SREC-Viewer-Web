@@ -346,6 +346,7 @@ Vue.component('AisTreeChild', {
       <span>
         <span class="icon" @click="toggle" v-if="node.children && !node.isOpen"><i class="fas fa-caret-right"></i></span>
         <span class="icon" @click="toggle" v-if="node.children && node.isOpen"><i class="fas fa-caret-down"></i></span>
+        <span v-if="!node.children" style="display:inline-block; width:24px;">&nbsp;</span>
         <span @click="select({treeID: treeID, props: node.props})">
           <span v-if="node.type=='product'"><img src="css/ticon_product.png"></span>
           <span v-if="node.type=='layer'"><img src="css/ticon_layer.png"></span>

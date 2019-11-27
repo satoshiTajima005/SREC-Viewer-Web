@@ -386,14 +386,14 @@ Vue.component('AisTree', {
   template: `
     <div class="tree tabbody">
       <div class="columns">
-        <div class="column">
+        <div class="column treecol" style="border-right:3px double #dbdbdb;">
           <div>
             <ul>
               <ais-tree-child v-for="(child, index) in target.children" :key="index" :item="child" treeID="tree" ref="root"></ais-tree-child>
             </ul>
           </div>
         </div>
-        <div class="column">
+        <div class="column treecol">
           <div>
             <table class="table">
               <tr v-for="(row, index) in selected">
@@ -435,19 +435,21 @@ Vue.component('Ais', {
     <div>
       <ais-unique :target="unique"></ais-unique>
       <hr class="hr">
-      <div class="tabs is-boxed">
-        <ul>
-          <li :class="{'is-active': undertab=='table'}" @click="changeView('table')">
-            <a><span class="icon"><i class="fas fa-table"></i></span><span>テーブル</span></a>
-          </li>
-          <li :class="{'is-active': undertab=='tree'}" @click="changeView('tree')">
-            <a><span class="icon"><i class="fas fa-stream"></i></span><span>ツリー</span></a>
-          </li>
-        </ul>
-      </div>
-      <div>
-        <ais-table :target="table" v-if="undertab=='table'"></ais-table>
-        <ais-tree :target="tree" v-if="undertab=='tree'"></ais-tree>
+      <div style="background:#f8f8f8;padding: 10px;">
+        <div class="tabs is-boxed">
+          <ul>
+            <li :class="{'is-active': undertab=='table'}" @click="changeView('table')">
+              <a><span class="icon"><i class="fas fa-table"></i></span><span>テーブル</span></a>
+            </li>
+            <li :class="{'is-active': undertab=='tree'}" @click="changeView('tree')">
+              <a><span class="icon"><i class="fas fa-stream"></i></span><span>ツリー</span></a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ais-table :target="table" v-if="undertab=='table'"></ais-table>
+          <ais-tree :target="tree" v-if="undertab=='tree'"></ais-tree>
+        </div>
       </div>
     </div>
   `,

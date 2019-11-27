@@ -418,7 +418,7 @@ Vue.component('AisTree', {
       let treespred = function(arg, treeID){
         arg.isSelected = treeID == arg.treeID;
         arg.children.map(function(child){
-          treespred(child);
+          treespred(child, treeID);
         });
       }
       treespred(this.$refs.root, arg.treeID);

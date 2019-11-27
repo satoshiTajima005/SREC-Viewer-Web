@@ -324,8 +324,8 @@ Vue.component('AisUnique', {
 Vue.component('AisTable', {
   props: {target:{type: Object} },
   template:
-    `<div class="table is-bordered is-narrow" style="margin: 10px;">
-      <table>
+    `<div class="tabbody">
+      <table class="table is-bordered is-narrow" style="margin: 10px;">
         <thead>
           <tr v-for="tr in target.thead">
             <th v-for="th in tr" :colspan="th.colspan">{{th.value}}</th>
@@ -384,25 +384,23 @@ Vue.component('AisTreeChild', {
 Vue.component('AisTree', {
   props: {target:{type: Object} },
   template: `
-    <div class="tree">
-      <div class="tabbody">
-        <div class="columns">
-          <div class="column">
-            <div>
-              <ul>
-                <ais-tree-child v-for="(child, index) in target.children" :key="index" :item="child" treeID="tree" ref="root"></ais-tree-child>
-              </ul>
-            </div>
+    <div class="tree tabbody">
+      <div class="columns">
+        <div class="column">
+          <div>
+            <ul>
+              <ais-tree-child v-for="(child, index) in target.children" :key="index" :item="child" treeID="tree" ref="root"></ais-tree-child>
+            </ul>
           </div>
-          <div class="column">
-            <div>
-              <table class="table">
-                <tr v-for="(row, index) in selected">
-                  <th>{{row.name}}</th>
-                  <td>{{row.value}}</td>
-                </tr>
-              </table>
-            </div>
+        </div>
+        <div class="column">
+          <div>
+            <table class="table">
+              <tr v-for="(row, index) in selected">
+                <th>{{row.name}}</th>
+                <td>{{row.value}}</td>
+              </tr>
+            </table>
           </div>
         </div>
       </div>

@@ -217,9 +217,4 @@
     <xsl:if test="$id='S405'">コーティング(他の複合材)</xsl:if>
   </xsl:template>
 
-
-<!--
-  <xsl:include href="xsl/function.xsl"/>
-  <xsl:include href="xsl/dicJAMP.xsl"/>
--->
 </xsl:stylesheet>

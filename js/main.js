@@ -69,6 +69,13 @@ document.addEventListener('DOMContentLoaded', function () {
               break;
             case 'MSDSplus':
             case 'MSDSplus-temp':
+                o.data = {
+                  unique: {},
+                  //table: {}
+                };
+                o.data.unique = await me.xmlTransform(o.txt, 'xsl/MSDSplus_UNIQUE.xsl');
+                //o.data.table = await me.xmlTransform(o.txt, 'xsl/MSDSplus_TABLE.xsl');
+                break;
             case 'IEC62474':
             case 'SHAI':
             case 'SHCI':

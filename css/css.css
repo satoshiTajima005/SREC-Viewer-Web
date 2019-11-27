@@ -95,6 +95,14 @@ body {
   padding: 3px 10px;
 }
 
+/*unique fade*/
+.fade-enter-active, .fade-leave-active {
+  transition: all .3s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
 /*table header*/
 .layer{
   background-color:#f7b263;
@@ -131,12 +139,4 @@ body {
 .is-selected {
   color: #fff;
   background-color: #5e9257;
-}
-
-/**/
-.fade-enter-active, .fade-leave-active {
-  transition: all .3s;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
 }

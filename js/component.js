@@ -353,7 +353,7 @@ Vue.component('AisTreeChild', {
           <span v-if="node.type=='material'"><img src="css/ticon_material.png"></span>
           <span v-if="node.type=='substance'"><img src="css/ticon_law.png"></span>
           <span v-if="node.type=='law'"></span>
-          <span :class="{'is-selected': node.isSelected}">{{ node.name }}</span>
+          <span :class="{'is-selected': isSelected}">{{ node.name }}</span>
         </span>
       </span>
       <ul class="node" v-show="node.isOpen" v-if="node.children">
@@ -417,11 +417,9 @@ Vue.component('AisTree', {
       this.selected = arg.props;
       let treespred = function(arg, treeID){
         arg.isSelected = treeID == arg.treeID;
-        if (arg.children){
-          arg.children.map(function(child){
-            treespred(child, treeID);
-          });
-        }
+        arg.$children.map(function(child){
+          treespred(child, treeID);
+        });
       }
       treespred(this.$refs.root[0], arg.treeID);
     }

@@ -352,8 +352,8 @@ Vue.component('AisTreeChild', {
           <span v-if="node.type=='layer'"><img src="css/ticon_layer.png"></span>
           <span v-if="node.type=='parts'"><img src="css/ticon_parts.png"></span>
           <span v-if="node.type=='material'"><img src="css/ticon_material.png"></span>
-          <span v-if="node.type=='substance'"><img src="css/ticon_law.png"></span>
-          <span v-if="node.type=='law'"></span>
+          <span v-if="node.type=='substance'"><img src="css/ticon_substance.png"></span>
+          <span v-if="node.type=='law'"><img src="css/ticon_law.png"></span>
           <span :class="{'is-selected': isSelected}">{{ node.name }}</span>
         </span>
       </span>

@@ -346,7 +346,7 @@ Vue.component('AisTreeChild', {
       <span>
         <span class="icon" @click="toggle" v-if="node.children && !node.isOpen"><i class="fas fa-caret-right"></i></span>
         <span class="icon" @click="toggle" v-if="node.children && node.isOpen"><i class="fas fa-caret-down"></i></span>
-        <span @click="select({id: treeID, props: node.props, counter:0})">
+        <span @click="select({id: treeID, props: node.props})">
           <span v-if="node.type=='product'"><img src="css/ticon_product.png"></span>
           <span v-if="node.type=='layer'"><img src="css/ticon_layer.png"></span>
           <span v-if="node.type=='parts'"><img src="css/ticon_parts.png"></span>
@@ -372,41 +372,36 @@ Vue.component('AisTreeChild', {
       this.node.isOpen = !this.node.isOpen;
     },
     select: function(arg){
-      this.isSelected = arg.counter==0;
-      arg.counter++;
       if (this.$parent.showDetail){
         this.$parent.showDetail(arg);
       }else{
         this.$parent.select(arg);
       }
     },
-
   }
 });
 Vue.component('AisTree', {
   props: {target:{type: Object} },
   template: `
     <div class="tree">
-      <div class="columns">
-        <div class="column">
-          <div class="columns tabbody">
-            <div class="column">
-              <div>
-                <ul>
-                  <ais-tree-child v-for="(child, index) in target.children" :key="index" :item="child" treeID="tree"></ais-tree-child>
-                </ul>
-              </div>
+      <div class="tabbody">
+        <div class="columns">
+          <div class="column">
+            <div>
+              <ul>
+                <ais-tree-child v-for="(child, index) in target.children" :key="index" :item="child" treeID="tree" ref="root"></ais-tree-child>
+              </ul>
             </div>
-            <div class="column">
-              <div>
-                <table class="table">
-                  <tr v-for="(row, index) in selected">
-                    <th>{{row.name}}</th>
-                    <td>{{row.value}}</td>
-                  </tr>
-                </table>
-              <div>
-            </div>
+          </div>
+          <div class="column">
+            <div>
+              <table class="table">
+                <tr v-for="(row, index) in selected">
+                  <th>{{row.name}}</th>
+                  <td>{{row.value}}</td>
+                </tr>
+              </table>
+            <div>
           </div>
         </div>
       </div>
@@ -420,6 +415,13 @@ Vue.component('AisTree', {
   methods: {
     showDetail: function(arg){
       this.selected = arg.props;
+      let treespred = function(arg, treeID){
+        arg.isSelected = treeID == arg.treeID;
+        arg.children.map(function(child){
+          treespred(child);
+        });
+      }
+      treespred($refs.root, arg.treeID);
     }
   }
 });

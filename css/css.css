@@ -57,14 +57,17 @@ body {
   color: #aaa;
 }
 
-.preview {
-  padding: 15px 15px 20px 15px;
-  background-color: #fff;
-  max-height: calc(100% - 70px);
-  overflow-y: scroll;
+.tabbody {
   border: 1px solid #dbdbdb;
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;
+  padding: 15px 15px 20px 15px;
+  background-color: #fff;
+  overflow-y: scroll;
+}
+
+.preview {
+  max-height: calc(100% - 70px);
 }
 
 .message-body.columns {
@@ -96,10 +99,16 @@ body {
 .tree .item {
   cursor: pointer;
 }
+
 .tree .node {
   padding-left: 1.5em!important;
   line-height: 1.5em!important;
   list-style-type: none;
+}
+
+.is-selected {
+  color: #fff;
+  background-color: #5e9257;
 }
 
 /**/

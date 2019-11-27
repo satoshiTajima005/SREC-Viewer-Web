@@ -15,7 +15,7 @@ Vue.component('tabs', {
           </li>
         </ul>
       </div>
-      <div class="preview">
+      <div class="preview tabbody">
         <ais
           v-if="/AIS/.test(tabObject.list[tabObject.selected].type)"
           ref="ais"
@@ -389,20 +389,24 @@ Vue.component('AisTree', {
     <div class="tree">
       <div class="columns">
         <div class="column">
-          <div  style="border:1px solid #666; border-radius:7px;">
-            <ul>
-              <ais-tree-child v-for="(child, index) in target.children" :key="index" :item="child" treeID="tree"></ais-tree-child>
-            </ul>
-          </div>
-        </div>
-        <div class="column">
-          <div style="border:1px solid #666; border-radius:7px;">
-            <table class="table">
-              <tr v-for="(row, index) in selected">
-                <th>{{row.name}}</th>
-                <td>{{row.value}}</td>
-              </tr>
-            </table>
+          <div class="columns tabbody">
+            <div class="column">
+              <div>
+                <ul>
+                  <ais-tree-child v-for="(child, index) in target.children" :key="index" :item="child" treeID="tree"></ais-tree-child>
+                </ul>
+              </div>
+            </div>
+            <div class="column">
+              <div>
+                <table class="table">
+                  <tr v-for="(row, index) in selected">
+                    <th>{{row.name}}</th>
+                    <td>{{row.value}}</td>
+                  </tr>
+                </table>
+              <div>
+            </div>
           </div>
         </div>
       </div>

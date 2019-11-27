@@ -96,6 +96,23 @@ body {
 }
 
 /**/
+.layer{
+  background-color:#f7c663;
+}
+.parts{
+  background-color:#f7df63;
+} 
+.meterial{
+  background-color:#c6f7c6;
+}
+.substance{
+  background-color:#f7c6e7;
+}
+.law{
+  background-color:#c6e7f7;
+}
+
+/**/
 .tree .item {
   cursor: pointer;
 }

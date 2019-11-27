@@ -8,11 +8,11 @@
     {
       "thead": [
         [
-          {"colspan":"2", "value": "階層"},
-          {"colspan":"2", "value": "部品"},
-          {"colspan":"<xsl:value-of select="$ver+2"/>", "value": "材料"},
-          {"colspan":"<xsl:value-of select="$ver+1"/>", "value": "物質"},
-          {"colspan":"<xsl:value-of select="$ver"/>", "value": "法令"}
+          {"colspan":"2", "class":"layer", "value": "階層"},
+          {"colspan":"2", "class":"parts", "value": "部品"},
+          {"colspan":"<xsl:value-of select="$ver+2"/>", "class":"material", "value": "材料"},
+          {"colspan":"<xsl:value-of select="$ver+1"/>", "class":"substance", "value": "物質"},
+          {"colspan":"<xsl:value-of select="$ver"/>", "class":"law", "value": "法令"}
         ],[
           {"value":"名称"},<!--名称-->
           {"value":"員数"},<!--員数-->

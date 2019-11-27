@@ -328,7 +328,7 @@ Vue.component('AisTable', {
       <table class="table is-bordered is-narrow" style="margin: 10px;">
         <thead>
           <tr v-for="tr in target.thead">
-            <th v-for="th in tr" :colspan="th.colspan">{{th.value}}</th>
+            <th v-for="th in tr" :colspan="th.colspan" :class="th.class">{{th.value}}</th>
           </tr>
         </thead>
         <tbody>
@@ -384,9 +384,9 @@ Vue.component('AisTreeChild', {
 Vue.component('AisTree', {
   props: {target:{type: Object} },
   template: `
-    <div class="tree tabbody">
+    <div class="tree tabbody" style="overflow:visible;">
       <div class="columns">
-        <div class="column treecol" style="border-right:3px double #dbdbdb;">
+        <div class="column treecol">
           <div>
             <ul>
               <ais-tree-child v-for="(child, index) in target.children" :key="index" :item="child" treeID="tree" ref="root"></ais-tree-child>

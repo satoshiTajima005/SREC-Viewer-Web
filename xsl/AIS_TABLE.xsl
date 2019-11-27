@@ -173,8 +173,10 @@
       {"value":""}
       {"value":""}
       {"value":""}
-      {"value":""}
-      <xsl:if test="$ver='4' and count(.//KJA030)!=0">{"value":""}</xsl:if>
+      <xsl:if test="$ver='4' and count(.//KJA030)!=0">
+        {"value":""}
+        {"value":""}
+      </xsl:if>
     </xsl:if>
     <xsl:if test="count(.//KJA030)!=0">
       <xsl:for-each select=".//KJA030[position()!=1]">

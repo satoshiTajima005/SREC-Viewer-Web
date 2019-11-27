@@ -125,9 +125,9 @@
       {"value":""}
       {"value":""}
       {"value":""}
-      {"value":""}
-      {"value":""}
       <xsl:if test="$ver='4'">
+        {"value":""}
+        {"value":""}
         {"value":""}
       </xsl:if>
     </xsl:if>
@@ -214,7 +214,6 @@
         {"value":""}
         {"value":""}
         {"value":""}
-        {"value":""}
       </xsl:if>
       <xsl:if test="count(.//KJA031)!=0">
         <xsl:for-each select=".//KJA031[position()!=1]">
@@ -225,7 +224,6 @@
     <xsl:if test="$ver='4'">
       <xsl:apply-templates select=".//KJA031[count(.//KJE278)!=0][1]"/><!--<xsl:if test="count(.//KJE278)=1">],</xsl:if>-->
       <xsl:if test="count(.//KJE278)=0">
-        {"value":""}
         {"value":""}
         {"value":""}
         {"value":""}

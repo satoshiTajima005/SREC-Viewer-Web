@@ -402,7 +402,7 @@ Vue.component('AisTree', {
                   <td>{{row.value}}</td>
                 </tr>
               </table>
-            <div>
+            </div>
           </div>
         </div>
       </div>

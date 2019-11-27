@@ -161,7 +161,6 @@
     {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE189/PROPERTY_VALUE"/>"}
     {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE190/PROPERTY_VALUE"/>"}
     {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:if test=".//KJE128/PROPERTY_VALUE!=''"><xsl:value-of select="concat(.//KJE128/PROPERTY_VALUE, .//KJE128/PROPERTY_VALUE/@prefix, 'g')"/></xsl:if>"}
-    <xsl:if test="$ver='3' and count(.//KJA030)!=0">,</xsl:if>
     <xsl:if test="$ver='4'">
       {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE296/PROPERTY_VALUE"/>"}
     </xsl:if>
@@ -175,7 +174,7 @@
       {"value":""}
       {"value":""}
       {"value":""}
-      {"value":""}
+      <xsl:if test="$ver='4' and count(.//KJA030)!=0">{"value":""}</xsl:if>
     </xsl:if>
     <xsl:if test="count(.//KJA030)!=0">
       <xsl:for-each select=".//KJA030[position()!=1]">

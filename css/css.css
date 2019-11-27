@@ -95,13 +95,13 @@ body {
   padding: 3px 10px;
 }
 
-/**/
+/*table header*/
 .layer{
-  background-color:#f7c663;
+  background-color:#f7b263;
 }
 .parts{
-  background-color:#f7df63;
-} 
+  background-color:#fdff6d;
+}
 .material{
   background-color:#c6f7c6;
 }

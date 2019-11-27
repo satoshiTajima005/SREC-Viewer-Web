@@ -421,7 +421,7 @@ Vue.component('AisTree', {
           treespred(child);
         });
       }
-      treespred($refs.root, arg.treeID);
+      treespred(this.$refs.root, arg.treeID);
     }
   }
 });

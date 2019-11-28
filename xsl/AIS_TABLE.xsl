@@ -204,7 +204,7 @@
     <!-- 行入力 -->
     {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE071/PROPERTY_VALUE"/>"}
     {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE070/PROPERTY_VALUE"/>"}
-    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:if test=".//KJE131/PROPERTY_VALUE!=''"><xsl:call-template name="unitConvR"><xsl:with-param name="rate" select=".//KJE131/PROPERTY_VALUE"/><xsl:with-param name="unit" select=".//KJE131/PROPERTY_VALUE/@unit"/></xsl:call-template></xsl:if>"}
+    {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:if test=".//KJE131/PROPERTY_VALUE!=''"><xsl:value-of select=".//KJE131/PROPERTY_VALUE"/><xsl:value-of select=".//KJE131/PROPERTY_VALUE/@unit"/></xsl:if>"}
     {"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:if test=".//KJE133/PROPERTY_VALUE!=''"><xsl:value-of select="concat(.//KJE133/PROPERTY_VALUE, .//KJE133/PROPERTY_VALUE/@prefix, 'g')"/></xsl:if>"}
     <xsl:if test="$ver='4'">{"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE191/PROPERTY_VALUE"/>"}</xsl:if>
 
@@ -265,23 +265,6 @@
       <xsl:value-of select="count($node//KJE278)" />
     </xsl:if>
   </xsl:template>
-
-<!--
-##########################################################################################
-		比率単位変換関数
-##########################################################################################-->
-	<xsl:template name="unitConvR">
-		<xsl:param name="rate" />
-		<xsl:param name="unit" />
-		<xsl:choose>
-			<xsl:when test="$unit='ppm'">
-				<xsl:value-of select="concat($rate div 10000, '%')"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="concat($rate, '%')"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
 
 <!--
 ##########################################################################################

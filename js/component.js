@@ -16,20 +16,22 @@ Vue.component('tabs', {
         </ul>
       </div>
       <div class="preview tabbody">
-        <ais
-          v-if="/AIS/.test(tabObject.list[tabObject.selected].type)"
-          ref="ais"
-          :detail="tabObject.list[tabObject.selected].detail"
-          :unique="tabObject.list[tabObject.selected].data.unique"
-          :table="tabObject.list[tabObject.selected].data.table"
-          :tree="tabObject.list[tabObject.selected].data.tree">
-        </ais>
-        <msdsplus
-          v-if="/MSDS/.test(tabObject.list[tabObject.selected].type)"
-          ref="msp"
-          :unique="tabObject.list[tabObject.selected].data.unique"
-          :table="tabObject.list[tabObject.selected].data.table">
-        </msdsplus>
+        <div v-if="tabObject.list.length">
+          <ais
+            v-if="/AIS/.test(tabObject.list[tabObject.selected].type)"
+            ref="ais"
+            :detail="tabObject.list[tabObject.selected].detail"
+            :unique="tabObject.list[tabObject.selected].data.unique"
+            :table="tabObject.list[tabObject.selected].data.table"
+            :tree="tabObject.list[tabObject.selected].data.tree">
+          </ais>
+          <msds-plus
+            v-if="/MSDS/.test(tabObject.list[tabObject.selected].type)"
+            ref="msp"
+            :unique="tabObject.list[tabObject.selected].data.unique"
+            :table="tabObject.list[tabObject.selected].data.table">
+          </msds-plus>
+        </div>
       </div>
     </div>
   `,
@@ -381,8 +383,22 @@ Vue.component('MspUnique', {
   `
 });
 Vue.component('MspTable', {
+  props: {target:{type: Object} },
   template: `
-
+    <div class="tabbody">
+      <table class="table is-bordered is-narrow" style="margin: 10px;">
+        <thead>
+          <tr v-for="tr in target.thead">
+            <th v-for="th in tr" :colspan="th.colspan" :class="th.class">{{th.value}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="tr in target.tbody">
+            <td v-for="td in tr" :rowspan="td.rowspan">{{td.value}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   `
 });
 Vue.component('MsdsPlus', {
@@ -403,7 +419,7 @@ Vue.component('MsdsPlus', {
           </ul>
         </div>
         <div>
-          <msp-table :target="table" v-if="undertab=='table'"></msp-table>
+          <msp-table :target="table"></msp-table>
         </div>
       </div>
     </div>

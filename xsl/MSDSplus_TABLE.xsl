@@ -4,7 +4,7 @@
 <!-- ****************************************** MSDSplus ********************************************************** -->
 	<xsl:template match="/">
     {
-		  "header":[
+		  "thead":[
         [
           {"colspan":"4", "class":"substance", "value":"管理対象物質"},
 					{"colspan":"3", "class":"law", "value":"管理対象基準"}
@@ -18,7 +18,7 @@
 					{"value":"該当区分"}
         ]
       ],
-      "body":[
+      "tbody":[
 			  <xsl:apply-templates select="//KJA043" />
       ]
     }
@@ -29,7 +29,7 @@
 		[
 			{"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE272/PROPERTY_VALUE"/>"},
 			{"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE273/PROPERTY_VALUE"/>"},
-			{"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:call-template name="unitConvR"><xsl:with-param name="rate" select=".//KJE274/PROPERTY_VALUE"/><xsl:with-param name="unit" select=".//KJE274/PROPERTY_VALUE/@unit"/></xsl:call-template>"},
+			{"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE274/PROPERTY_VALUE"/><xsl:value-of select=".//KJE274/PROPERTY_VALUE/@unit"/>"},
 			{"rowspan":"<xsl:value-of select="$rows"/>", "value":"<xsl:value-of select=".//KJE275/PROPERTY_VALUE"/>"},
 			<xsl:apply-templates select=".//KJA044[1]" />
 		]
@@ -53,23 +53,6 @@
 			{"value":"<xsl:value-of select=".//KJE278/PROPERTY_VALUE"/>"}
 		</xsl:if>
 	</xsl:template>
-
-<!--
-##########################################################################################
-	比率単位変換関数
-##########################################################################################-->
-<xsl:template name="unitConvR">
-  <xsl:param name="rate" />
-  <xsl:param name="unit" />
-  <xsl:choose>
-    <xsl:when test="$unit='ppm'">
-      <xsl:value-of select="concat($rate div 10000, '%')"/>
-    </xsl:when>
-    <xsl:otherwise>
-      <xsl:value-of select="concat($rate, '%')"/>
-    </xsl:otherwise>
-  </xsl:choose>
-</xsl:template>
 
 <!--
 ##########################################################################################

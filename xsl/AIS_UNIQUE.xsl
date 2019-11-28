@@ -97,7 +97,7 @@
         ]
       },
       "AIS6":{
-        "title": "成型品情報"
+        "title": "成型品情報",
         "isShow": true,
         "data":[
           [

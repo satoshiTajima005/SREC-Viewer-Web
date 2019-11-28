@@ -103,7 +103,7 @@
           {"title":"製品名", "class":"KJE265", "value":"<xsl:value-of select="//KJE265/PROPERTY_VALUE"/>"},
           {"title":"製品番号", "class":"KJE264", "value":"<xsl:value-of select="//KJE264/PROPERTY_VALUE"/>"},
           {"title":"製品番号(母)", "class":"KJE298", "value":"<xsl:value-of select="//KJE298/PROPERTY_VALUE"/>"},
-          {"title":"一般商品名", "class":"KJE266", "value":"<xsl:value-of select="//KJE266/PROPERTY_VALUE"/>"},
+          {"title":"一般商品名", "class":"KJE266", "value":"<xsl:value-of select="//KJE266/PROPERTY_VALUE"/>"}
         ],[
           {"title":"GADSL", "class":"KJE267", "value":"<xsl:call-template name="getCoveredRow"><xsl:with-param name="id" select="string(//KJE267/PROPERTY_VALUE)"/></xsl:call-template>"},
           {"title":"JIG", "class":"KJE268", "value":"<xsl:call-template name="getCoveredRow"><xsl:with-param name="id" select="string(//KJE268/PROPERTY_VALUE)"/></xsl:call-template>"},

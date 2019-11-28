@@ -55,7 +55,7 @@ Vue.component('UniqueWrap', {
   props: {oName:{type: String}, target:{ type: Object } },
   template: `
     <div class="message is-green">
-      <div class="message-header" @click="toggleDetail(oName)">
+      <div class="message-header" @click="toggleDetail">
         <p>{{target.title}}</p>
         <span class="icon" v-if="!target.isShow"><i class="fas fa-caret-right"></i></span>
         <span class="icon" v-if="target.isShow"><i class="fas fa-caret-down"></i></span>
@@ -65,14 +65,14 @@ Vue.component('UniqueWrap', {
           <div class="column">
             <table class="unique-table table is-bordered is-narrow">
               <tbody>
-                <unique-tr v-for="item in target[0]" :title="item.title" :value="item.value"></unique-tr>
+                <unique-tr v-for="item in target.data[0]" :title="item.title" :value="item.value"></unique-tr>
               </tbody>
             </table>
           </div>
           <div class="column">
             <table class="unique-table table is-bordered is-narrow">
               <tbody>
-                <unique-tr v-for="item in target[1]" :title="item.title" :value="item.value"></unique-tr>
+                <unique-tr v-for="item in target.data[1]" :title="item.title" :value="item.value"></unique-tr>
               </tbody>
             </table>
           </div>
@@ -81,7 +81,7 @@ Vue.component('UniqueWrap', {
     </div>
   `,
   methods: {
-    toggleDetail: function(prop){
+    toggleDetail: function(){
       this.target.isShow = !this.target.isShow;
     }
   }

@@ -72,7 +72,7 @@
             {"title":"FAX", "class":"KJE157", "value":"<xsl:value-of select="//KJE157/PROPERTY_VALUE"/>"},
             {"title":"E-Mail", "class":"KJE091", "value":"<xsl:value-of select="//KJE091/PROPERTY_VALUE"/>"},
             {"title":"備考 1", "class":"KJE158", "value":"<xsl:value-of select="//KJE158/PROPERTY_VALUE"/>"},
-            {"title":備考 2"", "class":"KJE159", "value":"<xsl:value-of select="//KJE159/PROPERTY_VALUE"/>"},
+            {"title":"備考 2", "class":"KJE159", "value":"<xsl:value-of select="//KJE159/PROPERTY_VALUE"/>"},
             {"title":"備考 3", "class":"KJE160", "value":"<xsl:value-of select="//KJE160/PROPERTY_VALUE"/>"}
           ]
         ]

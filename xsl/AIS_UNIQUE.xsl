@@ -6,52 +6,76 @@
   <xsl:template match="/">
     <xsl:variable name="ver" select="number(substring(//PROPERTY_SNAME[.='Use format']/following-sibling::node()/text(), 5, 1))"/>
     {
-      "AIS1":{<!--AISに関する情報-->
+      "AIS1":{
+        "title": "AISに関する情報",
         "isShow": true,
-        "LANG":"<xsl:value-of select="//LANG"/>",<!--言語-->
-        "KJE134":"<xsl:value-of select="//KJE134/PROPERTY_VALUE"/>",<!--文書GPID-->
-        "KJE135":"<xsl:value-of select="//KJE135/PROPERTY_VALUE"/>",<!--文書種類-->
-        "KJE098":"<xsl:value-of select="//KJE098/PROPERTY_VALUE"/>",<!--文書番号-->
-        "KJE136":"<xsl:value-of select="//KJE136/PROPERTY_VALUE"/>",<!--フォーマットVer.-->
-        "KJE137":"<xsl:value-of select="//KJE137/PROPERTY_VALUE"/>",<!--提出日-->
-        "KJE016":"<xsl:value-of select="//KJE016/PROPERTY_VALUE"/>",<!--作成日-->
-        "KJE017":"<xsl:value-of select="//KJE017/PROPERTY_VALUE"/>",<!--改訂日-->
-        "KJE014":"<xsl:value-of select="//KJE014/PROPERTY_VALUE"/>"<!--改訂履歴-->
+        "data": [
+          [
+            {"title":"言語", "class":"LANG", "value":"<xsl:value-of select="//LANG"/>"},
+            {"title":"文書GPID", "class":"KJE134", "value":"<xsl:value-of select="//KJE134/PROPERTY_VALUE"/>"},
+            {"title":文書種類"", "class":"KJE135", "value":"<xsl:value-of select="//KJE135/PROPERTY_VALUE"/>"},
+            {"title":"文書番号", "class":"KJE098", "value":"<xsl:value-of select="//KJE098/PROPERTY_VALUE"/>"},
+            {"title":"フォーマット", "class":"KJE136", "value":"<xsl:value-of select="//KJE136/PROPERTY_VALUE"/>"}
+          ],[
+            {"title":"提出日", "id":"KJE137", "value":"<xsl:value-of select="//KJE137/PROPERTY_VALUE"/>"},
+            {"title":"作成日", "id":"KJE016", "value":"<xsl:value-of select="//KJE016/PROPERTY_VALUE"/>"},
+            {"title":"改訂日", "id":"KJE017", "value":"<xsl:value-of select="//KJE017/PROPERTY_VALUE"/>"},
+            {"title":"改訂履歴", "id":"KJE014", "value":"<xsl:value-of select="//KJE014/PROPERTY_VALUE"/>"}
+          ]
+        ]
       },
-      "AIS2":{<!--発行会社情報-->
+      "AIS2":{
+        "title": "発行会社情報",
         "isShow": true,
-        "KJE138":"<xsl:value-of select="//KJE138/PROPERTY_VALUE"/>",<!--登録機関ID-->
-        "KJE011":"<xsl:value-of select="//KJE011/PROPERTY_VALUE"/>",<!--会社ID-->
-        "KJE141":"<xsl:value-of select="//KJE141/PROPERTY_VALUE"/>",<!--JAMP ID-->
-        "KJE012":"<xsl:value-of select="//KJE012/PROPERTY_VALUE"/>",<!--会社名 -->
-        <xsl:if test="$ver='4'">"KJE297":"<xsl:value-of select="//KJE297/PROPERTY_VALUE"/>",<!--会社名(母)--></xsl:if>
-        "KJE142":"<xsl:value-of select="//KJE142/PROPERTY_VALUE"/>"<!--追加情報-->
+        "data": [
+          [
+            {"title":"登録機関ID", "class":"KJE138", "value":"<xsl:value-of select="//KJE138/PROPERTY_VALUE"/>"},
+            {"title":"会社ID", "class":"KJE011", "value":"<xsl:value-of select="//KJE011/PROPERTY_VALUE"/>"},
+            {"title":"JAMP ID", "class":"KJE141", "value":"<xsl:value-of select="//KJE141/PROPERTY_VALUE"/>"}
+          ],[
+            {"title":"会社名", "class":"KJE012", "value":"<xsl:value-of select="//KJE012/PROPERTY_VALUE"/>"},
+            {"title":"会社名(母)", "class":"KJE297", "value":"<xsl:value-of select="//KJE297/PROPERTY_VALUE"/>"},
+            {"title":"追加情報", "class":"KJE142", "value":"<xsl:value-of select="//KJE142/PROPERTY_VALUE"/>"}
+          ]
+        ]
       },
-      "AIS3":{<!--発行/作成 部門情報-->
+      "AIS3":{
+        "title":"発行/作成 部門情報",
         "isShow": true,
-        "KJE143":"<xsl:value-of select="//KJE143/PROPERTY_VALUE"/>",<!--発行:部門名-->
-        "KJE144":"<xsl:value-of select="//KJE144/PROPERTY_VALUE"/>",<!--発行:住所-->
-        "KJE145":"<xsl:value-of select="//KJE145/PROPERTY_VALUE"/>",<!--発行:電話-->
-        "KJE146":"<xsl:value-of select="//KJE146/PROPERTY_VALUE"/>",<!--発行:FAX-->
-        "KJE147":"<xsl:value-of select="//KJE147/PROPERTY_VALUE"/>",<!--発行:E-Mail-->
-        "KJE093":"<xsl:value-of select="//KJE093/PROPERTY_VALUE"/>",<!--作成:部門名-->
-        "KJE124":"<xsl:value-of select="//KJE124/PROPERTY_VALUE"/>"<!--作成:電話-->
+        "data":[
+          [
+            {"title":"発行:部門名", "class":"KJE143", "value":"<xsl:value-of select="//KJE143/PROPERTY_VALUE"/>"},
+            {"title":"発行:住所", "class":"KJE144", "value":"<xsl:value-of select="//KJE144/PROPERTY_VALUE"/>"},
+            {"title":"発行:電話", "class":"KJE145", "value":"<xsl:value-of select="//KJE145/PROPERTY_VALUE"/>"},
+            {"title":"発行:FAX", "class":"KJE146", "value":"<xsl:value-of select="//KJE146/PROPERTY_VALUE"/>"}
+          ],[
+            {"title":"発行:E-Mail", "class":"KJE147", "value":"<xsl:value-of select="//KJE147/PROPERTY_VALUE"/>"},
+            {"title":"作成:部門名", "class":"KJE093", "value":"<xsl:value-of select="//KJE093/PROPERTY_VALUE"/>"},
+            {"title":"作成:電話", "class":"KJE124", "value":"<xsl:value-of select="//KJE124/PROPERTY_VALUE"/>"}
+          ]
+        ]
       },
-      "AIS4":{<!--依頼者情報-->
+      "AIS4":{
+        "title":"依頼者情報",
         "isShow": true,
-        "KJE149":"<xsl:value-of select="//KJE149/PROPERTY_VALUE"/>",<!--登録機関ID-->
-        "KJE150":"<xsl:value-of select="//KJE150/PROPERTY_VALUE"/>",<!--会社ID-->
-        "KJE153":"<xsl:value-of select="//KJE153/PROPERTY_VALUE"/>",<!--JAMP ID-->
-        "KJE078":"<xsl:value-of select="//KJE078/PROPERTY_VALUE"/>",<!--会社名-->
-        "KJE154":"<xsl:value-of select="//KJE154/PROPERTY_VALUE"/>",<!--部門名-->
-        "KJE155":"<xsl:value-of select="//KJE155/PROPERTY_VALUE"/>",<!--住所-->
-        "KJE090":"<xsl:value-of select="//KJE090/PROPERTY_VALUE"/>",<!--担当者氏名-->
-        "KJE156":"<xsl:value-of select="//KJE156/PROPERTY_VALUE"/>",<!--電話-->
-        "KJE157":"<xsl:value-of select="//KJE157/PROPERTY_VALUE"/>",<!--FAX-->
-        "KJE091":"<xsl:value-of select="//KJE091/PROPERTY_VALUE"/>",<!--E-Mail-->
-        "KJE158":"<xsl:value-of select="//KJE158/PROPERTY_VALUE"/>",<!--備考 1-->
-        "KJE159":"<xsl:value-of select="//KJE159/PROPERTY_VALUE"/>",<!--備考 2-->
-        "KJE160":"<xsl:value-of select="//KJE160/PROPERTY_VALUE"/>"<!--備考 3-->
+        "data": [
+          [
+            {"title":"登録機関ID", "class":"KJE149", "value":"<xsl:value-of select="//KJE149/PROPERTY_VALUE"/>"},
+            {"title":"会社ID", "class":"KJE150", "value":"<xsl:value-of select="//KJE150/PROPERTY_VALUE"/>"},
+            {"title":"JAMP ID", "class":"KJE153", "value":"<xsl:value-of select="//KJE153/PROPERTY_VALUE"/>"},
+            {"title":"会社名", "class":"KJE078", "value":"<xsl:value-of select="//KJE078/PROPERTY_VALUE"/>"},
+            {"title":"部門名", "class":"KJE154", "value":"<xsl:value-of select="//KJE154/PROPERTY_VALUE"/>"},
+            {"title":"住所", "class":"KJE155", "value":"<xsl:value-of select="//KJE155/PROPERTY_VALUE"/>"},
+            {"title":"担当者氏名", "class":"KJE090", "value":"<xsl:value-of select="//KJE090/PROPERTY_VALUE"/>"}
+          ],[
+            {"title":"電話", "class":"KJE156", "value":"<xsl:value-of select="//KJE156/PROPERTY_VALUE"/>"},
+            {"title":"FAX", "class":"KJE157", "value":"<xsl:value-of select="//KJE157/PROPERTY_VALUE"/>"},
+            {"title":"E-Mail", "class":"KJE091", "value":"<xsl:value-of select="//KJE091/PROPERTY_VALUE"/>"},
+            {"title":"備考 1", "class":"KJE158", "value":"<xsl:value-of select="//KJE158/PROPERTY_VALUE"/>"},
+            {"title":備考 2"", "class":"KJE159", "value":"<xsl:value-of select="//KJE159/PROPERTY_VALUE"/>"},
+            {"title":"備考 3", "class":"KJE160", "value":"<xsl:value-of select="//KJE160/PROPERTY_VALUE"/>"}
+          ]
+        ]
       },
       "AIS5":{<!--型番情報-->
         "isShow": true,
@@ -72,25 +96,29 @@
           "<xsl:value-of select="//KJA022[6]/EDK022-001/KJE164/PROPERTY_VALUE"/>"
         ]
       },
-      "AIS6":{<!--成型品情報-->
+      "AIS6":{
+        "title": "成型品情報"
         "isShow": true,
-        "KJE101":"<xsl:value-of select="//KJE101/PROPERTY_VALUE"/>",<!--製造会社-->
-        "KJE018":"<xsl:value-of select="//KJE018/PROPERTY_VALUE"/>",<!--発行者型番-->
-        <xsl:if test="$ver='4'">
-          "KJE298":"<xsl:value-of select="//KJE298/PROPERTY_VALUE"/>",<!--発行者型番(母)-->
-        </xsl:if>
-        "KJE172":"<xsl:value-of select="//KJE172/PROPERTY_VALUE"/>",<!--一般商品名-->
-        "KJE173":"<xsl:value-of select="//KJE173/PROPERTY_VALUE"/>",<!--シリーズ名-->
-        "KJE174":"<xsl:value-of select="//KJE174/PROPERTY_VALUE"/>",<!--発行者備考-->
-        "KJE183":"<xsl:value-of select="//KJE183/PROPERTY_VALUE"/>",<!--引用等-->
-        "KJE176":"<xsl:value-of select="string(//KJE176/PROPERTY_VALUE)"/>",<!--集合化-->
-        "KJE177":"<xsl:value-of select="string(//KJE177/PROPERTY_VALUE)"/>",<!--単位-->
-        "KJE023":"<xsl:value-of select="concat(//KJE023/PROPERTY_VALUE, //KJE023/PROPERTY_VALUE/@prefix, 'g')"/>",<!--質量-->
-        "KJE178":"<xsl:value-of select="string(//KJE178/PROPERTY_VALUE)"/>",<!--GADSL-->
-        "KJE179":"<xsl:value-of select="string(//KJE179/PROPERTY_VALUE)"/>",<!--JIG-->
-        "KJE180":"<xsl:value-of select="string(//KJE180/PROPERTY_VALUE)"/>",<!--含有確認-->
-        "KJE181":"<xsl:value-of select="//KJE181/PROPERTY_VALUE"/>",<!--材質リストVer.-->
-        "KJE182":"<xsl:value-of select="//KJE182/PROPERTY_VALUE"/>"<!--物質リストVer.-->
+        "data":[
+          [
+            {"title":"製造会社", "class":"KJE101", "value":"<xsl:value-of select="//KJE101/PROPERTY_VALUE"/>"},
+            {"title":"発行者型番", "class":"KJE018", "value":"<xsl:value-of select="//KJE018/PROPERTY_VALUE"/>"},
+            {"title":"発行者型番(母)", "class":"KJE298", "value":"<xsl:value-of select="//KJE298/PROPERTY_VALUE"/>"},
+            {"title":"一般商品名", "class":"KJE172", "value":"<xsl:value-of select="//KJE172/PROPERTY_VALUE"/>"},
+            {"title":"シリーズ名", "class":"KJE173", "value":"<xsl:value-of select="//KJE173/PROPERTY_VALUE"/>"},
+            {"title":"発行者備考", "class":"KJE174", "value":"<xsl:value-of select="//KJE174/PROPERTY_VALUE"/>"},
+            {"title":"引用等", "class":"KJE183", "value":"<xsl:value-of select="//KJE183/PROPERTY_VALUE"/>"},
+            {"title":"集合化", "class":"KJE176", "value":"<xsl:value-of select="string(//KJE176/PROPERTY_VALUE)"/>"}
+          ],[
+            {"title":"単位", "class":"KJE177", "value":"<xsl:value-of select="string(//KJE177/PROPERTY_VALUE)"/>"},
+            {"title":"質量", "class":"KJE023", "value":"<xsl:value-of select="concat(//KJE023/PROPERTY_VALUE, //KJE023/PROPERTY_VALUE/@prefix, 'g')"/>"},
+            {"title":"GADSL", "class":"KJE178", "value":"<xsl:value-of select="string(//KJE178/PROPERTY_VALUE)"/>"},
+            {"title":"JIG", "class":"KJE179", "value":"<xsl:value-of select="string(//KJE179/PROPERTY_VALUE)"/>"},
+            {"title":"含有確認", "class":"KJE180", "value":"<xsl:value-of select="string(//KJE180/PROPERTY_VALUE)"/>"},
+            {"title":"材質リストVer.", "class":"KJE181", "value":"<xsl:value-of select="//KJE181/PROPERTY_VALUE"/>"},
+            {"title":"物質リストVer.", "class":"KJE182", "value":"<xsl:value-of select="//KJE182/PROPERTY_VALUE"/>"}
+          ]
+        ]
       },
       "AIS7":{<!--集計情報-->
         "isShow": true,

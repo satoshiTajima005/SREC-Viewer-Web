@@ -13,7 +13,7 @@
           [
             {"title":"言語", "class":"LANG", "value":"<xsl:value-of select="//LANG"/>"},
             {"title":"文書GPID", "class":"KJE134", "value":"<xsl:value-of select="//KJE134/PROPERTY_VALUE"/>"},
-            {"title":文書種類"", "class":"KJE135", "value":"<xsl:value-of select="//KJE135/PROPERTY_VALUE"/>"},
+            {"title":"文書種類", "class":"KJE135", "value":"<xsl:value-of select="//KJE135/PROPERTY_VALUE"/>"},
             {"title":"文書番号", "class":"KJE098", "value":"<xsl:value-of select="//KJE098/PROPERTY_VALUE"/>"},
             {"title":"フォーマット", "class":"KJE136", "value":"<xsl:value-of select="//KJE136/PROPERTY_VALUE"/>"}
           ],[

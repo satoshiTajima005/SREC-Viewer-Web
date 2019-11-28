@@ -24,6 +24,13 @@ Vue.component('tabs', {
           :table="tabObject.list[tabObject.selected].data.table"
           :tree="tabObject.list[tabObject.selected].data.tree">
         </ais>
+        <ais
+          v-if="/MSDS/.test(tabObject.list[tabObject.selected].type)"
+          ref="msp"
+          :detail="tabObject.list[tabObject.selected].detail"
+          :unique="tabObject.list[tabObject.selected].data.unique"
+          :table="tabObject.list[tabObject.selected].data.table"
+        </ais>
       </div>
     </div>
   `,

@@ -65,7 +65,7 @@
           {"title":"会社名", "class":"KJE249", "value":"<xsl:value-of select="//KJE249/PROPERTY_VALUE"/>"},
           {"title":"部門名", "class":"KJE256", "value":"<xsl:value-of select="//KJE256/PROPERTY_VALUE"/>"},
           {"title":"住所", "class":"KJE257", "value":"<xsl:value-of select="//KJE257/PROPERTY_VALUE"/>"},
-          {"title":"担当者氏名", "class":"KJE258", "value":"<xsl:value-of select="//KJE258/PROPERTY_VALUE"/>"},
+          {"title":"担当者氏名", "class":"KJE258", "value":"<xsl:value-of select="//KJE258/PROPERTY_VALUE"/>"}
         ],[
           {"title":"電話", "class":"KJE259", "value":"<xsl:value-of select="//KJE259/PROPERTY_VALUE"/>"},
           {"title":"FAX", "class":"KJE260", "value":"<xsl:value-of select="//KJE260/PROPERTY_VALUE"/>"},

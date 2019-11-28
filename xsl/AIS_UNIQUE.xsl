@@ -108,13 +108,13 @@
             {"title":"シリーズ名", "class":"KJE173", "value":"<xsl:value-of select="//KJE173/PROPERTY_VALUE"/>"},
             {"title":"発行者備考", "class":"KJE174", "value":"<xsl:value-of select="//KJE174/PROPERTY_VALUE"/>"},
             {"title":"引用等", "class":"KJE183", "value":"<xsl:value-of select="//KJE183/PROPERTY_VALUE"/>"},
-            {"title":"集合化", "class":"KJE176", "value":"<xsl:value-of select="string(//KJE176/PROPERTY_VALUE)"/>"}
+            {"title":"集合化", "class":"KJE176", "value":"<xsl:call-template name="getKJE176"><xsl:with-param name="id" select="string(//KJE176/PROPERTY_VALUE)"/></xsl:call-template>"}
           ],[
-            {"title":"単位", "class":"KJE177", "value":"<xsl:value-of select="string(//KJE177/PROPERTY_VALUE)"/>"},
+            {"title":"単位", "class":"KJE177", "value":"<xsl:call-template name="getKJE177"><xsl:with-param name="id" select="string(//KJE177/PROPERTY_VALUE)"/></xsl:call-template>"},
             {"title":"質量", "class":"KJE023", "value":"<xsl:value-of select="concat(//KJE023/PROPERTY_VALUE, //KJE023/PROPERTY_VALUE/@prefix, 'g')"/>"},
-            {"title":"GADSL", "class":"KJE178", "value":"<xsl:value-of select="string(//KJE178/PROPERTY_VALUE)"/>"},
-            {"title":"JIG", "class":"KJE179", "value":"<xsl:value-of select="string(//KJE179/PROPERTY_VALUE)"/>"},
-            {"title":"含有確認", "class":"KJE180", "value":"<xsl:value-of select="string(//KJE180/PROPERTY_VALUE)"/>"},
+            {"title":"GADSL", "class":"KJE178", "value":"<xsl:call-template name="getCoveredRow"><xsl:with-param name="id" select="string(//KJE178/PROPERTY_VALUE)"/></xsl:call-template>"},
+            {"title":"JIG", "class":"KJE179", "value":"<xsl:call-template name="getCoveredRow"><xsl:with-param name="id" select="string(//KJE179/PROPERTY_VALUE)"/></xsl:call-template>"},
+            {"title":"含有確認", "class":"KJE180", "value":"<xsl:call-template name="getContained"><xsl:with-param name="id" select="string(//KJE180/PROPERTY_VALUE)"/></xsl:call-template>"},
             {"title":"材質リストVer.", "class":"KJE181", "value":"<xsl:value-of select="//KJE181/PROPERTY_VALUE"/>"},
             {"title":"物質リストVer.", "class":"KJE182", "value":"<xsl:value-of select="//KJE182/PROPERTY_VALUE"/>"}
           ]
@@ -136,6 +136,48 @@
     }<xsl:if test="last()!=position()">,</xsl:if>
   </xsl:template>
 
+<!--
+##########################################################################################
+		集合化
+##########################################################################################-->
+	<xsl:template name="getKJE176">
+		<xsl:param name="id" />
+		<xsl:if test="$id='0'">無し</xsl:if>
+		<xsl:if test="$id='1'">複合化</xsl:if>
+		<xsl:if test="$id='2'">単純化</xsl:if>
+	</xsl:template>
+<!--
+##########################################################################################
+		報告単位
+##########################################################################################-->
+	<xsl:template name="getKJE177">
+		<xsl:param name="id" />
+		<xsl:if test="$id='PC'">個</xsl:if>
+		<xsl:if test="$id='MTR'">m</xsl:if>
+		<xsl:if test="$id='MTK'">m2</xsl:if>
+		<xsl:if test="$id='MTQ'">m3</xsl:if>
+		<xsl:if test="$id='CMT'">cm</xsl:if>
+		<xsl:if test="$id='CMK'">cm2</xsl:if>
+		<xsl:if test="$id='CMQ'">cm3</xsl:if>
+	</xsl:template>
+<!--
+##########################################################################################
+		対象法令	KJE178 KJE179 KJE267 KJE268 KJE269
+##########################################################################################-->
+	<xsl:template name="getCoveredRow">
+		<xsl:param name="id" />
+		<xsl:if test="$id='0'">対象としない</xsl:if>
+		<xsl:if test="$id='1'">対象とする</xsl:if>
+	</xsl:template>
+<!--
+##########################################################################################
+		含有判定	KJE180 KJE270
+##########################################################################################-->
+	<xsl:template name="getContained">
+		<xsl:param name="id" />
+		<xsl:if test="$id='0'">含有無し</xsl:if>
+		<xsl:if test="$id='1'">含有あり</xsl:if>
+	</xsl:template>
 <!--
 ##########################################################################################
 		材質区分取得関数

@@ -79,7 +79,12 @@ Vue.component('UniqueWrap', {
         </div>
       </transition>
     </div>
-  `
+  `,
+  methods: {
+    toggleDetail: function(prop){
+      this.target.isShow = !this.target.isShow;
+    }
+  }
 });
 Vue.component('AisUnique', {
   props: { target:{ type: Object } },
@@ -154,36 +159,6 @@ Vue.component('AisUnique', {
   methods: {
     toggleDetail: function(prop){
       this.target[prop].isShow = !this.target[prop].isShow;
-    },
-    getKJE176: function(id){
-      switch (id){
-        case '0': return '無し';
-        case '1': return '複合化';
-        case '2': return '単純化';
-      }
-    },
-    getKJE177: function(id){
-      switch (id){
-        case 'PC': return '個';
-        case 'MTR': return 'm';
-        case 'MTK': return 'm2';
-        case 'MTQ': return 'm3';
-        case 'CMT': return 'cm';
-        case 'CMK': return 'cm2';
-        case 'CMQ': return 'cm3';
-      }
-    },
-    getCoveredRow(id){  //KJE178 KJE179 KJE267 KJE268 KJE269
-      switch(id){
-        case '0': return '対象としない';
-        case '1': return '対象とする';
-      }
-    },
-    getContained(id){ //KJE180 KJE270
-      switch (id){
-        case '0': return '含有あり';
-        case '1': return '含有なし';
-      }
     }
   }
 });

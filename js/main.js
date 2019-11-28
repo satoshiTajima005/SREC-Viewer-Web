@@ -71,16 +71,17 @@ document.addEventListener('DOMContentLoaded', function () {
             case 'MSDSplus-temp':
                 o.data = {
                   unique: {},
-                  //table: {}
+                  table: {}
                 };
                 o.data.unique = await me.xmlTransform(o.txt, 'xsl/MSDSplus_UNIQUE.xsl');
-                //o.data.table = await me.xmlTransform(o.txt, 'xsl/MSDSplus_TABLE.xsl');
+                o.data.table = await me.xmlTransform(o.txt, 'xsl/MSDSplus_TABLE.xsl');
                 break;
             case 'IEC62474':
             case 'SHAI':
             case 'SHCI':
               break;
             case 'JAMA':
+              break;
             case 'JGP4':
               o.data = o.txt;
               break;
@@ -276,11 +277,16 @@ document.addEventListener('DOMContentLoaded', function () {
         
         //XSLT変換不足対応
         res = res.replace(/\n\s*/igm,'');
-        if (xslPath == 'xsl/AIS_TABLE.xsl'){
-          res = res
-            .replace(/\#\[/g, '],[')
-            .replace(/\@\[/, '[')
-            .replace(/\}\{/g, '},{');
+        switch (xslPath){
+          case 'xsl/AIS_TABLE.xsl':
+            res = res
+              .replace(/\#\[/g, '],[')
+              .replace(/\@\[/, '[')
+              .replace(/\}\{/g, '},{');
+            break;
+          case 'xsl/MSDSplus_TABLE.xsl':
+            res = res.replace(/\]\s?\[/g, '],[');
+            break;
         }
         return res;
       },

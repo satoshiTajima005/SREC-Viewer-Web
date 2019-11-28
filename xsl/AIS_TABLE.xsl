@@ -173,7 +173,7 @@
       {"value":""}
       {"value":""}
       {"value":""}
-      <xsl:if test="$ver='4' and count(.//KJA030)!=0">
+      <xsl:if test="$ver='4'">
         {"value":""}
         {"value":""}
       </xsl:if>

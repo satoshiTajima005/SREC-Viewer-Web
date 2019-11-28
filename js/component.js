@@ -154,7 +154,6 @@ Vue.component('AisUnique', {
       </div>
 
     </div>
-  </div>
   `,
   methods: {
     toggleDetail: function(prop){
@@ -305,8 +304,105 @@ Vue.component('Ais', {
     }
   }
 });
-Vue.component('MSDSplus', {
-  template: ``
+Vue.component('MspUnique', {
+  props: { target:{ type: Object } },
+  template: `
+    <div class="unique">
+      <unique-wrap oName="MS1" :target="target.MS1"></unique-wrap>
+      <unique-wrap oName="MS2" :target="target.MS2"></unique-wrap>
+      <unique-wrap oName="MS3" :target="target.MS3"></unique-wrap>
+      <unique-wrap oName="MS4" :target="target.MS4"></unique-wrap>
+
+      <div class="message is-green">
+        <div class="message-header" @click="toggleDetail('MS5')">
+          <p>型番情報</p>
+          <span class="icon" v-if="!target.MS5.isShow"><i class="fas fa-caret-right"></i></span>
+          <span class="icon" v-if="target.MS5.isShow"><i class="fas fa-caret-down"></i></span>
+        </div>
+        <transition name="fade">
+          <div class="message-body columns" v-show="target.MS5.isShow">
+            <div class="column is-half">
+              <table class="unique-table table is-bordered is-narrow">
+                <caption>依頼者</caption>
+                <tbody>
+                  <unique-tr v-for="(item,index) in target.MS5.KJE253" :title="index+1" :value="item" :key="index"></unique-tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="column is-half">
+              <table class="unique-table table is-bordered is-narrow">
+                <caption>発行者</caption>
+                <tbody>
+                  <unique-tr v-for="(item,index) in target.MS5.KJE254" :title="index+1" :value="item" :key="index"></unique-tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </transition>
+      </div>
+
+      <unique-wrap oName="MS6" :target="target.MS6"></unique-wrap>
+
+      <div class="message is-green">
+        <div class="message-header" @click="toggleDetail('MS7')">
+          <p>報告法令等の制定/改訂 番号</p>
+          <span class="icon" v-if="!target.MS7.isShow"><i class="fas fa-caret-right"></i></span>
+          <span class="icon" v-if="target.MS7.isShow"><i class="fas fa-caret-down"></i></span>
+        </div>
+        <transition name="fade">
+          <div class="message-body columns" v-show="target.MS7.isShow">
+            <div class="column">
+              <table class="table is-bordered is-narrow">
+                <thead>
+                  <th style="text-align:left; width:auto;">ID</th>
+                  <th style="text-align:left; width:auto;">名称</th>
+                  <th style="text-align:left; width:auto;">制定/改訂 番号</th>
+                </thead>
+                <tbody>
+                  <tr v-for="(item, index) in target.MS7.data" :key="index">
+                    <td>{{item.ID}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.rev}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </transition>
+      </div>
+
+    </div>
+  `
+});
+Vue.component('MspTable', {
+  template: `
+
+  `
+});
+Vue.component('MsdsPlus', {
+  props: {
+    detail:{type: String},
+    unique:{type: Object},
+    table:{type: Object}
+  },
+  template: `
+    <div>
+      <msp-unique :target="unique"></msp-unique>
+      <hr class="hr">
+      <div style="background:#f8f8f8;padding: 10px;">
+        <div class="tabs is-boxed">
+          <ul>
+            <li class="is-active">
+              <a><span class="icon"><i class="fas fa-table"></i></span><span>テーブル</span></a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <msp-table :target="table" v-if="undertab=='table'"></msp-table>
+        </div>
+      </div>
+    </div>
+  `
 });
 Vue.component('JGPSSI', {
   template: ``

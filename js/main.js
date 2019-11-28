@@ -11,6 +11,31 @@ let list = {
     item:{}
   } 
 }
+/*********************************************************************************************************************************
+    機能：xml特殊文字変換
+注意事項：無し
+*********************************************************************************************************************************/
+String.prototype.xmlEncode = function () {
+  return this
+    .replace(/&/ig, "&amp;")
+    .replace(/</ig, "&lt;")
+    .replace(/>/ig, "&gt;")
+    .replace(/"/ig, "&quot;")
+    .replace(/'/ig, "&apos;");
+};
+
+/*********************************************************************************************************************************
+    機能：文字列繰り返し
+注意事項：無し
+*********************************************************************************************************************************/
+String.prototype.repeat = function (n) {
+  let ret = "",
+    str = this;
+  for (; n > 0; n >>>= 1, str += str)
+    if (n & 1) ret += str;
+  return ret;
+};
+
 
 Vue.config.productionTip = true;
 let app;
@@ -69,18 +94,31 @@ document.addEventListener('DOMContentLoaded', function () {
               break;
             case 'MSDSplus':
             case 'MSDSplus-temp':
-                o.data = {
-                  unique: {},
-                  table: {}
-                };
-                o.data.unique = await me.xmlTransform(o.txt, 'xsl/MSDSplus_UNIQUE.xsl');
-                o.data.table = await me.xmlTransform(o.txt, 'xsl/MSDSplus_TABLE.xsl');
-                break;
+              o.data = {
+                unique: {},
+                table: {}
+              };
+              o.data.unique = await me.xmlTransform(o.txt, 'xsl/MSDSplus_UNIQUE.xsl');
+              o.data.table = await me.xmlTransform(o.txt, 'xsl/MSDSplus_TABLE.xsl');
+              break;
             case 'IEC62474':
             case 'SHAI':
             case 'SHCI':
               break;
             case 'JAMA':
+              o.data = {
+                unique: {},
+                //tree: {}
+              };
+              let ver = o.txt.split("\r\n")[0].split('","')-0;
+              if (ver == NaN){
+                //todo JAMAファイルではない
+                //todo 画面に何かしらの表示
+                break;
+              }
+              o.txt = me.JamaToXML(o.txt, ver);
+              o.data.unique = await me.xmlTransform(o.txt, 'xsl/JAMA_UNIQUE.xsl');
+              //o.data.tree = await me.xmlTransform(o.txt, 'xsl/JAMA_TREE.xsl');
               break;
             case 'JGP4':
               o.data = o.txt;
@@ -236,30 +274,22 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       },
       Utf8ArrayToStr: function (b) {
-        var a;
-        var c = "";
-        var f = b.length;
+        let a;
+        let c = "";
+        let f = b.length;
         for (a = 0; a < f;) {
-          var d = b[a++];
+          let d = b[a++];
           switch (d >> 4) {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
+            case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
               c += String.fromCharCode(d);
               break;
-            case 12:
-            case 13:
-              var e = b[a++];
+            case 12: case 13:
+              let e = b[a++];
               c += String.fromCharCode((d & 31) << 6 | e & 63);
               break;
             case 14:
               e = b[a++];
-              var g = b[a++];
+              let g = b[a++];
               c += String.fromCharCode((d & 15) << 12 | (e & 63) << 6 | (g & 63) << 0)
           }
         }
@@ -296,13 +326,13 @@ document.addEventListener('DOMContentLoaded', function () {
         return isXML ? this.parseXML(res) : res;
       },
       xmlToJson: function (xml) {
-        var obj = {};
+        let obj = {};
         if (xml.nodeType == 1) { // element
           // do attributes
           if (xml.attributes.length > 0) {
             obj["@attributes"] = {};
-            for (var j = 0; j < xml.attributes.length; j++) {
-              var attribute = xml.attributes.item(j);
+            for (let j = 0; j < xml.attributes.length; j++) {
+              let attribute = xml.attributes.item(j);
               obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
             }
           }
@@ -311,14 +341,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         // do children
         if (xml.hasChildNodes()) {
-          for (var i = 0; i < xml.childNodes.length; i++) {
-            var item = xml.childNodes.item(i);
-            var nodeName = item.nodeName;
+          for (let i = 0; i < xml.childNodes.length; i++) {
+            let item = xml.childNodes.item(i);
+            let nodeName = item.nodeName;
             if (typeof (obj[nodeName]) == "undefined") {
               obj[nodeName] = this.xmlToJson(item);
             } else {
               if (typeof (obj[nodeName].push) == "undefined") {
-                var old = obj[nodeName];
+                let old = obj[nodeName];
                 obj[nodeName] = [];
                 obj[nodeName].push(old);
               }
@@ -331,6 +361,113 @@ document.addEventListener('DOMContentLoaded', function () {
       parseXML: function (xmlStr) {
         return new DOMParser().parseFromString(xmlStr, "text/xml")
       },
+      JamaToXML : function (strJAMA, ver) {
+        //変数及びオブジェクト定義
+        let arrJAMA = [],
+          JamaXML = [],
+          level, rept, PrevNode,
+          makeValue = function (hits, arr) {
+            let res = "";
+            for (let i = hits[0]; i < hits[hits.length - 1] + 1; i++) {
+              if (hits.indexOf(i) != -1) {
+                res += '<V col="' + i + '">' + arr[i].xmlEncode() + "</V>";
+              }
+            }
+            return res;
+          },
+          closeNB = function () {
+            switch (PrevNode) {
+              case "BH":
+                rept = Number(arrJAMA[arrJAMA.length - 1][7]) - 1;
+                JamaXML[JamaXML.length] = "</PARTS>".repeat(rept);
+                break;
+              case "ZR":
+                rept = Number(arrJAMA[arrJAMA.length - 1][7]) - 1;
+                JamaXML[JamaXML.length] = "</MATERIAL>";
+                JamaXML[JamaXML.length] = "</PARTS>".repeat(rept);
+                break;
+            }
+            JamaXML[JamaXML.length] = '</NPARTS>';
+          };
+        //区分ごとのJAMA列
+        let col = {
+          NB: [2, 3, 4, 5],
+          BH: (ver < 230) ? [6, 7, 8, 9, 10, 11, 33, 39, 40, 45] : [6, 7, 8, 9, 10, 11, 39, 40, 45],
+          ZR: (ver < 230) ? [12, 13, 14, 15, 16, 17, 18, 19, 28, 29, 30, 31, 32, 41, 46, 48] : [12, 13, 14, 15, 16, 17, 18, 19, 28, 29, 30, 31, 32, 33, 41, 46, 48],
+          KB: (ver < 240) ? [20, 23, 24, 25, 26, 34, 42, 43, 44, 47] : [20, 23, 24, 25, 26, 34, 35, 42, 43, 44, 47]
+        }
+    
+        //実処理
+        strJAMA = strJAMA.split("\r\n");
+        for (let i = 0; i < strJAMA.length; i++) {
+          if (strJAMA[i] != "") {
+            arrJAMA[arrJAMA.length] = strJAMA[i].slice(1, strJAMA[i].length - 1).split('","');
+          }
+        }
+        //配列0行目
+        JamaXML[JamaXML.length] = '<?xml version="1.0" encoding="UTF-8" ?>';
+        JamaXML[JamaXML.length] = '<JAMA>';
+        JamaXML[JamaXML.length] = '<toolLang>ja</toolLang>';
+        JamaXML[JamaXML.length] = "<VER>" + arrJAMA[0][1].xmlEncode() + "</VER>";
+        JamaXML[JamaXML.length] = "<CSV_DATE>" + arrJAMA[0][2].xmlEncode() + "</CSV_DATE>";
+        JamaXML[JamaXML.length] = "<DATA_VALIDATE>" + arrJAMA[0][3].xmlEncode() + "</DATA_VALIDATE>";
+        JamaXML[JamaXML.length] = "<EX_LIST>" + arrJAMA[0][5].xmlEncode() + "</EX_LIST>";
+        //配列1行目
+        JamaXML[JamaXML.length] = "<MAKER_CODE>" + arrJAMA[1][1].xmlEncode() + "</MAKER_CODE>";
+        JamaXML[JamaXML.length] = "<SUPPLIER_CODE>" + arrJAMA[1][2].xmlEncode() + "</SUPPLIER_CODE>";
+        JamaXML[JamaXML.length] = "<SUPPLIER_NAME>" + arrJAMA[1][3].xmlEncode() + "</SUPPLIER_NAME>";
+        JamaXML[JamaXML.length] = "<RES_LIMIT>" + arrJAMA[1][4].xmlEncode() + "</RES_LIMIT>";
+        JamaXML[JamaXML.length] = "<RES_DATE>" + arrJAMA[1][5].xmlEncode() + "</RES_DATE>";
+        //2行目以降
+        for (let i = 2, l = arrJAMA.length; i < l; i++) {
+          for (let j = 4; j < 25; j++) {
+            if (arrJAMA[i][j] == "") continue;
+            switch (j) {
+              case 4: //###納入部品(重量列)###		2/3/4/5
+                if (i > 2) closeNB();
+                JamaXML[JamaXML.length] = '<NPARTS level="' + arrJAMA[i][7] + '" row="' + i + '">';
+                JamaXML[JamaXML.length] = makeValue(col.NB, arrJAMA[i]);
+                PrevNode = "NB";
+                break;
+              case 10: //###構成部品(重量列)###		6/7/8/9/10/11/(33)/39/40/45 ※リサイクルマーク
+                if (PrevNode == "ZR") {
+                  JamaXML[JamaXML.length] = "</MATERIAL>";
+                }
+                if (arrJAMA[i - 1][7] != "1") {
+                  rept = Number(arrJAMA[i - 1][7]) - Number(arrJAMA[i][7]) + 1;
+                  JamaXML[JamaXML.length] = "</PARTS>".repeat(rept);
+                }
+                level = arrJAMA[i][7];
+                JamaXML[JamaXML.length] = '<PARTS level="' + level + '" row="' + i + '">';
+                JamaXML[JamaXML.length] = makeValue(col.BH, arrJAMA[i]);
+                PrevNode = "BH";
+                break;
+              case 15: //###材料###				12/13/14/15/16/17/18/19/28/29/30/31/32/(33)/41/46/48　※GADSL物質申告済
+                if (arrJAMA[i][7] == "1" && PrevNode == "BH") { //納入部品直下の場合
+                  JamaXML[JamaXML.length] = "</MATERIAL>";
+                  rept = Number(arrJAMA[i - 1][7]) - 1;
+                  JamaXML[JamaXML.length] = "</PARTS>".repeat(rept);
+                } else if (PrevNode == "ZR") {
+                  JamaXML[JamaXML.length] = "</MATERIAL>";
+                }
+                level = Number(arrJAMA[i][7]) + 1;
+                JamaXML[JamaXML.length] = '<MATERIAL level="' + level + '" row="' + i + '">';
+                JamaXML[JamaXML.length] = makeValue(col.ZR, arrJAMA[i]);
+                PrevNode = "ZR";
+                break;
+              case 24: //###化合物###			20/23/24/25/26/34/(35)/42/43/44/47
+                level = Number(arrJAMA[i][7]) + 2;
+                JamaXML[JamaXML.length] = '<SUBSTANCE level="' + level + '" row="' + i + '">';
+                JamaXML[JamaXML.length] = makeValue(col.KB, arrJAMA[i]);
+                JamaXML[JamaXML.length] = '</SUBSTANCE>';
+                break;
+            }
+          }
+        }
+        closeNB();
+        JamaXML[JamaXML.length] = '</JAMA>';
+        return JamaXML.join("\n");
+      }
     }
   });
 });

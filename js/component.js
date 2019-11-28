@@ -94,6 +94,24 @@ Vue.component('UniqueWrap', {
     }
   }
 });
+Vue.component('TableView', {
+  props: {target:{type: Object} },
+  template:
+    `<div class="tabbody">
+      <table class="table is-bordered is-narrow" style="margin: 10px;">
+        <thead>
+          <tr v-for="tr in target.thead">
+            <th v-for="th in tr" :colspan="th.colspan" :class="th.class">{{th.value}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="tr in target.tbody">
+            <td v-for="td in tr" :rowspan="td.rowspan">{{td.value}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>`
+});
 Vue.component('AisUnique', {
   props: { target:{ type: Object } },
   template: `
@@ -168,24 +186,6 @@ Vue.component('AisUnique', {
       this.target[prop].isShow = !this.target[prop].isShow;
     }
   }
-});
-Vue.component('AisTable', {
-  props: {target:{type: Object} },
-  template:
-    `<div class="tabbody">
-      <table class="table is-bordered is-narrow" style="margin: 10px;">
-        <thead>
-          <tr v-for="tr in target.thead">
-            <th v-for="th in tr" :colspan="th.colspan" :class="th.class">{{th.value}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="tr in target.tbody">
-            <td v-for="td in tr" :rowspan="td.rowspan">{{td.value}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>`
 });
 Vue.component('AisTreeChild', {
   props: {item:{type: Object}, treeID:{type: String} },
@@ -295,7 +295,7 @@ Vue.component('Ais', {
           </ul>
         </div>
         <div>
-          <ais-table :target="table" v-if="undertab=='table'"></ais-table>
+          <table-view :target="table" v-if="undertab=='table'"></table-view>
           <ais-tree :target="tree" v-if="undertab=='tree'"></ais-tree>
         </div>
       </div>
@@ -382,25 +382,6 @@ Vue.component('MspUnique', {
     </div>
   `
 });
-Vue.component('MspTable', {
-  props: {target:{type: Object} },
-  template: `
-    <div class="tabbody">
-      <table class="table is-bordered is-narrow" style="margin: 10px;">
-        <thead>
-          <tr v-for="tr in target.thead">
-            <th v-for="th in tr" :colspan="th.colspan" :class="th.class">{{th.value}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="tr in target.tbody">
-            <td v-for="td in tr" :rowspan="td.rowspan">{{td.value}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  `
-});
 Vue.component('MsdsPlus', {
   props: {
     unique:{type: Object},
@@ -419,7 +400,7 @@ Vue.component('MsdsPlus', {
           </ul>
         </div>
         <div>
-          <msp-table :target="table"></msp-table>
+          <table-view :target="table"></table-view>
         </div>
       </div>
     </div>

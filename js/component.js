@@ -90,10 +90,10 @@ Vue.component('AisUnique', {
   props: { target:{ type: Object } },
   template: `
     <div class="unique">
-      <uniqu-wrap oName="AIS1" :target="target.AIS1"></uniqu-wrap>
-      <uniqu-wrap oName="AIS2" :target="target.AIS2"></uniqu-wrap>
-      <uniqu-wrap oName="AIS3" :target="target.AIS3"></uniqu-wrap>
-      <uniqu-wrap oName="AIS4" :target="target.AIS4"></uniqu-wrap>
+      <unique-wrap oName="AIS1" :target="target.AIS1"></unique-wrap>
+      <unique-wrap oName="AIS2" :target="target.AIS2"></unique-wrap>
+      <unique-wrap oName="AIS3" :target="target.AIS3"></unique-wrap>
+      <unique-wrap oName="AIS4" :target="target.AIS4"></unique-wrap>
 
       <div class="AIS5 message is-green">
         <div class="message-header" @click="toggleDetail('AIS5')">
@@ -123,7 +123,7 @@ Vue.component('AisUnique', {
         </transition>
       </div>
 
-      <uniqu-wrap oName="AIS6" :target="target.AIS6"></uniqu-wrap>
+      <unique-wrap oName="AIS6" :target="target.AIS6"></unique-wrap>
 
       <div class="AIS7 message is-green">
         <div class="message-header" @click="toggleDetail('AIS7')">

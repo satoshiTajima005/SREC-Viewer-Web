@@ -65,14 +65,14 @@ Vue.component('UniqueWrap', {
           <div class="column">
             <table class="unique-table table is-bordered is-narrow">
               <tbody>
-                <unique-tr v-for="item in target.data[0]" :title="item.title" :value="item.value"></unique-tr>
+                <unique-tr v-for="(item,index) in target.data[0]" :title="item.title" :value="item.value" :key="index"></unique-tr>
               </tbody>
             </table>
           </div>
           <div class="column">
             <table class="unique-table table is-bordered is-narrow">
               <tbody>
-                <unique-tr v-for="item in target.data[1]" :title="item.title" :value="item.value"></unique-tr>
+                <unique-tr v-for="(item,index) in target.data[1]" :title="item.title" :value="item.value" :key="index"></unique-tr>
               </tbody>
             </table>
           </div>

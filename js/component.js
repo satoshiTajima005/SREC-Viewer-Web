@@ -24,13 +24,12 @@ Vue.component('tabs', {
           :table="tabObject.list[tabObject.selected].data.table"
           :tree="tabObject.list[tabObject.selected].data.tree">
         </ais>
-        <ais
+        <msdsplus
           v-if="/MSDS/.test(tabObject.list[tabObject.selected].type)"
           ref="msp"
-          :detail="tabObject.list[tabObject.selected].detail"
           :unique="tabObject.list[tabObject.selected].data.unique"
-          :table="tabObject.list[tabObject.selected].data.table"
-        </ais>
+          :table="tabObject.list[tabObject.selected].data.table">
+        </msdsplus>
       </div>
     </div>
   `,
@@ -388,7 +387,6 @@ Vue.component('MspTable', {
 });
 Vue.component('MsdsPlus', {
   props: {
-    detail:{type: String},
     unique:{type: Object},
     table:{type: Object}
   },

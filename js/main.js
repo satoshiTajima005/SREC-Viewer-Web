@@ -11,6 +11,7 @@ let list = {
     item: {}
   }
 }
+
 /*********************************************************************************************************************************
     機能：xml特殊文字変換
 注意事項：無し
@@ -20,7 +21,7 @@ String.prototype.xmlEncode = function () {
     .replace(/&/ig, "&amp;")
     .replace(/</ig, "&lt;")
     .replace(/>/ig, "&gt;")
-    .replace(/"/ig, "&quot;")
+    .replace(/"/ig, "\\&quot;")
     .replace(/'/ig, "&apos;");
 };
 
@@ -35,7 +36,6 @@ String.prototype.repeat = function (n) {
     if (n & 1) ret += str;
   return ret;
 };
-
 
 Vue.config.productionTip = true;
 let app;
@@ -88,6 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 tree: {},
                 table: {}
               };
+              o.txt = o.txt.replace(/&quot;/igm, '\\&quot;');
               o.data.unique = await me.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl');
               o.data.tree = await me.xmlTransform(o.txt, 'xsl/AIS_TREE.xsl');
               o.data.table = await me.xmlTransform(o.txt, 'xsl/AIS_TABLE.xsl');
@@ -98,6 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 unique: {},
                 table: {}
               };
+              o.txt = o.txt.replace(/&quot;/igm, '\\&quot;');
               o.data.unique = await me.xmlTransform(o.txt, 'xsl/MSDSplus_UNIQUE.xsl');
               o.data.table = await me.xmlTransform(o.txt, 'xsl/MSDSplus_TABLE.xsl');
               break;
@@ -107,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 //tree: {},
                 //table: {}
               };
+              o.txt = o.txt.replace(/&quot;/igm, '\\&quot;');
               o.data.unique = await me.xmlTransform(o.txt, 'xsl/IEC62474_UNIQUE.xsl');
               //o.data.tree = await me.xmlTransform(o.txt, 'xsl/IEC62474_TREE.xsl');
               //o.data.table = await me.xmlTransform(o.txt, 'xsl/IEC62474_TABLE.xsl');

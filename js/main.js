@@ -4,12 +4,12 @@ let list = {
   type: "", //AIS, AIS-temp, MSDSplus, MSDSplus-temp, IEC62474, SHAI, SHCI, JAMA, JGP4
   txt: "", //読み込んだ生のテキストデータ
   detail: "", //詳細表示のパターン[tree, table, itemNo]
-  data: {//JSON変換したデータ
-    unique:{},
-    table:{},
-    tree:{},
-    item:{}
-  } 
+  data: { //JSON変換したデータ
+    unique: {},
+    table: {},
+    tree: {},
+    item: {}
+  }
 }
 /*********************************************************************************************************************************
     機能：xml特殊文字変換
@@ -102,23 +102,29 @@ document.addEventListener('DOMContentLoaded', function () {
               o.data.table = await me.xmlTransform(o.txt, 'xsl/MSDSplus_TABLE.xsl');
               break;
             case 'IEC62474':
-            case 'SHAI':
-            case 'SHCI':
+              o.data = {
+                unique: {},
+                //tree: {},
+                //table: {}
+              };
+              o.data.unique = await me.xmlTransform(o.txt, 'xsl/IEC62474_UNIQUE.xsl');
+              //o.data.tree = await me.xmlTransform(o.txt, 'xsl/IEC62474_TREE.xsl');
+              //o.data.table = await me.xmlTransform(o.txt, 'xsl/IEC62474_TABLE.xsl');
               break;
             case 'JAMA':
               o.data = {
                 unique: {},
-                //tree: {}
+                tree: {}
               };
-              let ver = o.txt.split("\r\n")[0].split('","')-0;
-              if (ver == NaN){
+              let ver = o.txt.split("\r\n")[0].split('","') - 0;
+              if (ver == NaN) {
                 //todo JAMAファイルではない
                 //todo 画面に何かしらの表示
                 break;
               }
               o.txt = me.JamaToXML(o.txt, ver);
               o.data.unique = await me.xmlTransform(o.txt, 'xsl/JAMA_UNIQUE.xsl');
-              //o.data.tree = await me.xmlTransform(o.txt, 'xsl/JAMA_TREE.xsl');
+              o.data.tree = await me.xmlTransform(o.txt, 'xsl/JAMA_TREE.xsl');
               break;
             case 'JGP4':
               o.data = o.txt;
@@ -127,13 +133,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }));
 
         //dataをJSON.parse
-        tabObject.map(o =>{
+        tabObject.map(o => {
           try {
             if (o.data.unique) o.data.unique = JSON.parse(o.data.unique);
             if (o.data.tree) o.data.tree = JSON.parse(o.data.tree);
             if (o.data.table) o.data.table = JSON.parse(o.data.table);
             if (o.data.item) o.data.item = JSON.parse(o.data.item);
-          }catch(e){
+          } catch (e) {
             console.log('JSON parse error');
             console.log(o.data);
           }
@@ -143,7 +149,9 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       getFileArr: async function (file, o) {
         //ファイルタイプの判定
-        let f = [], type = '', detail = '';
+        let f = [],
+          type = '',
+          detail = '';
         switch (file.name.slice(-4).toUpperCase()) {
           case '.XML': //AIS・MSDSplus・IEC62474判定
             f = await this.readFile(file);
@@ -160,13 +168,9 @@ document.addEventListener('DOMContentLoaded', function () {
             detail = 'item';
             break;
           case 'SHAI': //ZIP
-            f = await this.readFile(file, null, true);
-            type = 'SHAI';
-            detail = 'tree';
-            break;
           case 'SHCI': //ZIP
             f = await this.readFile(file, null, true);
-            type = 'SHCI';
+            type = 'IEC62474';
             detail = 'tree';
             break;
           default:
@@ -274,22 +278,30 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       },
       Utf8ArrayToStr: function (b) {
-        let a;
-        let c = "";
-        let f = b.length;
+        var a;
+        var c = "";
+        var f = b.length;
         for (a = 0; a < f;) {
-          let d = b[a++];
+          var d = b[a++];
           switch (d >> 4) {
-            case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
               c += String.fromCharCode(d);
               break;
-            case 12: case 13:
-              let e = b[a++];
+            case 12:
+            case 13:
+              var e = b[a++];
               c += String.fromCharCode((d & 31) << 6 | e & 63);
               break;
             case 14:
               e = b[a++];
-              let g = b[a++];
+              var g = b[a++];
               c += String.fromCharCode((d & 15) << 12 | (e & 63) << 6 | (g & 63) << 0)
           }
         }
@@ -297,17 +309,18 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       xmlTransform: async function (xmlStr, xslPath) {
         if (xmlStr.charCodeAt(0) === 0xFEFF) xmlStr = xmlStr.slice(1); //BOM削除
-        xmlStr = xmlStr.replace(/<DESCRIPT(.|\s)*?>/im, "<DESCRIPT>") //名前空間除去
+        xmlStr = xmlStr.replace(/<DESCRIPT(.|\s)*?>/im, "<DESCRIPT>"); //JAMP-名前空間除去
+        xmlStr = xmlStr.replace(/xmlns=".*?"/im, "").replace(/xmlns:xsi=".*?"/im, ""); //chem-名前空間除去
         let xml = this.parseXML(xmlStr);
         let xsl = await this.xhrLoad(xslPath, true); //xslロード
         let xslp = new XSLTProcessor();
         xslp.importStylesheet(xsl);
         let o = xslp.transformToFragment(xml, document);
         let res = o.textContent;
-        
+
         //XSLT変換不足対応
-        res = res.replace(/\n\s*/igm,'');
-        switch (xslPath){
+        res = res.replace(/\n\s*/igm, '');
+        switch (xslPath) {
           case 'xsl/AIS_TABLE.xsl':
             res = res
               .replace(/\#\[/g, '],[')
@@ -361,7 +374,7 @@ document.addEventListener('DOMContentLoaded', function () {
       parseXML: function (xmlStr) {
         return new DOMParser().parseFromString(xmlStr, "text/xml")
       },
-      JamaToXML : function (strJAMA, ver) {
+      JamaToXML: function (strJAMA, ver) {
         //変数及びオブジェクト定義
         let arrJAMA = [],
           JamaXML = [],
@@ -396,7 +409,7 @@ document.addEventListener('DOMContentLoaded', function () {
           ZR: (ver < 230) ? [12, 13, 14, 15, 16, 17, 18, 19, 28, 29, 30, 31, 32, 41, 46, 48] : [12, 13, 14, 15, 16, 17, 18, 19, 28, 29, 30, 31, 32, 33, 41, 46, 48],
           KB: (ver < 240) ? [20, 23, 24, 25, 26, 34, 42, 43, 44, 47] : [20, 23, 24, 25, 26, 34, 35, 42, 43, 44, 47]
         }
-    
+
         //実処理
         strJAMA = strJAMA.split("\r\n");
         for (let i = 0; i < strJAMA.length; i++) {

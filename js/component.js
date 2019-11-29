@@ -16,7 +16,7 @@ Vue.component('tabs', {
         </ul>
       </div>
       <div class="preview tabbody">
-        <div v-if="tabObject.list.length">
+        <div v-if="tabObject.list[tabObject.selected]">
           <ais
             v-if="/AIS/.test(tabObject.list[tabObject.selected].type)"
             ref="ais"
@@ -28,9 +28,24 @@ Vue.component('tabs', {
           <msds-plus
             v-if="/MSDS/.test(tabObject.list[tabObject.selected].type)"
             ref="msp"
+            :detail="tabObject.list[tabObject.selected].detail"
             :unique="tabObject.list[tabObject.selected].data.unique"
             :table="tabObject.list[tabObject.selected].data.table">
           </msds-plus>
+          <jama
+            v-if="/JAMA/.test(tabObject.list[tabObject.selected].type)"
+            ref="jama"
+            :detail="tabObject.list[tabObject.selected].detail"
+            :unique="tabObject.list[tabObject.selected].data.unique"
+            :tree="tabObject.list[tabObject.selected].data.tree">
+          </jama>
+          <chem
+            v-if="/IEC/.test(tabObject.list[tabObject.selected].type)"
+            ref="chem"
+            :detail="tabObject.list[tabObject.selected].detail"
+            :unique="tabObject.list[tabObject.selected].data.unique"
+            :tree="tabObject.list[tabObject.selected].data.tree">
+          </chem>
         </div>
       </div>
     </div>
@@ -44,6 +59,8 @@ Vue.component('tabs', {
     clickTab: function(target, index){
       target.selected = index;
       if (this.$refs.ais) this.$refs.ais.changeView('table');
+      if (this.$refs.msp) this.$refs.msp.changeView('table');
+      if (this.$refs.jama) this.$refs.jama.changeView('tree');
     },
     deleteTab: function(target, index){
       target.list.splice( index, 1 );
@@ -111,6 +128,85 @@ Vue.component('TableView', {
         </tbody>
       </table>
     </div>`
+});
+Vue.component('TreeView', {
+  props: {target:{type: Object} },
+  template: `
+    <div class="tree tabbody" style="overflow:visible;">
+      <div class="columns">
+        <div class="column treecol">
+          <div>
+            <ul>
+              <slot></slot>
+            </ul>
+          </div>
+        </div>
+        <div class="column treecol">
+          <div>
+            <table class="table">
+              <tr v-for="(row, index) in selected">
+                <th>{{row.name}}</th>
+                <td>{{row.value}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  `,
+  data: function(){
+    return {
+      selected: []
+    }
+  },
+  methods: {
+    showDetail: function(arg){
+      this.selected = arg.props;
+      this.$parent.treeSelect(arg);
+    }
+  }
+});
+Vue.component('TreeChild', {
+  props: {item:{type: Object}, treeID:{type: String} },
+  template: `
+    <li class="item">
+      <span>
+        <span class="icon" @click="toggle" v-if="node.children && !node.isOpen"><i class="fas fa-caret-right"></i></span>
+        <span class="icon" @click="toggle" v-if="node.children && node.isOpen"><i class="fas fa-caret-down"></i></span>
+        <span v-if="!node.children" style="display:inline-block; width:24px;">&nbsp;</span>
+        <span @click="select({treeID: treeID, props: node.props})">
+          <span v-if="node.type=='product'"><img src="css/ticon_product.png"></span>
+          <span v-if="node.type=='layer'"><img src="css/ticon_layer.png"></span>
+          <span v-if="node.type=='parts'"><img src="css/ticon_parts.png"></span>
+          <span v-if="node.type=='material'"><img src="css/ticon_material.png"></span>
+          <span v-if="node.type=='substance'"><img src="css/ticon_substance.png"></span>
+          <span v-if="node.type=='law'"><img src="css/ticon_law.png"></span>
+          <span :class="{'is-selected': isSelected}">{{ node.name }}</span>
+        </span>
+      </span>
+      <ul class="node" v-show="node.isOpen" v-if="node.children">
+        <tree-child v-for="(child, index) in node.children" :key="index":item="child" :treeID="treeID+''+index"></tree-child>
+      </ul>
+    </li>
+  `,
+  data: function(){
+    return {
+      node: this.item,
+      isSelected: false
+    }
+  },
+  methods: {
+    toggle: function(){
+      this.node.isOpen = !this.node.isOpen;
+    },
+    select: function(arg){
+      if (this.$parent.showDetail){
+        this.$parent.showDetail(arg);
+      }else{
+        this.$parent.select(arg);
+      }
+    },
+  }
 });
 Vue.component('AisUnique', {
   props: { target:{ type: Object } },
@@ -187,91 +283,6 @@ Vue.component('AisUnique', {
     }
   }
 });
-Vue.component('AisTreeChild', {
-  props: {item:{type: Object}, treeID:{type: String} },
-  template: `
-    <li class="item">
-      <span>
-        <span class="icon" @click="toggle" v-if="node.children && !node.isOpen"><i class="fas fa-caret-right"></i></span>
-        <span class="icon" @click="toggle" v-if="node.children && node.isOpen"><i class="fas fa-caret-down"></i></span>
-        <span v-if="!node.children" style="display:inline-block; width:24px;">&nbsp;</span>
-        <span @click="select({treeID: treeID, props: node.props})">
-          <span v-if="node.type=='product'"><img src="css/ticon_product.png"></span>
-          <span v-if="node.type=='layer'"><img src="css/ticon_layer.png"></span>
-          <span v-if="node.type=='parts'"><img src="css/ticon_parts.png"></span>
-          <span v-if="node.type=='material'"><img src="css/ticon_material.png"></span>
-          <span v-if="node.type=='substance'"><img src="css/ticon_substance.png"></span>
-          <span v-if="node.type=='law'"><img src="css/ticon_law.png"></span>
-          <span :class="{'is-selected': isSelected}">{{ node.name }}</span>
-        </span>
-      </span>
-      <ul class="node" v-show="node.isOpen" v-if="node.children">
-        <ais-tree-child v-for="(child, index) in node.children" :key="index":item="child" :treeID="treeID+''+index"></ais-tree-child>
-      </ul>
-    </li>
-  `,
-  data: function(){
-    return {
-      node: this.item,
-      isSelected: false
-    }
-  },
-  methods: {
-    toggle: function(){
-      this.node.isOpen = !this.node.isOpen;
-    },
-    select: function(arg){
-      if (this.$parent.showDetail){
-        this.$parent.showDetail(arg);
-      }else{
-        this.$parent.select(arg);
-      }
-    },
-  }
-});
-Vue.component('AisTree', {
-  props: {target:{type: Object} },
-  template: `
-    <div class="tree tabbody" style="overflow:visible;">
-      <div class="columns">
-        <div class="column treecol">
-          <div>
-            <ul>
-              <ais-tree-child v-for="(child, index) in target.children" :key="index" :item="child" treeID="tree" ref="root"></ais-tree-child>
-            </ul>
-          </div>
-        </div>
-        <div class="column treecol">
-          <div>
-            <table class="table">
-              <tr v-for="(row, index) in selected">
-                <th>{{row.name}}</th>
-                <td>{{row.value}}</td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  `,
-  data: function(){
-    return {
-      selected: []
-    }
-  },
-  methods: {
-    showDetail: function(arg){
-      this.selected = arg.props;
-      let treespred = function(arg, treeID){
-        arg.isSelected = treeID == arg.treeID;
-        arg.$children.map(function(child){
-          treespred(child, treeID);
-        });
-      }
-      treespred(this.$refs.root[0], arg.treeID);
-    }
-  }
-});
 Vue.component('Ais', {
   props: {
     detail:{type: String}, 
@@ -296,7 +307,9 @@ Vue.component('Ais', {
         </div>
         <div>
           <table-view :target="table" v-if="undertab=='table'"></table-view>
-          <ais-tree :target="tree" v-if="undertab=='tree'"></ais-tree>
+          <tree-view :target="tree" v-if="undertab=='tree'">
+            <tree-child v-for="(child, index) in tree.children" :key="index" :item="child" treeID="tree" ref="root"></tree-child>
+          </tree-view>
         </div>
       </div>
     </div>
@@ -309,6 +322,15 @@ Vue.component('Ais', {
   methods: {
     changeView: function(arg){
       this.undertab = arg;
+    },
+    treeSelect: function(arg){
+      let treespred = function(arg, treeID){
+        arg.isSelected = treeID == arg.treeID;
+        arg.$children.map(function(child){
+          treespred(child, treeID);
+        });
+      }
+      treespred(this.$refs.root[0], arg.treeID);
     }
   }
 });
@@ -380,7 +402,12 @@ Vue.component('MspUnique', {
       </div>
 
     </div>
-  `
+  `,
+  methods: {
+    toggleDetail: function(prop){
+      this.target[prop].isShow = !this.target[prop].isShow;
+    }
+  }
 });
 Vue.component('MsdsPlus', {
   props: {
@@ -404,14 +431,225 @@ Vue.component('MsdsPlus', {
         </div>
       </div>
     </div>
-  `
+  `,
+  data: function () {
+    return {
+      undertab: this.detail
+    }
+  },
+  methods: {
+    changeView: function(arg){
+      this.undertab = arg;
+    }
+  }
+});
+Vue.component('Jama', {
+  props: {
+    detail:{type: String},
+    unique:{type: Object},
+    tree:{type: Object}
+  },
+  template: `
+    <div>
+      <div class="unique">
+        <unique-wrap oName="JAMA" :target="unique.JAMA"></unique-wrap>
+      </div>
+      <hr class="hr">
+      <div style="background:#f8f8f8;padding: 10px;">
+        <div class="tabs is-boxed">
+          <ul>
+            <li class="is-active">
+              <a><span class="icon"><i class="fas fa-stream"></i></span><span>ツリー</span></a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <tree-view :target="tree">
+            <tree-child v-for="(child, index) in tree.children" :key="index" :item="child" treeID="tree" ref="root"></tree-child>
+          </tree-view>
+        </div>
+      </div>
+    </div>
+  `,
+  data: function () {
+    return {
+      undertab: this.detail
+    }
+  },
+  methods: {
+    changeView: function(arg){
+      this.undertab = arg;
+    },
+    treeSelect: function(arg){
+      let treespred = function(arg, treeID){
+        arg.isSelected = treeID == arg.treeID;
+        arg.$children.map(function(child){
+          treespred(child, treeID);
+        });
+      }
+      treespred(this.$refs.root[0], arg.treeID);
+    }
+  }
+});
+Vue.component('ChemUnique', {
+  props: { target:{ type: Object } },
+  template: `
+    <div class="unique">
+      <unique-wrap oName="IEC1" :target="target.IEC1"></unique-wrap>
+
+      <div class="message is-green">
+        <div class="message-header" @click="toggleDetail('IEC2')">
+          <p>{{target.IEC2.title}}</p>
+          <span class="icon" v-if="!target.IEC2.isShow"><i class="fas fa-caret-right"></i></span>
+          <span class="icon" v-if="target.IEC2.isShow"><i class="fas fa-caret-down"></i></span>
+        </div>
+        <transition name="fade">
+          <div class="message-body" v-show="target.IEC2.isShow">
+            <button class="button" v-for="(item, index) in target.IEC2.data" :type="item.type" :data-base64="item.data">{{item.name}}</button>
+          </div>
+        </transition>
+      </div>
+
+      <div class="message is-green">
+        <div class="message-header" @click="toggleDetail('IEC3')">
+          <p>{{target.IEC3.title}}</p>
+          <span class="icon" v-if="!target.IEC3.isShow"><i class="fas fa-caret-right"></i></span>
+          <span class="icon" v-if="target.IEC3.isShow"><i class="fas fa-caret-down"></i></span>
+        </div>
+        <transition name="fade">
+          <div class="message-body" v-show="target.IEC3.isShow">
+            <table class="unique-table table is-bordered is-narrow">
+              <thead>
+                <th>&nbsp;</th>
+                <th style="text-align:center!important;">依頼者</th>
+                <th style="text-align:center!important;">回答者</th>
+                <th style="text-align:center!important;">回答承認者</th>
+              </thead>
+              <tbody>
+                <tr v-for="(tr, index) in target.IEC3.data" :key="index">
+                  <td>{{tr.title}}</td>
+                  <td v-for="(td, index) in tr.value" :key="index">{{td}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </transition>
+      </div>
+
+      <div class="message is-green">
+        <div class="message-header" @click="toggleDetail('IEC4')">
+          <p>{{target.IEC4.title}}</p>
+          <span class="icon" v-if="!target.IEC4.isShow"><i class="fas fa-caret-right"></i></span>
+          <span class="icon" v-if="target.IEC4.isShow"><i class="fas fa-caret-down"></i></span>
+        </div>
+        <transition name="fade">
+          <div class="message-body" v-show="target.IEC4.isShow">
+            <table class="unique-table table is-bordered is-narrow">
+              <thead>
+                <th>&nbsp;</th>
+                <th style="text-align:center!important;">依頼者</th>
+                <th style="text-align:center!important;">回答者</th>
+              </thead>
+              <tbody>
+                <tr v-for="(tr, index) in target.IEC4.data" :key="index">
+                  <td>{{tr.title}}</td>
+                  <td v-for="(td, index) in tr.value" :key="index">{{td}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </transition>
+      </div>
+
+      <div class="message is-green">
+        <div class="message-header" @click="toggleDetail('IEC5')">
+          <p>{{target.IEC5.title}}</p>
+          <span class="icon" v-if="!target.IEC5.isShow"><i class="fas fa-caret-right"></i></span>
+          <span class="icon" v-if="target.IEC5.isShow"><i class="fas fa-caret-down"></i></span>
+        </div>
+        <transition name="fade">
+          <div class="message-body" v-show="target.IEC5.isShow">
+            <table class="unique-table table is-bordered is-narrow">
+              <thead>
+                <th style="text-align:center!important;">ID</th>
+                <th style="text-align:center!important;">返答要求</th>
+                <th style="text-align:center!important;">回答</th>
+              </thead>
+              <tbody>
+                <tr v-for="(tr, index) in target.IEC5.data" :key="index">
+                  <td>{{tr.ID}}</td>
+                  <td>{{tr.request}}</td>
+                  <td>{{tr.answer}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </transition>
+      </div>
+
+      <unique-wrap oName="IEC6" :target="target.IEC6"></unique-wrap>
+
+    </div>
+  `,
+  methods: {
+    toggleDetail: function(prop){
+      this.target[prop].isShow = !this.target[prop].isShow;
+    }
+  }
+});
+Vue.component('Chem', {
+  props: {
+    detail:{type: String}, 
+    unique:{type: Object},
+    //table:{type: Object},
+    //tree:{type: Object}
+  },
+  template: `
+    <div>
+      <chem-unique :target="unique"></chem-unique>
+      <hr class="hr">
+      <div style="background:#f8f8f8;padding: 10px;">
+        <div class="tabs is-boxed">
+          <ul>
+            <li :class="{'is-active': undertab=='table'}" @click="changeView('table')">
+              <a><span class="icon"><i class="fas fa-table"></i></span><span>テーブル</span></a>
+            </li>
+            <li :class="{'is-active': undertab=='tree'}" @click="changeView('tree')">
+              <a><span class="icon"><i class="fas fa-stream"></i></span><span>ツリー</span></a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <!--
+          <table-view :target="table" v-if="undertab=='table'"></table-view>
+          <tree-view :target="tree" v-if="undertab=='tree'">
+            <tree-child v-for="(child, index) in tree.children" :key="index" :item="child" treeID="tree" ref="root"></tree-child>
+          </tree-view>
+          -->
+        </div>
+      </div>
+    </div>
+  `,
+  data: function () {
+    return {
+      undertab: this.detail
+    }
+  },
+  methods: {
+    changeView: function(arg){
+      this.undertab = arg;
+    },
+    treeSelect: function(arg){
+      let treespred = function(arg, treeID){
+        arg.isSelected = treeID == arg.treeID;
+        arg.$children.map(function(child){
+          treespred(child, treeID);
+        });
+      }
+      treespred(this.$refs.root[0], arg.treeID);
+    }
+  }
 });
 Vue.component('JGPSSI', {
-  template: ``
-});
-Vue.component('JAMA', {
-  template: ``
-});
-Vue.component('chem', {
   template: ``
 });

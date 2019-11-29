@@ -1,3 +1,4 @@
+/*共有コンポーネント*/
 Vue.component('tabs', {
   props: ['target', 'moveto', 'language'],
   template: `
@@ -208,6 +209,8 @@ Vue.component('TreeChild', {
     },
   }
 });
+
+/*個別コンポーネント*/
 Vue.component('AisUnique', {
   props: { target:{ type: Object } },
   template: `

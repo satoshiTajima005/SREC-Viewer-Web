@@ -138,52 +138,52 @@
 
 <!--
 ##########################################################################################
-		集合化
+    集合化
 ##########################################################################################-->
-	<xsl:template name="getKJE176">
-		<xsl:param name="id" />
-		<xsl:if test="$id='0'">無し</xsl:if>
-		<xsl:if test="$id='1'">複合化</xsl:if>
-		<xsl:if test="$id='2'">単純化</xsl:if>
-	</xsl:template>
+  <xsl:template name="getKJE176">
+    <xsl:param name="id" />
+    <xsl:if test="$id='0'">無し</xsl:if>
+    <xsl:if test="$id='1'">複合化</xsl:if>
+    <xsl:if test="$id='2'">単純化</xsl:if>
+  </xsl:template>
 <!--
 ##########################################################################################
-		報告単位
+    報告単位
 ##########################################################################################-->
-	<xsl:template name="getKJE177">
-		<xsl:param name="id" />
-		<xsl:if test="$id='PC'">個</xsl:if>
-		<xsl:if test="$id='MTR'">m</xsl:if>
-		<xsl:if test="$id='MTK'">m2</xsl:if>
-		<xsl:if test="$id='MTQ'">m3</xsl:if>
-		<xsl:if test="$id='CMT'">cm</xsl:if>
-		<xsl:if test="$id='CMK'">cm2</xsl:if>
-		<xsl:if test="$id='CMQ'">cm3</xsl:if>
-	</xsl:template>
+  <xsl:template name="getKJE177">
+    <xsl:param name="id" />
+    <xsl:if test="$id='PC'">個</xsl:if>
+    <xsl:if test="$id='MTR'">m</xsl:if>
+    <xsl:if test="$id='MTK'">m2</xsl:if>
+    <xsl:if test="$id='MTQ'">m3</xsl:if>
+    <xsl:if test="$id='CMT'">cm</xsl:if>
+    <xsl:if test="$id='CMK'">cm2</xsl:if>
+    <xsl:if test="$id='CMQ'">cm3</xsl:if>
+  </xsl:template>
 <!--
 ##########################################################################################
-		対象法令	KJE178 KJE179 KJE267 KJE268 KJE269
+    対象法令  KJE178 KJE179 KJE267 KJE268 KJE269
 ##########################################################################################-->
-	<xsl:template name="getCoveredRow">
-		<xsl:param name="id" />
-		<xsl:if test="$id='0'">対象としない</xsl:if>
-		<xsl:if test="$id='1'">対象とする</xsl:if>
-	</xsl:template>
+  <xsl:template name="getCoveredRow">
+    <xsl:param name="id" />
+    <xsl:if test="$id='0'">対象としない</xsl:if>
+    <xsl:if test="$id='1'">対象とする</xsl:if>
+  </xsl:template>
 <!--
 ##########################################################################################
-		含有判定	KJE180 KJE270
+    含有判定  KJE180 KJE270
 ##########################################################################################-->
-	<xsl:template name="getContained">
-		<xsl:param name="id" />
-		<xsl:if test="$id='0'">含有無し</xsl:if>
-		<xsl:if test="$id='1'">含有あり</xsl:if>
-	</xsl:template>
+  <xsl:template name="getContained">
+    <xsl:param name="id" />
+    <xsl:if test="$id='0'">含有無し</xsl:if>
+    <xsl:if test="$id='1'">含有あり</xsl:if>
+  </xsl:template>
 <!--
 ##########################################################################################
-		材質区分取得関数
+    材質区分取得関数
 ##########################################################################################-->
-	<xsl:template name="getMatCLass">
-		<xsl:param name="id" />
+  <xsl:template name="getMatCLass">
+    <xsl:param name="id" />
     <xsl:if test="$id='R111'">高合金鋼</xsl:if>
     <xsl:if test="$id='R112'">高合金鋳鉄</xsl:if>
     <xsl:if test="$id='R101'">鉄鋼/鋳鋼/焼結合金</xsl:if>

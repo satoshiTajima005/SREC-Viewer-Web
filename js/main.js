@@ -406,13 +406,13 @@ document.addEventListener('DOMContentLoaded', function () {
           for (let j = 4; j < 25; j++) {
             if (arrJAMA[i][j] == "") continue;
             switch (j) {
-              case 4: //###納入部品(重量列)###		2/3/4/5
+              case 4: //###納入部品(重量列)###    2/3/4/5
                 if (i > 2) closeNB();
                 JamaXML[JamaXML.length] = '<NPARTS level="' + arrJAMA[i][7] + '" row="' + i + '">';
                 JamaXML[JamaXML.length] = makeValue(col.NB, arrJAMA[i]);
                 PrevNode = "NB";
                 break;
-              case 10: //###構成部品(重量列)###		6/7/8/9/10/11/(33)/39/40/45 ※リサイクルマーク
+              case 10: //###構成部品(重量列)###    6/7/8/9/10/11/(33)/39/40/45 ※リサイクルマーク
                 if (PrevNode == "ZR") {
                   JamaXML[JamaXML.length] = "</MATERIAL>";
                 }
@@ -425,7 +425,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 JamaXML[JamaXML.length] = makeValue(col.BH, arrJAMA[i]);
                 PrevNode = "BH";
                 break;
-              case 15: //###材料###				12/13/14/15/16/17/18/19/28/29/30/31/32/(33)/41/46/48　※GADSL物質申告済
+              case 15: //###材料###        12/13/14/15/16/17/18/19/28/29/30/31/32/(33)/41/46/48　※GADSL物質申告済
                 if (arrJAMA[i][7] == "1" && PrevNode == "BH") { //納入部品直下の場合
                   JamaXML[JamaXML.length] = "</MATERIAL>";
                   rept = Number(arrJAMA[i - 1][7]) - 1;
@@ -438,7 +438,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 JamaXML[JamaXML.length] = makeValue(col.ZR, arrJAMA[i]);
                 PrevNode = "ZR";
                 break;
-              case 24: //###化合物###			20/23/24/25/26/34/(35)/42/43/44/47
+              case 24: //###化合物###      20/23/24/25/26/34/(35)/42/43/44/47
                 level = Number(arrJAMA[i][7]) + 2;
                 JamaXML[JamaXML.length] = '<SUBSTANCE level="' + level + '" row="' + i + '">';
                 JamaXML[JamaXML.length] = makeValue(col.KB, arrJAMA[i]);

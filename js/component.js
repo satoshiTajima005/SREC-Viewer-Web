@@ -45,6 +45,7 @@ Vue.component('tabs', {
             ref="chem"
             :detail="tabObject.list[tabObject.selected].detail"
             :unique="tabObject.list[tabObject.selected].data.unique"
+            :table="tabObject.list[tabObject.selected].data.table"
             :tree="tabObject.list[tabObject.selected].data.tree">
           </chem>
         </div>
@@ -604,7 +605,7 @@ Vue.component('Chem', {
   props: {
     detail:{type: String}, 
     unique:{type: Object},
-    //table:{type: Object},
+    table:{type: Object},
     //tree:{type: Object}
   },
   template: `
@@ -615,16 +616,66 @@ Vue.component('Chem', {
         <div class="tabs is-boxed">
           <ul>
             <li :class="{'is-active': undertab=='table'}" @click="changeView('table')">
-              <a><span class="icon"><i class="fas fa-table"></i></span><span>テーブル</span></a>
+              <a><span class="icon"><i class="fas fa-table"></i></span><span>遵法情報</span></a>
             </li>
             <li :class="{'is-active': undertab=='tree'}" @click="changeView('tree')">
-              <a><span class="icon"><i class="fas fa-stream"></i></span><span>ツリー</span></a>
+              <a><span class="icon"><i class="fas fa-stream"></i></span><span>成分情報</span></a>
             </li>
           </ul>
         </div>
         <div>
+          <div class="tabbody">
+            <table class="table is-bordered is-narrow" style="margin: 10px;">
+              <caption style="text-align:left;font-weight:bold;">含有有り</caption>
+              <thead>
+                <tr class="has-background-danger">
+                  <th class="has-text-white">ID</th>
+                  <th class="has-text-white">物質<br>[報告用途]</th>
+                  <th class="has-text-white">報告閾値</th>
+                  <th class="has-text-white">含有率(%)</th>
+                  <th class="has-text-white">含有量</th>
+                  <th class="has-text-white">使用用途</th>
+                  <th class="has-text-white">使用部位</th>
+                  <th class="has-text-white">適用除外ID<br>[適用除外内容]</th>
+                  <th class="has-text-white">コメント</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="tr in table.over">
+                  <td>{{tr.ID}}</td>
+                  <td :title="tr.AppJA">{{tr.nameJA}}</td>
+                  <td>{{tr.ThresholdJA}}</td>
+                  <td>{{tr.MassPercent}}</td>
+                  <td>{{tr.weight}}{{tr.unit}}</td>
+                  <td>{{tr.use}}</td>
+                  <td>{{tr.usePart}}</td>
+                  <td :title="tr.ExemptionDescription">{{tr.ExemptionID}}</td>
+                  <td>{{tr.comment}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="table is-bordered is-narrow" style="margin: 10px;">
+              <caption style="text-align:left;font-weight:bold;">含有無し</caption>
+              <thead>
+                <tr class="has-background-info">
+                  <th class="has-text-white">ID</th>
+                  <th class="has-text-white">物質(群)</th>
+                  <th class="has-text-white">報告用途</th>
+                  <th class="has-text-white">報告閾値</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="tr in table.lower">
+                  <td>{{tr.ID}}</td>
+                  <td>{{tr.nameJA}}</td>
+                  <td>{{tr.AppJA}}</td>
+                  <td>{{tr.ThresholdJA}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
           <!--
-          <table-view :target="table" v-if="undertab=='table'"></table-view>
           <tree-view :target="tree" v-if="undertab=='tree'">
             <tree-child v-for="(child, index) in tree.children" :key="index" :item="child" treeID="tree" ref="root"></tree-child>
           </tree-view>

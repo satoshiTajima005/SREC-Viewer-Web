@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-  <xsl:output method="html" encoding="UTF-8" indent="no" omit-xml-declaration="no"/>
+	<xsl:output method="html" encoding="UTF-8" indent="no" omit-xml-declaration="no"/>
 <!-- *********************************************************************** MSDSplus *********************************************************************** -->
 <xsl:template match="/">
 <xsl:variable name="ver" select="number(substring(//PROPERTY_SNAME[.='Use format']/following-sibling::node()/text(), 5, 1))"/>
   {
-    "MS1":{
+		"MS1":{
       "title":"MSDSplusに関する情報",
       "isShow":true,
       "data": [
@@ -23,7 +23,7 @@
         ]
       ]
     },
-    "MS2":{
+		"MS2":{
       "title":"発行会社情報",
       "isShow":true,
       "data":[
@@ -38,7 +38,7 @@
         ]
       ]
     },
-    "MS3":{
+		"MS3":{
       "title":"発行/作成 部門情報",
       "isShow":true,
       "data":[
@@ -54,7 +54,7 @@
         ]
       ]
     },
-    "MS4":{
+		"MS4":{
       "title":"依頼者情報",
       "isShow":true,
       "data": [
@@ -76,26 +76,26 @@
         ]
       ]
     },
-    "MS5":{<!--型番情報-->
+		"MS5":{<!--型番情報-->
       "isShow":true,
       "KJE253":[<!--依頼者-->
-        "<xsl:value-of select="//KJA040[1]/EDK040-001/KJE253/PROPERTY_VALUE"/>",
-        "<xsl:value-of select="//KJA040[2]/EDK040-001/KJE253/PROPERTY_VALUE"/>",
-        "<xsl:value-of select="//KJA040[3]/EDK040-001/KJE253/PROPERTY_VALUE"/>",
-        "<xsl:value-of select="//KJA040[4]/EDK040-001/KJE253/PROPERTY_VALUE"/>",
-        "<xsl:value-of select="//KJA040[5]/EDK040-001/KJE253/PROPERTY_VALUE"/>",
-        "<xsl:value-of select="//KJA040[6]/EDK040-001/KJE253/PROPERTY_VALUE"/>"
+			  "<xsl:value-of select="//KJA040[1]/EDK040-001/KJE253/PROPERTY_VALUE"/>",
+			  "<xsl:value-of select="//KJA040[2]/EDK040-001/KJE253/PROPERTY_VALUE"/>",
+			  "<xsl:value-of select="//KJA040[3]/EDK040-001/KJE253/PROPERTY_VALUE"/>",
+			  "<xsl:value-of select="//KJA040[4]/EDK040-001/KJE253/PROPERTY_VALUE"/>",
+			  "<xsl:value-of select="//KJA040[5]/EDK040-001/KJE253/PROPERTY_VALUE"/>",
+			  "<xsl:value-of select="//KJA040[6]/EDK040-001/KJE253/PROPERTY_VALUE"/>"
       ],
-      "KJE254":[<!--発行者-->
-        "<xsl:value-of select="//KJA040[1]/EDK040-001/KJE254/PROPERTY_VALUE"/>",
-        "<xsl:value-of select="//KJA040[2]/EDK040-001/KJE254/PROPERTY_VALUE"/>",
-        "<xsl:value-of select="//KJA040[3]/EDK040-001/KJE254/PROPERTY_VALUE"/>",
-        "<xsl:value-of select="//KJA040[4]/EDK040-001/KJE254/PROPERTY_VALUE"/>",
-        "<xsl:value-of select="//KJA040[5]/EDK040-001/KJE254/PROPERTY_VALUE"/>",
-        "<xsl:value-of select="//KJA040[6]/EDK040-001/KJE254/PROPERTY_VALUE"/>"
+			"KJE254":[<!--発行者-->
+				"<xsl:value-of select="//KJA040[1]/EDK040-001/KJE254/PROPERTY_VALUE"/>",
+				"<xsl:value-of select="//KJA040[2]/EDK040-001/KJE254/PROPERTY_VALUE"/>",
+				"<xsl:value-of select="//KJA040[3]/EDK040-001/KJE254/PROPERTY_VALUE"/>",
+				"<xsl:value-of select="//KJA040[4]/EDK040-001/KJE254/PROPERTY_VALUE"/>",
+				"<xsl:value-of select="//KJA040[5]/EDK040-001/KJE254/PROPERTY_VALUE"/>",
+				"<xsl:value-of select="//KJA040[6]/EDK040-001/KJE254/PROPERTY_VALUE"/>"
       ]
     },
-    "MS6":{
+		"MS6":{
       "title":"製品情報",
       "isShow":true,
       "data":[
@@ -113,16 +113,16 @@
         ]
       ]
     },
-    "MS7":{<!--報告法令等の制定/改訂 番号-->
+		"MS7":{<!--報告法令等の制定/改訂 番号-->
       "isShow":true,
       "data":[
-        <xsl:apply-templates select="//KJA041"/>
+			  <xsl:apply-templates select="//KJA041"/>
       ]
     }
   }
 </xsl:template>
-  
-  <!-- ********************************** 報告法令 ************************************************************** -->
+	
+	<!-- ********************************** 報告法令 ************************************************************** -->
 <xsl:template match="KJA041">
   {
     "ID":"<xsl:value-of select=".//KJE262/PROPERTY_VALUE"/>",
@@ -133,7 +133,7 @@
 
 <!--
 ##########################################################################################
-    対象法令  KJE178 KJE179 KJE267 KJE268 KJE269
+		対象法令	KJE178 KJE179 KJE267 KJE268 KJE269
 ##########################################################################################-->
 <xsl:template name="getCoveredRow">
   <xsl:param name="id" />
@@ -142,7 +142,7 @@
 </xsl:template>
 <!--
 ##########################################################################################
-    含有判定  KJE180 KJE270
+		含有判定	KJE180 KJE270
 ##########################################################################################-->
 <xsl:template name="getContained">
   <xsl:param name="id" />
@@ -151,7 +151,7 @@
 </xsl:template>
 <!--
 ##########################################################################################
-    法令名取得関数
+		法令名取得関数
 ##########################################################################################-->
 <xsl:template name="getLawName">
   <xsl:param name="id" />

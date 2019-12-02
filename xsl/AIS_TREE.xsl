@@ -134,10 +134,10 @@
 <!-- ************************************************関数郡***************************************************** -->
 <!--
 ##########################################################################################
-    材質用途取得関数
+		材質用途取得関数
 ##########################################################################################-->
-  <xsl:template name="getMatUse">
-    <xsl:param name="id" />
+	<xsl:template name="getMatUse">
+		<xsl:param name="id" />
     <xsl:if test="$id='1'">1.母材</xsl:if>
     <xsl:if test="$id='2'">2.被覆</xsl:if>
     <xsl:if test="$id='3'">3.付着剤</xsl:if>
@@ -150,14 +150,14 @@
     <xsl:if test="$id='10'">10.(表面処理系)CVD処理</xsl:if>
     <xsl:if test="$id='11'">11.(表面処理系)塗装</xsl:if>
     <xsl:if test="$id='12'">12.(表面処理系)マーキング</xsl:if>
-  </xsl:template>
+	</xsl:template>
 
 <!--
 ##########################################################################################
-    材質区分取得関数
+		材質区分取得関数
 ##########################################################################################-->
-  <xsl:template name="getMatCLass">
-    <xsl:param name="id" />
+	<xsl:template name="getMatCLass">
+		<xsl:param name="id" />
     <xsl:if test="$id='R111'">高合金鋼</xsl:if>
     <xsl:if test="$id='R112'">高合金鋳鉄</xsl:if>
     <xsl:if test="$id='R101'">鉄鋼/鋳鋼/焼結合金</xsl:if>
@@ -263,24 +263,24 @@
 
 <!--
 ##########################################################################################
-    法令名取得関数
+		法令名取得関数
 ##########################################################################################-->
-  <xsl:template name="getLawName">
-    <xsl:param name="id" />
-    <xsl:if test="$id=''"></xsl:if>
-    <xsl:if test="$id='EU01'">RoHS</xsl:if>
-    <xsl:if test="$id='EU02'">ELV</xsl:if>
-    <xsl:if test="$id='EU03'">CLP Annex VI CMR 1,2</xsl:if>
-    <xsl:if test="$id='EU04'">REACH Annex XVII</xsl:if>
-    <xsl:if test="$id='EU05'">SVHC</xsl:if>
-    <xsl:if test="$id='EU06'">POPs Annex I</xsl:if>
-    <xsl:if test="$id='IA00'">任意報告物質</xsl:if>
-    <xsl:if test="$id='IA01'">GADSL</xsl:if>
-    <xsl:if test="$id='IA02'">IEC62474/JIG</xsl:if>
-    <xsl:if test="$id='JP01'">化審法(第一種特定化学物質)</xsl:if>
-    <xsl:if test="$id='JP02'">安衛法(製造等禁止物質)</xsl:if>
-    <xsl:if test="$id='JP03'">毒劇法(特定毒物)</xsl:if>
-    <xsl:if test="$id='OT01'">ESIS PBT</xsl:if>
-  </xsl:template>
+	<xsl:template name="getLawName">
+		<xsl:param name="id" />
+		<xsl:if test="$id=''"></xsl:if>
+		<xsl:if test="$id='EU01'">RoHS</xsl:if>
+		<xsl:if test="$id='EU02'">ELV</xsl:if>
+		<xsl:if test="$id='EU03'">CLP Annex VI CMR 1,2</xsl:if>
+		<xsl:if test="$id='EU04'">REACH Annex XVII</xsl:if>
+		<xsl:if test="$id='EU05'">SVHC</xsl:if>
+		<xsl:if test="$id='EU06'">POPs Annex I</xsl:if>
+		<xsl:if test="$id='IA00'">任意報告物質</xsl:if>
+		<xsl:if test="$id='IA01'">GADSL</xsl:if>
+		<xsl:if test="$id='IA02'">IEC62474/JIG</xsl:if>
+		<xsl:if test="$id='JP01'">化審法(第一種特定化学物質)</xsl:if>
+		<xsl:if test="$id='JP02'">安衛法(製造等禁止物質)</xsl:if>
+		<xsl:if test="$id='JP03'">毒劇法(特定毒物)</xsl:if>
+		<xsl:if test="$id='OT01'">ESIS PBT</xsl:if>
+	</xsl:template>
 
 </xsl:stylesheet>

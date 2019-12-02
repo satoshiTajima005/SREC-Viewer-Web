@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xsl:stylesheet version="1.0" 
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-  <xsl:output method="html" encoding="UTF-8" indent="yes" omit-xml-declaration="yes" />
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="html" encoding="UTF-8" indent="no" omit-xml-declaration="no" />
   <xsl:template match="Main">
     <ul>
       <xsl:attribute name="class">tv tree<xsl:value-of select="//toolLang" />
@@ -176,52 +175,52 @@
       </xsl:if>
     </li>
   </xsl:template>
-    <!--####################################### 物質 #######################################-->
-  <xsl:template match="Substance">
-    <li>
-      <xsl:if test="string(Threshold/@aboveThresholdLevel)='true'">
-        <xsl:attribute name="decision">true</xsl:attribute>
-      </xsl:if>
-      <span class="Substance">
-        <a href="#" id="SS{generate-id()}">
-          <xsl:choose>
-            <xsl:when test="string(UniqueID/@authority)='IEC62474'">
-              <xsl:call-template name="getSubstanceName">
-                <xsl:with-param name="id" select="string(UniqueID/@identity)" />
-                <xsl:with-param name="lang" select="string(//toolLang)" />
-              </xsl:call-template>
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:value-of select="@name" />
-            </xsl:otherwise>
-          </xsl:choose>
-        </a>
-        <input class="tag" id="comment_{generate-id()}" value="{@comment}" />
-        <input class="tag" id="descriptionOfUse_{generate-id()}" value="{@descriptionOfUse}" />
-        <input class="tag" id="name_{generate-id()}" value="{@name}" />
-        <input class="tag" id="mass_{generate-id()}" value="{Mass/@mass}" />
-        <input class="tag" id="unitOfMeasure_{generate-id()}" value="{Mass/@unitOfMeasure}" />
-        <input class="tag" id="massPlusTolerance_{generate-id()}" value="{Mass/@positiveTolerance}" />
-        <input class="tag" id="massMinusTolerance_{generate-id()}" value="{Mass/@negativeTolerance}" />
-        <input class="tag" id="massPercent_{generate-id()}" value="{MassPercent/@massPercent}" />
-        <input class="tag" id="percentPlusTolerance_{generate-id()}" value="{MassPercent/@positiveTolerance}" />
-        <input class="tag" id="percentMinusTolerance_{generate-id()}" value="{MassPercent/@negativeTolerance}" />
-        <input class="tag" id="matMassPercent_{generate-id()}" value="{MatMassPercent/@massPercent}" />
-        <input class="tag" id="matPercentPlusTolerance_{generate-id()}" value="{MatMassPercent/@positiveTolerance}" />
-        <input class="tag" id="matPercentMinusTolerance_{generate-id()}" value="{MatMassPercent/@negativeTolerance}" />
-        <input class="tag" id="aboveThresholdLevel_{generate-id()}" value="{Threshold/@aboveThresholdLevel}" />
-        <input class="tag" id="reportableApplication_{generate-id()}" value="{Threshold/@reportableApplication}" />
-        <input class="tag" id="reportingThreshold_{generate-id()}" value="{Threshold/@reportingThreshold}" />
-        <input class="tag" id="authority_{generate-id()}" value="{UniqueID/@authority}" />
-        <input class="tag" id="identity_{generate-id()}" value="{UniqueID/@identity}" />
-      </span>
-      <xsl:if test="count(Exemptions)!=0">
-        <ul>
-          <xsl:apply-templates select="Exemptions" />
-        </ul>
-      </xsl:if>
-    </li>
-  </xsl:template>
+  	<!--####################################### 物質 #######################################-->
+	<xsl:template match="Substance">
+		<li>
+			<xsl:if test="string(Threshold/@aboveThresholdLevel)='true'">
+				<xsl:attribute name="decision">true</xsl:attribute>
+			</xsl:if>
+			<span class="Substance">
+				<a href="#" id="SS{generate-id()}">
+					<xsl:choose>
+						<xsl:when test="string(UniqueID/@authority)='IEC62474'">
+							<xsl:call-template name="getSubstanceName">
+								<xsl:with-param name="id" select="string(UniqueID/@identity)" />
+								<xsl:with-param name="lang" select="string(//toolLang)" />
+							</xsl:call-template>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="@name" />
+						</xsl:otherwise>
+					</xsl:choose>
+				</a>
+				<input class="tag" id="comment_{generate-id()}" value="{@comment}" />
+				<input class="tag" id="descriptionOfUse_{generate-id()}" value="{@descriptionOfUse}" />
+				<input class="tag" id="name_{generate-id()}" value="{@name}" />
+				<input class="tag" id="mass_{generate-id()}" value="{Mass/@mass}" />
+				<input class="tag" id="unitOfMeasure_{generate-id()}" value="{Mass/@unitOfMeasure}" />
+				<input class="tag" id="massPlusTolerance_{generate-id()}" value="{Mass/@positiveTolerance}" />
+				<input class="tag" id="massMinusTolerance_{generate-id()}" value="{Mass/@negativeTolerance}" />
+				<input class="tag" id="massPercent_{generate-id()}" value="{MassPercent/@massPercent}" />
+				<input class="tag" id="percentPlusTolerance_{generate-id()}" value="{MassPercent/@positiveTolerance}" />
+				<input class="tag" id="percentMinusTolerance_{generate-id()}" value="{MassPercent/@negativeTolerance}" />
+				<input class="tag" id="matMassPercent_{generate-id()}" value="{MatMassPercent/@massPercent}" />
+				<input class="tag" id="matPercentPlusTolerance_{generate-id()}" value="{MatMassPercent/@positiveTolerance}" />
+				<input class="tag" id="matPercentMinusTolerance_{generate-id()}" value="{MatMassPercent/@negativeTolerance}" />
+				<input class="tag" id="aboveThresholdLevel_{generate-id()}" value="{Threshold/@aboveThresholdLevel}" />
+				<input class="tag" id="reportableApplication_{generate-id()}" value="{Threshold/@reportableApplication}" />
+				<input class="tag" id="reportingThreshold_{generate-id()}" value="{Threshold/@reportingThreshold}" />
+				<input class="tag" id="authority_{generate-id()}" value="{UniqueID/@authority}" />
+				<input class="tag" id="identity_{generate-id()}" value="{UniqueID/@identity}" />
+			</span>
+			<xsl:if test="count(Exemptions)!=0">
+				<ul>
+					<xsl:apply-templates select="Exemptions" />
+				</ul>
+			</xsl:if>
+		</li>
+	</xsl:template>
   <!--####################################### 適用除外 #######################################-->
   <xsl:template match="Exemptions">
     <li>

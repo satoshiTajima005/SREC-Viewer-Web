@@ -111,8 +111,8 @@ document.addEventListener('DOMContentLoaded', function () {
               };
               o.txt = o.txt.replace(/&quot;/igm, '\\&quot;');
               o.data.unique = await me.xmlTransform(o.txt, 'xsl/IEC62474_UNIQUE.xsl');
+              o.data.table = await me.xmlTransform(o.txt, 'xsl/IEC62474_TABLE.xsl');
               //o.data.tree = await me.xmlTransform(o.txt, 'xsl/IEC62474_TREE.xsl');
-              //o.data.table = await me.xmlTransform(o.txt, 'xsl/IEC62474_TABLE.xsl');
               break;
             case 'JAMA':
               o.data = {
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
           case 'SHCI': //ZIP
             f = await this.readFile(file, null, true);
             type = 'IEC62474';
-            detail = 'tree';
+            detail = 'table';
             break;
           default:
             //拡張子エラー
@@ -215,15 +215,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 break;
               case (/chemSHERPA-A/.test(fres)):
                 type = 'SHAI';
-                detail = 'tree';
+                detail = 'table';
                 break;
               case (/chemSHERPA-C/.test(fres)):
                 type = 'SHCI';
-                detail = 'tree';
+                detail = 'table';
                 break;
               case (/IEC62474/.test(fres)):
                 type = 'IEC62474';
-                detail = 'tree';
+                detail = 'table';
                 break;
               default:
                 o.push({
@@ -332,6 +332,9 @@ document.addEventListener('DOMContentLoaded', function () {
             break;
           case 'xsl/MSDSplus_TABLE.xsl':
             res = res.replace(/\]\s?\[/g, '],[');
+            break;
+          case 'xsl/IEC62474_TABLE.xsl':
+            res = res.replace(/\}\{/g, '},{');
             break;
         }
         return res;

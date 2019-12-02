@@ -144,7 +144,7 @@
           {"title":"発効日", "value":"<xsl:value-of select="Product/ProductID/@effectiveDate" />"},
           {"title":"型番", "value":"<xsl:value-of select="Product/ProductID/@identifier" />"},
           {"title":"名称", "value":"<xsl:value-of select="Product/ProductID/@name" />"},
-          {"title":"依頼者名", "value":"<xsl:value-of select="Product/ProductID/@requesterName" />"},
+          {"title":"依頼者品名", "value":"<xsl:value-of select="Product/ProductID/@requesterName" />"},
           {"title":"依頼者型番", "value":"<xsl:value-of select="Product/ProductID/@requesterIdentifier" />"},
           {"title":"製造場所", "value":"<xsl:value-of select="Product/ProductID/@manufacturingSite" />"}
         ],[

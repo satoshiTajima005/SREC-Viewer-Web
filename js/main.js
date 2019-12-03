@@ -106,13 +106,13 @@ document.addEventListener('DOMContentLoaded', function () {
             case 'IEC62474':
               o.data = {
                 unique: {},
-                //tree: {},
-                //table: {}
+                tree: {},
+                table: {}
               };
               o.txt = o.txt.replace(/&quot;/igm, '\\&quot;');
               o.data.unique = await me.xmlTransform(o.txt, 'xsl/IEC62474_UNIQUE.xsl');
               o.data.table = await me.xmlTransform(o.txt, 'xsl/IEC62474_TABLE.xsl');
-              //o.data.tree = await me.xmlTransform(o.txt, 'xsl/IEC62474_TREE.xsl');
+              o.data.tree = await me.xmlTransform(o.txt, 'xsl/IEC62474_TREE.xsl');
               break;
             case 'JAMA':
               o.data = {
@@ -334,6 +334,7 @@ document.addEventListener('DOMContentLoaded', function () {
             res = res.replace(/\]\s?\[/g, '],[');
             break;
           case 'xsl/IEC62474_TABLE.xsl':
+          case 'xsl/IEC62474_TREE.xsl':
             res = res.replace(/\}\{/g, '},{');
             break;
         }

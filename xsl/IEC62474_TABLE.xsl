@@ -4,18 +4,18 @@
 
   <!--####################################### 製品 #######################################-->
   <xsl:template match="Main/Product">
-  {
-    "over": [
-      <xsl:apply-templates select="./Substance[Threshold/@aboveThresholdLevel='true']" />  <!--V1-->
-      <xsl:apply-templates select="./SubstanceGroup[Threshold/@aboveThresholdLevel='true']" /><!--V1-->
-      <xsl:apply-templates select="./Compliance/DsDsg[ComplianceThreshold/@aboveComplianceThreshold='true']" /><!--V2-->
-    ],
-    "lower": [
-      <xsl:apply-templates select="./Substance[Threshold/@aboveThresholdLevel='false']" />  <!--V1-->
-      <xsl:apply-templates select="./SubstanceGroup[Threshold/@aboveThresholdLevel='false']" /><!--V1-->
-      <xsl:apply-templates select="./Compliance/DsDsg[ComplianceThreshold/@aboveComplianceThreshold='false']" /><!--V2-->
-    ]
-  }
+    {
+      "over": [
+        <xsl:apply-templates select="./Substance[Threshold/@aboveThresholdLevel='true']" />  <!--V1-->
+        <xsl:apply-templates select="./SubstanceGroup[Threshold/@aboveThresholdLevel='true']" /><!--V1-->
+        <xsl:apply-templates select="./Compliance/DsDsg[ComplianceThreshold/@aboveComplianceThreshold='true']" /><!--V2-->
+      ],
+      "lower": [
+        <xsl:apply-templates select="./Substance[Threshold/@aboveThresholdLevel='false']" />  <!--V1-->
+        <xsl:apply-templates select="./SubstanceGroup[Threshold/@aboveThresholdLevel='false']" /><!--V1-->
+        <xsl:apply-templates select="./Compliance/DsDsg[ComplianceThreshold/@aboveComplianceThreshold='false']" /><!--V2-->
+      ]
+    }
   </xsl:template>
 
   <!--####################################### 物質 V1 #######################################-->

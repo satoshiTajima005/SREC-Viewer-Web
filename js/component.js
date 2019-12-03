@@ -63,6 +63,7 @@ Vue.component('tabs', {
       if (this.$refs.ais) this.$refs.ais.changeView('table');
       if (this.$refs.msp) this.$refs.msp.changeView('table');
       if (this.$refs.jama) this.$refs.jama.changeView('tree');
+      if (this.$refs.chem) this.$refs.chem.changeView('table');
     },
     deleteTab: function(target, index){
       target.list.splice( index, 1 );
@@ -606,7 +607,7 @@ Vue.component('Chem', {
     detail:{type: String}, 
     unique:{type: Object},
     table:{type: Object},
-    //tree:{type: Object}
+    tree:{type: Object}
   },
   template: `
     <div>
@@ -624,7 +625,7 @@ Vue.component('Chem', {
           </ul>
         </div>
         <div>
-          <div class="tabbody">
+          <div class="tabbody" v-if="undertab=='table'" style="height: 500px; overflow-y: scroll;">
             <table class="table is-bordered is-narrow" style="margin: 10px;">
               <caption style="text-align:left;font-weight:bold;">含有有り</caption>
               <thead>
@@ -675,11 +676,9 @@ Vue.component('Chem', {
             </table>
           </div>
 
-          <!--
           <tree-view :target="tree" v-if="undertab=='tree'">
             <tree-child v-for="(child, index) in tree.children" :key="index" :item="child" treeID="tree" ref="root"></tree-child>
           </tree-view>
-          -->
         </div>
       </div>
     </div>

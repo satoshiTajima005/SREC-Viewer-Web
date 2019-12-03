@@ -3,6 +3,7 @@
   <xsl:output method="html" encoding="UTF-8" indent="no" omit-xml-declaration="no" />
 
 <xsl:template match="Main">
+  <xsl:param name="ver" select="@schemaDatabaseVersion" />
   {
     "IEC1":{
       "title":"文書情報",
@@ -10,7 +11,8 @@
       "data":[
         [
           {"title":"スキーマDB Ver.", "value":"<xsl:value-of select="@schemaDatabaseVersion" />"},
-          {"title":"物質DB Ver.", "value":"<xsl:value-of select="@substanceDatabaseVersion" />"},
+          <xsl:if test="$ver='X6.01ex1.0'">{"title":"物質DB Ver.", "value":"<xsl:value-of select="@substanceDatabaseVersion" />"},</xsl:if>
+          <xsl:if test="$ver='X8.00ex1.0'">{"title":"物質DB Ver.", "value":"<xsl:value-of select="//DeclarableSubstanceList/@version" />"},</xsl:if>
           {"title":"ツール機関", "value":"<xsl:value-of select="ToolNameVersionID/@authority" />"}
         ],[
           {"title":"ツールID", "value":"<xsl:value-of select="ToolNameVersionID/@identity" />"},

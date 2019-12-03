@@ -211,6 +211,28 @@ Vue.component('TreeChild', {
     },
   }
 });
+Vue.component('ErrMsg', {
+  props: ['o'],
+  template: `
+    <div style="position:fixed; right:0; bottom:0;">
+      <div v-for="(err, index) in item" class="notification is-warning">
+        <button class="delete" @click="removeErr(index)"></button>
+        {{err.filename}}<br/>
+        {{err.msg}}
+      </div>
+    </div>
+  `,
+  data: function (){
+    return {
+      item : this.o
+    }
+  },
+  methods: {
+    removeErr: function(index){
+      this.item.splice(index, 1);
+    }
+  }
+});
 
 /*個別コンポーネント*/
 Vue.component('AisUnique', {

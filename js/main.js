@@ -40,7 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
       tabRight: {
         selected: 0,
         list: []
-      }
+      },
+      err: [] //{filename:'', msg:''}
     },
     methods: {
       openFile: async function (e) {
@@ -62,18 +63,17 @@ document.addEventListener('DOMContentLoaded', function () {
         await Promise.all(tabObject.map(async function (o, index) {
           switch (o.type) {
             case 'extErr':
+              me.err.push({filename:o.name, msg:'表示できない拡張子です'});
+              break;  
             case 'zipErr':
+              me.err.push({filename:o.name, msg:'chemSHRPAのデータが破損しています'});
+              break;
             case 'xmlTypeErr':
-              //todo エラーなので配列から削除
-              //todo 画面に何かしらの表示
+              me.err.push({filename:o.name, msg:'xml書式が展開できない形式です'});
               break;
             case 'AIS':
             case 'AIS-temp':
-              o.data = {
-                unique: {},
-                tree: {},
-                table: {}
-              };
+              o.data = { unique: {}, tree: {}, table: {} };
               o.txt = o.txt.replace(/&quot;/igm, '\\&quot;');
               o.data.unique = await me.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl');
               o.data.tree = await me.xmlTransform(o.txt, 'xsl/AIS_TREE.xsl');
@@ -81,34 +81,27 @@ document.addEventListener('DOMContentLoaded', function () {
               break;
             case 'MSDSplus':
             case 'MSDSplus-temp':
-              o.data = {
-                unique: {},
-                table: {}
-              };
+              o.data = { unique: {}, table: {} };
               o.txt = o.txt.replace(/&quot;/igm, '\\&quot;');
               o.data.unique = await me.xmlTransform(o.txt, 'xsl/MSDSplus_UNIQUE.xsl');
               o.data.table = await me.xmlTransform(o.txt, 'xsl/MSDSplus_TABLE.xsl');
               break;
             case 'IEC62474':
-              o.data = {
-                unique: {},
-                tree: {},
-                table: {}
-              };
+              o.data = { unique: {}, tree: {}, table: {} };
               o.txt = o.txt.replace(/&quot;/igm, '\\&quot;');
               o.data.unique = await me.xmlTransform(o.txt, 'xsl/IEC62474_UNIQUE.xsl');
               o.data.table = await me.xmlTransform(o.txt, 'xsl/IEC62474_TABLE.xsl');
               o.data.tree = await me.xmlTransform(o.txt, 'xsl/IEC62474_TREE.xsl');
               break;
             case 'JAMA':
-              o.data = {
-                unique: {},
-                tree: {}
-              };
-              let ver = o.txt.split("\r\n")[0].split('","') - 0;
-              if (ver == NaN) {
-                //todo JAMAファイルではない
-                //todo 画面に何かしらの表示
+              o.data = { unique: {}, tree: {} };
+              let ver = 0;
+              try {
+                ver = o.txt.split("\r\n")[0].split('","')[1].replace(/Ver\./, '') - 0;
+              }catch(e){}
+              if (!ver) {
+                o.result = false;
+                me.err.push({filename:o.name, msg:'JAMAファイルと形式が異なります'});
                 break;
               }
               o.txt = me.JamaToXML(o.txt, ver);
@@ -117,6 +110,11 @@ document.addEventListener('DOMContentLoaded', function () {
               break;
           }
         }));
+        
+        //エラーデータを削除
+        tabObject = tabObject.filter(function(o){
+          return o.result;
+        });
 
         //dataをJSON.parse
         tabObject.map(o => {
@@ -193,13 +191,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 detail = 'table';
                 break;
               case (/chemSHERPA-A/.test(fres)):
-                type = 'SHAI';
-                detail = 'table';
-                break;
               case (/chemSHERPA-C/.test(fres)):
-                type = 'SHCI';
-                detail = 'table';
-                break;
               case (/IEC62474/.test(fres)):
                 type = 'IEC62474';
                 detail = 'table';
@@ -293,7 +285,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (xmlStr.charCodeAt(0) === 0xFEFF) xmlStr = xmlStr.slice(1); //BOM削除
         xmlStr = xmlStr.replace(/<DESCRIPT(.|\s)*?>/im, "<DESCRIPT>"); //JAMP-名前空間除去
         xmlStr = xmlStr.replace(/xmlns=".*?"/im, "").replace(/xmlns:xsi=".*?"/im, ""); //chem-名前空間除去
-        
+
         let xml = this.parseXML(xmlStr);
         let xsl = await this.xhrLoad(xslPath, true); //xslロード
         let xslp = new XSLTProcessor();

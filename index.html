@@ -8,15 +8,15 @@
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Noto+Sans+JP:400,700" rel="stylesheet">
-  <link href="css/green.css" rel="stylesheet">
-  <link href="css/css.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Noto+Sans+JP:400,700">
+  <link rel="stylesheet" href="css/green.css">
+  <link rel="stylesheet" href="css/css.css">
   <script src="https://jp.vuejs.org/js/vue.js"></script>
   <script src="js/unzip.min.js"></script>
   <script src="js/component.js"></script>
   <script src="dic/language.js"></script>
   <script src="js/main.js"></script>
-  <title>SREC-Viewer-Web (環境負荷物質報告書ビューワ― AIS MSDSplus JAMA chemSHRPA IEC62474 JGPSSI)</title>
+  <title>SREC-Viewer-Web (環境負荷物質報告書ビューワ― AIS/MSDSplus/JAMA/chemSHRPA/IEC62474)</title>
 </head>
 
 <body>
@@ -28,7 +28,7 @@
       <div class="column is-2">
         <div class="file is-green">
           <label class="file-label">
-            <input class="file-input" type="file" @change="openFile" accept=".xml,.csv,.jgp4,.shai,.shci" multiple>
+            <input class="file-input" type="file" @change="openFile" accept=".xml,.csv,.shai,.shci" multiple>
             <span class="file-cta">
               <span class="file-icon"><i class="far fa-folder-open"></i></span>
               <span class="file-label">{{language.openFile}}</span>
@@ -52,6 +52,7 @@
       <tabs v-if="tabLeft.list.length" :class="{half: tabRight.list.length}" :target="tabLeft" :moveto="tabRight" :language="language"></tabs>
       <tabs v-if="tabRight.list.length" :class="{half: tabLeft.list.length}" :target="tabRight" :moveTo="tabLeft" :language="language"></tabs>
     </div>
+    <err-msg :o="err"></err-msg>
   </div>
 </body>
 

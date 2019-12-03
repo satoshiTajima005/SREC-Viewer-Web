@@ -41,7 +41,33 @@ document.addEventListener('DOMContentLoaded', function () {
         selected: 0,
         list: []
       },
-      err: [] //{filename:'', msg:''}
+      err: [], //{filename:'', msg:''}
+      isShowOption: false, 
+      isShowHelp: false,
+      options:{
+        AIS1:true,
+        AIS2:true,
+        AIS3:true,
+        AIS4:true,
+        AIS5:true,
+        AIS6:true,
+        MS1:true,
+        MS2:true,
+        MS3:true,
+        MS4:true,
+        MS5:true,
+        MS6:true,
+        MS7:true,
+        JAMA:true,
+        IEC1:true,
+        IEC2:true,
+        IEC3:true,
+        IEC4:true,
+        IEC5:true,
+        NB:true,
+        BH:true,
+        ZR:true
+      }
     },
     methods: {
       openFile: async function (e) {

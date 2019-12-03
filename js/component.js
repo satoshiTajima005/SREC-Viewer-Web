@@ -1,4 +1,4 @@
-/*共有コンポーネント*/
+/*アプリケーションコンポーネント*/
 Vue.component('tabs', {
   props: ['target', 'moveto', 'language'],
   template: `
@@ -75,6 +75,90 @@ Vue.component('tabs', {
     }
   }
 });
+Vue.component('ErrMsg', {
+  props: ['o'],
+  template: `
+    <div style="position:fixed; right:0; bottom:0;">
+      <div v-for="(err, index) in item" class="notification is-warning">
+        <button class="delete" @click="removeErr(index)"></button>
+        {{err.filename}}<br/>
+        {{err.msg}}
+      </div>
+    </div>
+  `,
+  data: function (){
+    return {
+      item : this.o
+    }
+  },
+  methods: {
+    removeErr: function(index){
+      this.item.splice(index, 1);
+    }
+  }
+});
+Vue.component('OptionDlg', {
+  props: ['o', 'show'],
+  template: `
+    <div class="modal" :class="{'is-active': show}">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">初期表示設定</p>
+          <button class="delete" aria-label="close" @click="closeDlg"></button>
+        </header>
+        <section class="modal-card-body">
+          <h5 class="title is-5">セクション表示設定</h5>
+          <h6 class="title is-6">-- AIS --</h6>
+          <label class="checkbox"><input type="checkbox" v-model="item.AIS1">AISに関する情報</label>
+          <label class="checkbox"><input type="checkbox" v-model="item.AIS2">発行会社情報</label>
+          <label class="checkbox"><input type="checkbox" v-model="item.AIS3">発行/作成 部門情報</label>
+          <label class="checkbox"><input type="checkbox" v-model="item.AIS4">依頼者情報</label>
+          <label class="checkbox"><input type="checkbox" v-model="item.AIS5">型番情報</label>
+          <label class="checkbox"><input type="checkbox" v-model="item.AIS6">成型品情報</label>
+          <label class="checkbox"><input type="checkbox" v-model="item.AIS7">集計情報</label>
+          <h6 class="title is-6">-- MSDSplus --</h6>
+          <label class="checkbox"><input type="checkbox" v-model="item.MS1">MSDSplusに関する情報</label>
+          <label class="checkbox"><input type="checkbox" v-model="item.MS2">発行会社情報</label>
+          <label class="checkbox"><input type="checkbox" v-model="item.MS3">発行/作成 部門情報</label>
+          <label class="checkbox"><input type="checkbox" v-model="item.MS4">依頼者情報</label>
+          <label class="checkbox"><input type="checkbox" v-model="item.MS5">型番情報</label>
+          <label class="checkbox"><input type="checkbox" v-model="item.MS6">製品情報</label>
+          <label class="checkbox"><input type="checkbox" v-model="item.MS7">報告法令等の制定/改訂番号</label>
+          <h6 class="title is-6">-- JAMA --</h6>
+          <label class="checkbox"><input type="checkbox" v-model="item.JAMA">ファイル基本情報</label>
+          <h6 class="title is-6">-- IEC62474(chemSHERPA) --</h6>
+          <label class="checkbox"><input type="checkbox" v-model="item.IEC1">文書情報</label>
+          <label class="checkbox"><input type="checkbox" v-model="item.IEC2">添付文書</label>
+          <label class="checkbox"><input type="checkbox" v-model="item.IEC3">連絡先情報</label>
+          <label class="checkbox"><input type="checkbox" v-model="item.IEC4">依頼/回答 情報</label>
+          <label class="checkbox"><input type="checkbox" v-model="item.IEC5">問い合わせ情報</label>
+          <label class="checkbox"><input type="checkbox" v-model="item.IEC6">製品基本情報</label>
+          <h5 class="title is-5">JAMAツリー展開設定</h5>
+          <label class="checkbox"><input type="checkbox" v-model="item.NB">納入部品</label>
+          <label class="checkbox"><input type="checkbox" v-model="item.BH">部品</label>
+          <label class="checkbox"><input type="checkbox" v-model="item.ZR">材料</label>
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button" @click="closeDlg">閉じる</button>
+        </footer>
+      </div>
+    </div>
+  `,
+  data: function (){
+    return {
+      item : this.o,
+      view: this.show
+    }
+  },
+  methods: {
+    closeDlg: function(){
+      this.$parent.isShowOption = false;
+    }
+  }
+});
+
+/*共有コンポーネント*/
 Vue.component('UniqueTr', {
   props: ['title', 'value'],
   template: `<tr><th :style="/^[1-6]$/.test(title)?'width:50px;text-arign:center;':''">{{title}}</th><td>{{value}}</td></tr>`
@@ -209,28 +293,6 @@ Vue.component('TreeChild', {
         this.$parent.select(arg);
       }
     },
-  }
-});
-Vue.component('ErrMsg', {
-  props: ['o'],
-  template: `
-    <div style="position:fixed; right:0; bottom:0;">
-      <div v-for="(err, index) in item" class="notification is-warning">
-        <button class="delete" @click="removeErr(index)"></button>
-        {{err.filename}}<br/>
-        {{err.msg}}
-      </div>
-    </div>
-  `,
-  data: function (){
-    return {
-      item : this.o
-    }
-  },
-  methods: {
-    removeErr: function(index){
-      this.item.splice(index, 1);
-    }
   }
 });
 

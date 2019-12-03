@@ -1,17 +1,3 @@
-let list = {
-  name: "", //ファイル名
-  id: 0, //読み込んだファイル数のインクリメント
-  type: "", //AIS, AIS-temp, MSDSplus, MSDSplus-temp, IEC62474, SHAI, SHCI, JAMA, JGP4
-  txt: "", //読み込んだ生のテキストデータ
-  detail: "", //詳細表示のパターン[tree, table, itemNo]
-  data: { //JSON変換したデータ
-    unique: {},
-    table: {},
-    tree: {},
-    item: {}
-  }
-}
-
 /*********************************************************************************************************************************
     機能：xml特殊文字変換
 注意事項：無し
@@ -39,12 +25,12 @@ String.prototype.repeat = function (n) {
 
 Vue.config.productionTip = true;
 let app;
-let id = 0; //ファイルID
 
 document.addEventListener('DOMContentLoaded', function () {
   app = new Vue({
     el: "#app",
     data: {
+      id: 0, //ファイルID
       langType: 'ja',
       language: lang.ja,
       tabLeft: {
@@ -129,9 +115,6 @@ document.addEventListener('DOMContentLoaded', function () {
               o.data.unique = await me.xmlTransform(o.txt, 'xsl/JAMA_UNIQUE.xsl');
               o.data.tree = await me.xmlTransform(o.txt, 'xsl/JAMA_TREE.xsl');
               break;
-            case 'JGP4':
-              o.data = o.txt;
-              break;
           }
         }));
 
@@ -141,7 +124,6 @@ document.addEventListener('DOMContentLoaded', function () {
             if (o.data.unique) o.data.unique = JSON.parse(o.data.unique);
             if (o.data.tree) o.data.tree = JSON.parse(o.data.tree);
             if (o.data.table) o.data.table = JSON.parse(o.data.table);
-            if (o.data.item) o.data.item = JSON.parse(o.data.item);
           } catch (e) {
             console.log('JSON parse error');
             console.log(o.data);
@@ -151,6 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
         this.tabLeft.list = this.tabLeft.list.concat(tabObject);
       },
       getFileArr: async function (file, o) {
+        let me = this;
         //ファイルタイプの判定
         let f = [],
           type = '',
@@ -164,11 +147,6 @@ document.addEventListener('DOMContentLoaded', function () {
             f = await this.readFile(file, 'shift_jis');
             type = 'JAMA';
             detail = 'tree';
-            break;
-          case 'JGP4': //文字コード
-            f = await this.readFile(file, 'shift_jis');
-            type = 'JGP4';
-            detail = 'item';
             break;
           case 'SHAI': //ZIP
           case 'SHCI': //ZIP
@@ -194,6 +172,7 @@ document.addEventListener('DOMContentLoaded', function () {
           });
           return;
         }
+        //XML判定と戻り値へのプッシュ
         f.map(function (fres) {
           if (type === 'XML') {
             switch (true) {
@@ -234,10 +213,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
           }
-          id++;
+          me.id++;
           o.push({
             result: true,
-            id: id,
+            id: me.id,
             type: type,
             name: file.name,
             txt: fres,
@@ -281,11 +260,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       },
       Utf8ArrayToStr: function (b) {
-        var a;
-        var c = "";
-        var f = b.length;
+        let a;
+        let c = "";
+        let f = b.length;
         for (a = 0; a < f;) {
-          var d = b[a++];
+          let d = b[a++];
           switch (d >> 4) {
             case 0:
             case 1:
@@ -299,12 +278,12 @@ document.addEventListener('DOMContentLoaded', function () {
               break;
             case 12:
             case 13:
-              var e = b[a++];
+              let e = b[a++];
               c += String.fromCharCode((d & 31) << 6 | e & 63);
               break;
             case 14:
               e = b[a++];
-              var g = b[a++];
+              let g = b[a++];
               c += String.fromCharCode((d & 15) << 12 | (e & 63) << 6 | (g & 63) << 0)
           }
         }
@@ -314,6 +293,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (xmlStr.charCodeAt(0) === 0xFEFF) xmlStr = xmlStr.slice(1); //BOM削除
         xmlStr = xmlStr.replace(/<DESCRIPT(.|\s)*?>/im, "<DESCRIPT>"); //JAMP-名前空間除去
         xmlStr = xmlStr.replace(/xmlns=".*?"/im, "").replace(/xmlns:xsi=".*?"/im, ""); //chem-名前空間除去
+        
         let xml = this.parseXML(xmlStr);
         let xsl = await this.xhrLoad(xslPath, true); //xslロード
         let xslp = new XSLTProcessor();

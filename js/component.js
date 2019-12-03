@@ -703,6 +703,3 @@ Vue.component('Chem', {
     }
   }
 });
-Vue.component('JGPSSI', {
-  template: ``
-});

@@ -16,7 +16,7 @@
   <script src="js/component.js"></script>
   <script src="dic/language.js"></script>
   <script src="js/main.js"></script>
-  <title>SREC-Viewer-Web (環境負荷物質報告書ビューワ― JGPSSI AIS MSDSplus JAMA chemSHRPA IEC62474)</title>
+  <title>SREC-Viewer-Web (環境負荷物質報告書ビューワ― AIS MSDSplus JAMA chemSHRPA IEC62474 JGPSSI)</title>
 </head>
 
 <body>
@@ -37,12 +37,9 @@
         </div>
       </div>
       <div class="column">
-        <button type="button" class="button is-green" :class="{'is-light': langType!=='ja'}"
-          @click="langType='ja'">Japanese</button>
-        <button type="button" class="button is-green" :class="{'is-light': langType!=='en'}" @click="langType='en'"
-          disabled>English</button>
-        <button type="button" class="button is-green" :class="{'is-light': langType!=='zh'}" @click="langType='zh'"
-          disabled>Chinese</button>
+        <button type="button" class="button is-green" :class="{'is-light': langType!=='ja'}" @click="langType='ja'">Japanese</button>
+        <button type="button" class="button is-green" :class="{'is-light': langType!=='en'}" @click="langType='en'" disabled>English</button>
+        <button type="button" class="button is-green" :class="{'is-light': langType!=='zh'}" @click="langType='zh'" disabled>Chinese</button>
       </div>
       <div class="column">
         <button type="button" class="button is-green" @click="">

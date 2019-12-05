@@ -191,10 +191,10 @@ Vue.component('HelpDlg', {
 Copyright 2010 - 2019 FrogHand (Satoshi Tajima)
 <a href="http://opensource.org/licenses/mit-license.php">Released under the MIT license</a>
 Mail      <a href="mailto:froghand0104@gmail.com">froghand0104@gmail.com</a>
-Blog      <a href="http://froghand0104.blogspot.com">http://froghand0104.blogspot.com</a>
-GitHub    <a href="https://github.com/satoshiTajima005/SREC-Viewer-Web">https://github.com/satoshiTajima005/SREC-Viewer-Web</a>
+Blog      <a href="http://froghand0104.blogspot.com" target="_blank">http://froghand0104.blogspot.com</a>
+GitHub    <a href="https://github.com/satoshiTajima005/SREC-Viewer-Web" target="_blank">https://github.com/satoshiTajima005/SREC-Viewer-Web</a>
 </pre>【使用方法など】
-<pre style="height:150px;overflow:auto;display:block;border:1px solid #666;background:#fff;padding:10px">
+<pre style="height:200px;overflow:auto;display:block;border:1px solid #666;background:#fff;padding:10px">
 電気・電子・自動車業界で、環境情報伝達に一般的に使用されている
 ・JAMP-AIS [*.xml]
 ・JAMP-MSDSPlus [*.xml]
@@ -217,7 +217,7 @@ GitHub    <a href="https://github.com/satoshiTajima005/SREC-Viewer-Web">https://
 
 問題がありましたらメールかブログコメントで連絡をいただけると助かります。
 </pre> 【著作権情報】
-<pre style="height:150px;overflow:auto;display:block;border:1px solid #666;background:#fff;padding:10px">
+<pre style="height:100px;overflow:auto;display:block;border:1px solid #666;background:#fff;padding:10px">
 ---AIS/MSDSplus表示機能に関して---
   本ツールはECALGA環境辞書を複写/引用しています。
   ECALGA環境辞書の著作権はJEITA ECセンターにあります。
@@ -225,15 +225,14 @@ GitHub    <a href="https://github.com/satoshiTajima005/SREC-Viewer-Web">https://
   ECALGA環境辞書     <a href="http://ec.jeita.or.jp/jp/modules/contents09/">http://ec.jeita.or.jp/jp/modules/contents09/</a>
   Copyright (c) 2007 JEITA
 
-  ==Leaf icon==
+==Leaf icon==
   Creator : DragonArt
   Website : <a href="http://dragonartz.wordpress.com/">http://dragonartz.wordpress.com/</a>
 
-  ==SpyGlass icon==
+ ==SpyGlass icon==
   Creator : VistaICO Toolbar Icons
   Website : <a href="http://www.vistaico.com/contact.htm">http://www.vistaico.com/contact.htm</a>
-  Copyright (C) VistaICO.com
-      </pre>
+  Copyright (C) VistaICO.com</pre>
       </section>
     </div>
   </div>

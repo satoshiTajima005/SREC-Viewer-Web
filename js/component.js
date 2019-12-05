@@ -62,12 +62,14 @@ Vue.component('tabs', {
       target.selected = index;
       if (this.$refs.ais) this.$refs.ais.changeView('table');
       if (this.$refs.msp) this.$refs.msp.changeView('table');
-      if (this.$refs.jama) this.$refs.jama.changeView('tree');
+      if (this.$refs.jama) this.$refs.jama.changeView('table');
       if (this.$refs.chem) this.$refs.chem.changeView('table');
+      this.$nextTick(function () {
+        if (this.$refs.jama) this.$refs.jama.changeView('tree');
+      });
     },
     deleteTab: function(target, index){
       target.list.splice( index, 1 );
-      if (target.selected == index) target.selected = 0;
     },
     moveTab: function(target, item, index, moveTo){
       moveTo.push(Object.create(item));
@@ -206,7 +208,7 @@ GitHub    <a href="https://github.com/satoshiTajima005/SREC-Viewer-Web" target="
 各ツールとも、専用ツールをダウンロードしなくては内容が見れないという
 欠点があるので、その補完としてお使いください。
 
-ファイル関連付けを行いたい方は、ダウンロード版をご使用ください。
+ファイル関連付けを行いたい方は、<a href="https://froghand0104.blogspot.com/p/blog-page.html" target="_blank">ダウンロード版</a>をご使用ください。
 
 多言語化は・・・気が向いたらやります。
 
@@ -639,7 +641,7 @@ Vue.component('Jama', {
           </ul>
         </div>
         <div>
-          <tree-view :target="tree">
+          <tree-view :target="tree" v-if="undertab=='tree'">
             <tree-child v-for="(child, index) in tree.children" :key="index" :item="child" treeID="tree" ref="root"></tree-child>
           </tree-view>
         </div>

@@ -1,6 +1,5 @@
 # SREC-Viewer-Web
-### 環境負荷物質報告書ビューワ
-### (JAMP-AIS・MSDSplus/JAMA/chemSHERPA/IEC62474 対応)
+### 環境負荷物質報告書ビューワ(JAMP-AIS・MSDSplus/JAMA/chemSHERPA/IEC62474 対応)
 
 ### これなに？
 電気/電子/自動車関連業界で環境情報伝達ファイルとして普及している

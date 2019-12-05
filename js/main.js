@@ -32,7 +32,11 @@ document.addEventListener('DOMContentLoaded', function () {
     data: {
       id: 0, //ファイルID
       langType: 'ja',
-      language: lang.ja,
+      language: {
+        "openFile": "開く",
+        "movetab": "タブ移動",
+        "delete": "削除"
+      },
       tabLeft: {
         selected: 0,
         list: []
@@ -277,36 +281,7 @@ document.addEventListener('DOMContentLoaded', function () {
           return [res.target.result]; //ZIPが配列で戻すので合わせる
         }
       },
-      Utf8ArrayToStr: function (b) {
-        let a;
-        let c = "";
-        let f = b.length;
-        for (a = 0; a < f;) {
-          let d = b[a++];
-          switch (d >> 4) {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-              c += String.fromCharCode(d);
-              break;
-            case 12:
-            case 13:
-              let e = b[a++];
-              c += String.fromCharCode((d & 31) << 6 | e & 63);
-              break;
-            case 14:
-              e = b[a++];
-              let g = b[a++];
-              c += String.fromCharCode((d & 15) << 12 | (e & 63) << 6 | (g & 63) << 0)
-          }
-        }
-        return c
-      },
+      Utf8ArrayToStr: function (b) {var a;var c="";var f=b.length;for(a=0;a<f;){var d=b[a++];switch(d>>4){case 0:case 1:case 2:case 3:case 4:case 5:case 6:case 7:c+=String.fromCharCode(d);break;case 12:case 13:var e=b[a++];c+=String.fromCharCode((d&31)<<6|e&63);break;case 14:e=b[a++];var g=b[a++];c+=String.fromCharCode((d&15)<<12|(e&63)<<6|(g&63)<<0)}}return c},
       xmlTransform: async function (xmlStr, xslPath) {
         if (xmlStr.charCodeAt(0) === 0xFEFF) xmlStr = xmlStr.slice(1); //BOM削除
         xmlStr = xmlStr.replace(/<DESCRIPT(.|\s)*?>/im, "<DESCRIPT>"); //JAMP-名前空間除去

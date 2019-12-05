@@ -67,9 +67,9 @@ Vue.component('tabs', {
     },
     deleteTab: function(target, index){
       target.list.splice( index, 1 );
+      if (target.selected == index) target.selected = 0;
     },
     moveTab: function(target, item, index, moveTo){
-      target.selected = 0;
       moveTo.push(Object.create(item));
       this.deleteTab(target, index);
     }
@@ -79,7 +79,7 @@ Vue.component('ErrMsg', {
   props: ['o'],
   template: `
     <div style="position:fixed; right:0; bottom:0;">
-      <div v-for="(err, index) in item" class="notification is-warning">
+      <div v-for="(err, index) in item" :key="index" class="notification is-warning">
         <button class="delete" @click="removeErr(index)"></button>
         {{err.filename}}<br/>
         {{err.msg}}
@@ -98,46 +98,58 @@ Vue.component('ErrMsg', {
   }
 });
 Vue.component('OptionDlg', {
-  props: ['o', 'show'],
+  props: ['o'],
   template: `
-    <div class="modal" :class="{'is-active': show}">
+    <div class="modal is-active">
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-          <p class="modal-card-title">初期表示設定</p>
+          <p class="modal-card-title">初期表示設定<span style="font-size:0.5em; padding-left:20px;">※Cookieを使用しています</span></p>
           <button class="delete" aria-label="close" @click="closeDlg"></button>
         </header>
         <section class="modal-card-body">
           <h5 class="title is-5">セクション表示設定</h5>
           <h6 class="title is-6">-- AIS --</h6>
-          <label class="checkbox"><input type="checkbox" v-model="item.AIS1">AISに関する情報</label>
-          <label class="checkbox"><input type="checkbox" v-model="item.AIS2">発行会社情報</label>
-          <label class="checkbox"><input type="checkbox" v-model="item.AIS3">発行/作成 部門情報</label>
-          <label class="checkbox"><input type="checkbox" v-model="item.AIS4">依頼者情報</label>
-          <label class="checkbox"><input type="checkbox" v-model="item.AIS5">型番情報</label>
-          <label class="checkbox"><input type="checkbox" v-model="item.AIS6">成型品情報</label>
-          <label class="checkbox"><input type="checkbox" v-model="item.AIS7">集計情報</label>
+          <div class="items">
+            <label class="checkbox"><input type="checkbox" v-model="item.AIS1">AISに関する情報</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.AIS2">発行会社情報</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.AIS3">発行/作成 部門情報</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.AIS4">依頼者情報</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.AIS5">型番情報</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.AIS6">成型品情報</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.AIS7">集計情報</label>
+          </div>
           <h6 class="title is-6">-- MSDSplus --</h6>
-          <label class="checkbox"><input type="checkbox" v-model="item.MS1">MSDSplusに関する情報</label>
-          <label class="checkbox"><input type="checkbox" v-model="item.MS2">発行会社情報</label>
-          <label class="checkbox"><input type="checkbox" v-model="item.MS3">発行/作成 部門情報</label>
-          <label class="checkbox"><input type="checkbox" v-model="item.MS4">依頼者情報</label>
-          <label class="checkbox"><input type="checkbox" v-model="item.MS5">型番情報</label>
-          <label class="checkbox"><input type="checkbox" v-model="item.MS6">製品情報</label>
-          <label class="checkbox"><input type="checkbox" v-model="item.MS7">報告法令等の制定/改訂番号</label>
+          <div class="items">
+            <label class="checkbox"><input type="checkbox" v-model="item.MS1">MSDSplusに関する情報</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.MS2">発行会社情報</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.MS3">発行/作成 部門情報</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.MS4">依頼者情報</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.MS5">型番情報</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.MS6">製品情報</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.MS7">報告法令等の制定/改訂番号</label>
+          </div>
           <h6 class="title is-6">-- JAMA --</h6>
-          <label class="checkbox"><input type="checkbox" v-model="item.JAMA">ファイル基本情報</label>
+          <div class="items">
+            <label class="checkbox"><input type="checkbox" v-model="item.JAMA">ファイル基本情報</label>
+          </div>
           <h6 class="title is-6">-- IEC62474(chemSHERPA) --</h6>
-          <label class="checkbox"><input type="checkbox" v-model="item.IEC1">文書情報</label>
-          <label class="checkbox"><input type="checkbox" v-model="item.IEC2">添付文書</label>
-          <label class="checkbox"><input type="checkbox" v-model="item.IEC3">連絡先情報</label>
-          <label class="checkbox"><input type="checkbox" v-model="item.IEC4">依頼/回答 情報</label>
-          <label class="checkbox"><input type="checkbox" v-model="item.IEC5">問い合わせ情報</label>
-          <label class="checkbox"><input type="checkbox" v-model="item.IEC6">製品基本情報</label>
-          <h5 class="title is-5">JAMAツリー展開設定</h5>
-          <label class="checkbox"><input type="checkbox" v-model="item.NB">納入部品</label>
-          <label class="checkbox"><input type="checkbox" v-model="item.BH">部品</label>
-          <label class="checkbox"><input type="checkbox" v-model="item.ZR">材料</label>
+          <div class="items">
+            <label class="checkbox"><input type="checkbox" v-model="item.IEC1">文書情報</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.IEC2">添付文書</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.IEC3">連絡先情報</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.IEC4">依頼/回答 情報</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.IEC5">問い合わせ情報</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.IEC6">製品基本情報</label>
+          </div>
+          <h5 class="title is-5">ツリー展開設定</h5>
+          <div class="items">
+            <label class="checkbox"><input type="checkbox" v-model="item.product">製品</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.layer">階層</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.parts">部品</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.material">材料</label>
+            <label class="checkbox"><input type="checkbox" v-model="item.substance">物質</label>
+          </div>
         </section>
         <footer class="modal-card-foot">
           <button class="button" @click="closeDlg">閉じる</button>
@@ -147,13 +159,88 @@ Vue.component('OptionDlg', {
   `,
   data: function (){
     return {
-      item : this.o,
-      view: this.show
+      item : this.o
     }
   },
   methods: {
     closeDlg: function(){
+      Cookies.set('opt', JSON.stringify(this.item), { expires: 365 });
       this.$parent.isShowOption = false;
+    }
+  }
+});
+Vue.component('HelpDlg', {
+  template: `
+  <div class="modal is-active">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">SREC-Viewerについて</p>
+        <button class="delete" aria-label="close" @click="close"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="columns">
+          <div class="column is-narrow">
+            <img src="css/logo_48.png"/>
+          </div>
+          <div class="column">
+            SREC-Viewer<br/>(Substances Reports of Environmental Concern Viewer)<br/>環境負荷物質報告書ビューア Ver.7.0.0
+          </div>
+        </div>
+<pre>
+Copyright 2010 - 2019 FrogHand (Satoshi Tajima)
+<a href="http://opensource.org/licenses/mit-license.php">Released under the MIT license</a>
+Mail      <a href="mailto:froghand0104@gmail.com">froghand0104@gmail.com</a>
+Blog      <a href="http://froghand0104.blogspot.com">http://froghand0104.blogspot.com</a>
+GitHub    <a href="https://github.com/satoshiTajima005/SREC-Viewer-Web">https://github.com/satoshiTajima005/SREC-Viewer-Web</a>
+</pre>【使用方法など】
+<pre style="height:150px;overflow:auto;display:block;border:1px solid #666;background:#fff;padding:10px">
+電気・電子・自動車業界で、環境情報伝達に一般的に使用されている
+・JAMP-AIS [*.xml]
+・JAMP-MSDSPlus [*.xml]
+・chemSHRPA(AI/CI) [*.shai, *.shci, *.xml]
+・IEC62474 [*.xml]
+・JAMA/JAPIA統一データシート [*.csv]
+の各ファイルのビューワです。
+
+各ツールとも、専用ツールをダウンロードしなくては内容が見れないという
+欠点があるので、その補完としてお使いください。
+
+ファイル関連付けを行いたい方は、ダウンロード版をご使用ください。
+
+多言語化は・・・気が向いたらやります。
+
+※環境情報は機密事項を含むので、オプション機能を除くすべての機能は
+　クライアント側で処理しており、サーバーに内容が送信されることはありません。
+※JGPSSIの表示機能に関しては、実務上ほぼ使われなくなったので、
+　大幅改定を機に削除しました。
+
+問題がありましたらメールかブログコメントで連絡をいただけると助かります。
+</pre> 【著作権情報】
+<pre style="height:150px;overflow:auto;display:block;border:1px solid #666;background:#fff;padding:10px">
+---AIS/MSDSplus表示機能に関して---
+  本ツールはECALGA環境辞書を複写/引用しています。
+  ECALGA環境辞書の著作権はJEITA ECセンターにあります。
+  JETITA ECセンター  <a href="http://ec.jeita.or.jp/">http://ec.jeita.or.jp/</a>
+  ECALGA環境辞書     <a href="http://ec.jeita.or.jp/jp/modules/contents09/">http://ec.jeita.or.jp/jp/modules/contents09/</a>
+  Copyright (c) 2007 JEITA
+
+  ==Leaf icon==
+  Creator : DragonArt
+  Website : <a href="http://dragonartz.wordpress.com/">http://dragonartz.wordpress.com/</a>
+
+  ==SpyGlass icon==
+  Creator : VistaICO Toolbar Icons
+  Website : <a href="http://www.vistaico.com/contact.htm">http://www.vistaico.com/contact.htm</a>
+  Copyright (C) VistaICO.com
+      </pre>
+      </section>
+    </div>
+  </div>
+  `,
+  methods: {
+    close: function(){
+      this.$root.isShowHelp=false;
     }
   }
 });
@@ -204,13 +291,13 @@ Vue.component('TableView', {
     `<div class="tabbody">
       <table class="table is-bordered is-narrow" style="margin: 10px;">
         <thead>
-          <tr v-for="tr in target.thead">
-            <th v-for="th in tr" :colspan="th.colspan" :class="th.class">{{th.value}}</th>
+          <tr v-for="(tr,index) in target.thead" :key="index">
+            <th v-for="(th,index) in tr" :key="index" :colspan="th.colspan" :class="th.class">{{th.value}}</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="tr in target.tbody">
-            <td v-for="td in tr" :rowspan="td.rowspan">{{td.value}}</td>
+          <tr v-for="(tr,index) in target.tbody" :key="index">
+            <td v-for="(td,index) in tr" :key="index" :rowspan="td.rowspan">{{td.value}}</td>
           </tr>
         </tbody>
       </table>
@@ -231,7 +318,7 @@ Vue.component('TreeView', {
         <div class="column treecol">
           <div>
             <table class="table">
-              <tr v-for="(row, index) in selected">
+              <tr v-for="(row, index) in selected" :key="index">
                 <th>{{row.name}}</th>
                 <td>{{row.value}}</td>
               </tr>
@@ -272,7 +359,7 @@ Vue.component('TreeChild', {
         </span>
       </span>
       <ul class="node" v-show="node.isOpen" v-if="node.children">
-        <tree-child v-for="(child, index) in node.children" :key="index":item="child" :treeID="treeID+''+index"></tree-child>
+        <tree-child v-for="(child, index) in node.children" :key="index" :item="child" :treeID="treeID+''+index"></tree-child>
       </ul>
     </li>
   `,
@@ -594,7 +681,7 @@ Vue.component('ChemUnique', {
         </div>
         <transition name="fade">
           <div class="message-body" v-show="target.IEC2.isShow">
-            <button class="button" v-for="(item, index) in target.IEC2.data" :type="item.type" :data-base64="item.data">{{item.name}}</button>
+            <button class="button" v-for="(item, index) in target.IEC2.data" :key="index" :type="item.type" :data-base64="item.data">{{item.name}}</button>
           </div>
         </transition>
       </div>
@@ -726,7 +813,7 @@ Vue.component('Chem', {
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="tr in table.over">
+                <tr v-for="(tr,index) in table.over" :key="index">
                   <td>{{tr.ID}}</td>
                   <td :title="tr.AppJA">{{tr.nameJA}}</td>
                   <td>{{tr.ThresholdJA}}</td>
@@ -750,7 +837,7 @@ Vue.component('Chem', {
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="tr in table.lower">
+                <tr v-for="(tr,index) in table.lower" :key="index">
                   <td>{{tr.ID}}</td>
                   <td>{{tr.nameJA}}</td>
                   <td>{{tr.AppJA}}</td>

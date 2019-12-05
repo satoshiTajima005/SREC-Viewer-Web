@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
         AIS4:true,
         AIS5:true,
         AIS6:true,
+        AIS7:true,
         MS1:true,
         MS2:true,
         MS3:true,
@@ -68,9 +69,22 @@ document.addEventListener('DOMContentLoaded', function () {
         IEC3:true,
         IEC4:true,
         IEC5:true,
-        NB:true,
-        BH:true,
-        ZR:true
+        IEC6:true,
+        root:true,
+        product:true,
+        layer:true,
+        parts:true,
+        material:true,
+        substance:true,
+      }
+    },
+    mounted :function(){
+      //optionsをクッキーから取得
+      let opt = Cookies.get('opt');
+      if (opt) {
+        this.options = JSON.parse(opt);
+      }else{
+        Cookies.set('opt', JSON.stringify(this.$root.options), { expires: 365 });
       }
     },
     methods: {
@@ -157,6 +171,19 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(o.data);
           }
         });
+
+        //ユニーク部 / ツリー　展開設定
+        tabObject.map(function(l){
+          Object.keys(l.data.unique).forEach(key => l.data.unique[key].isShow = me.options[key])
+          if (l.data.tree) {
+            let spred = function(node){
+              node.isOpen = me.options[node.type];
+              if (node.children) node.children.map(n => spred(n) );
+            }
+            spred(l.data.tree);
+          }
+        });
+
         //変換後の配列をタブリストに投入
         this.tabLeft.list = this.tabLeft.list.concat(tabObject);
       },
@@ -281,7 +308,9 @@ document.addEventListener('DOMContentLoaded', function () {
           return [res.target.result]; //ZIPが配列で戻すので合わせる
         }
       },
-      Utf8ArrayToStr: function (b) {var a;var c="";var f=b.length;for(a=0;a<f;){var d=b[a++];switch(d>>4){case 0:case 1:case 2:case 3:case 4:case 5:case 6:case 7:c+=String.fromCharCode(d);break;case 12:case 13:var e=b[a++];c+=String.fromCharCode((d&31)<<6|e&63);break;case 14:e=b[a++];var g=b[a++];c+=String.fromCharCode((d&15)<<12|(e&63)<<6|(g&63)<<0)}}return c},
+      Utf8ArrayToStr: function (b) {
+        var a;var c="";var f=b.length;for(a=0;a<f;){var d=b[a++];switch(d>>4){case 0:case 1:case 2:case 3:case 4:case 5:case 6:case 7:c+=String.fromCharCode(d);break;case 12:case 13:var e=b[a++];c+=String.fromCharCode((d&31)<<6|e&63);break;case 14:e=b[a++];var g=b[a++];c+=String.fromCharCode((d&15)<<12|(e&63)<<6|(g&63)<<0)}}return c
+      },
       xmlTransform: async function (xmlStr, xslPath) {
         if (xmlStr.charCodeAt(0) === 0xFEFF) xmlStr = xmlStr.slice(1); //BOM削除
         xmlStr = xmlStr.replace(/<DESCRIPT(.|\s)*?>/im, "<DESCRIPT>"); //JAMP-名前空間除去

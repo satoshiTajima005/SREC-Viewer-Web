@@ -20,6 +20,22 @@ body {
   overflow: hidden;
 }
 
+.modal-background {
+  background-color:rgba(0,0,0,0.3);
+}
+.modal .title{
+  margin: 24px 0 5px 0;
+}
+.modal .title:first-child{
+  margin: 0 0 5px 0;
+}
+.modal .items{
+  padding-left: 20px;
+}
+.modal .items label{
+  margin-right: 30px;
+}
+
 .header {
   border-bottom: 1px solid #aaa;
   margin-bottom: 10px;

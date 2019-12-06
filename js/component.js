@@ -190,7 +190,7 @@ Vue.component('HelpDlg', {
           </div>
         </div>
 <pre>
-Copyright 2010 - 2019 FrogHand (Satoshi Tajima)
+Copyright 2010 - 2019 Satoshi Tajima
 <a href="http://opensource.org/licenses/mit-license.php">Released under the MIT license</a>
 Mail      <a href="mailto:froghand0104@gmail.com">froghand0104@gmail.com</a>
 Blog      <a href="http://froghand0104.blogspot.com" target="_blank">http://froghand0104.blogspot.com</a>
@@ -205,12 +205,10 @@ GitHub    <a href="https://github.com/satoshiTajima005/SREC-Viewer-Web" target="
 ・JAMA/JAPIA統一データシート [*.csv]
 の各ファイルのビューワです。
 
-各ツールとも、専用ツールをダウンロードしなくては内容が見れないという
-欠点があるので、その補完としてお使いください。
-
-ファイル関連付けを行いたい方は、<a href="https://froghand0104.blogspot.com/p/blog-page.html" target="_blank">ダウンロード版</a>をご使用ください。
-
-多言語化は・・・気が向いたらやります。
+・モダンブラウザ(Chrome/FF/Edge・・)なら大抵動くと思います(IEは動きません)
+・ウィンドウへのファイルドロップにも対応しています
+・ファイル関連付けを行いたい方は、<a href="https://froghand0104.blogspot.com/p/blog-page.html" target="_blank">ダウンロード版</a>をご使用ください。
+・多言語化は・・・ご要望が多ければやろうかな
 
 ※環境情報は機密事項を含むので、オプション機能を除くすべての機能は
 　クライアント側で処理しており、サーバーに表示したファイル内容が
@@ -227,11 +225,9 @@ GitHub    <a href="https://github.com/satoshiTajima005/SREC-Viewer-Web" target="
   JETITA ECセンター  <a href="http://ec.jeita.or.jp/">http://ec.jeita.or.jp/</a>
   ECALGA環境辞書     <a href="http://ec.jeita.or.jp/jp/modules/contents09/">http://ec.jeita.or.jp/jp/modules/contents09/</a>
   Copyright (c) 2007 JEITA
-
 ==Leaf icon==
   Creator : DragonArt
   Website : <a href="http://dragonartz.wordpress.com/">http://dragonartz.wordpress.com/</a>
-
  ==SpyGlass icon==
   Creator : VistaICO Toolbar Icons
   Website : <a href="http://www.vistaico.com/contact.htm">http://www.vistaico.com/contact.htm</a>

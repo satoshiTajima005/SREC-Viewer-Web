@@ -24,10 +24,9 @@ String.prototype.repeat = function (n) {
 };
 
 Vue.config.productionTip = true;
-let app;
 
 document.addEventListener('DOMContentLoaded', function () {
-  app = new Vue({
+  new Vue({
     el: "#app",
     data: {
       id: 0, //ファイルID
@@ -48,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
       err: [], //{filename:'', msg:''}
       isShowOption: false, 
       isShowHelp: false,
+      isShowDroper: false,
       options:{
         AIS1:true,
         AIS2:true,
@@ -88,13 +88,29 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     },
     methods: {
+      dragover: function(e){
+        let isFiles = e.dataTransfer.types.filter(item => item=='Files').length;
+        if (isFiles) this.isShowDroper = true;
+      },
+      dragleave: function(e){
+        this.isShowDroper = false;
+      },
+      ondrop: function(e){
+        this.isShowDroper = false;
+        let isFiles = e.dataTransfer.types.filter(item => item=='Files').length;
+        if (!isFiles) return;
+        this.showFile(e.dataTransfer.files);
+      },
       openFile: async function (e) {
+        if (!(window.File && window.FileReader && window.FileList && window.Blob)) return;
+        this.showFile(e.target.files.length);
+      },
+      showFile: async function(domFiles){
         let me = this;
 
-        if (!(window.File && window.FileReader && window.FileList && window.Blob)) return;
         let files = [];
         //FileListを配列化
-        for (let i = 0; i < e.target.files.length; i++) files.push(e.target.files[i]);
+        for (let i = 0; i < domFiles.length; i++) files.push(domFiles[i]);
 
         //ファイルのテキスト読み取り
         let tabObject = [];
@@ -102,7 +118,6 @@ document.addEventListener('DOMContentLoaded', function () {
           return me.getFileArr(file, tabObject);
         }));
 
-        //エラーを削除
         //ファイルテキストをオブジェクト化
         await Promise.all(tabObject.map(async function (o, index) {
           switch (o.type) {

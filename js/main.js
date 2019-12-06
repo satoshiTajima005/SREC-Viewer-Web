@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       openFile: async function (e) {
         if (!(window.File && window.FileReader && window.FileList && window.Blob)) return;
-        this.showFile(e.target.files.length);
+        this.showFile(e.target.files);
       },
       showFile: async function(domFiles){
         let me = this;

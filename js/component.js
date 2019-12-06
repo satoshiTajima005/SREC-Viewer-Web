@@ -286,7 +286,7 @@ Vue.component('UniqueWrap', {
 Vue.component('TableView', {
   props: {target:{type: Object} },
   template:
-    `<div class="tabbody">
+    `<div class="tabbody" style="max-height:500px; overflow:scroll;">
       <table class="table is-bordered is-narrow" style="margin: 10px;">
         <thead>
           <tr v-for="(tr,index) in target.thead" :key="index">

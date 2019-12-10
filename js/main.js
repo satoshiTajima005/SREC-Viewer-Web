@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
       isShowOption: false, 
       isShowHelp: false,
       isShowDroper: false,
+      isShowDropdown: false,
       options:{
         AIS1:true,
         AIS2:true,

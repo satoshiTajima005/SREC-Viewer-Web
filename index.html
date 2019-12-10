@@ -23,11 +23,11 @@
 <body>
   <div id="app">
     <div class="dropstarter" @dragover.prevent="dragover">
-      <div class="header columns">
+      <div class="header columns is-mobile">
         <div class="column is-narrow">
           <img src="css/logo.png">
         </div>
-        <div class="column is-2">
+        <div class="column">
           <div class="file is-green">
             <label class="file-label">
               <input class="file-input" type="file" @change="openFile" accept=".xml,.csv,.shai,.shci" multiple>
@@ -45,7 +45,7 @@
           <button type="button" class="button is-green" :class="{'is-light': langType!=='zh'}" @click="langType='zh'" disabled>Chinese</button>
           -->
         </div>
-        <div class="column is-narrow">
+        <div class="column is-narrow is-hidden-mobile">
           <button type="button" class="button is-green" @click="isShowOption=true">
             <span class="icon"><i class="fas fa-wrench"></i></span>
             <span>オプション</span>
@@ -57,6 +57,30 @@
           <a href="https://froghand0104.blogspot.com/p/blog-page.html" target="_blank" style="line-height: 40px; padding-left:30px;">
             ダウンロード版はこちら>>
           </a>
+        </div>
+        <div class="column is-narrow is-hidden-tablet">
+          <div class="dropdown is-right" :class="{'is-active':isShowDropdown }">
+            <div class="dropdown-trigger">
+              <button class="button is-green" @click="isShowDropdown=!isShowDropdown">
+                <span class="icon"><i class="fas fa-bars"></i></span>
+              </button>
+            </div>
+            <div class="dropdown-menu">
+              <div class="dropdown-content">
+                <a href="#" class="dropdown-item" @click="isShowOption=true">
+                  <span class="icon"><i class="fas fa-wrench"></i></span>
+                  <span>オプション</span>
+                </a>
+                <a class="dropdown-item" @click="isShowHelp=true">
+                  <span class="icon"><i class="fas fa-question"></i></span>
+                  <span>ヘルプ</span>
+                </a>
+                <a href="https://froghand0104.blogspot.com/p/blog-page.html" target="_blank" class="dropdown-item">
+                  ダウンロード版はこちら
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="viewarea columns">

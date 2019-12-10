@@ -23,6 +23,59 @@ String.prototype.repeat = function (n) {
   return ret;
 };
 
+/*********************************************************************************************************************************
+    機能：オフライン対応
+注意事項：無し
+*********************************************************************************************************************************/
+UpUp.start({
+  'content-url': 'index.html',
+  'assets': [
+    'js/component.js',
+    'js/js.cookie.min.js',
+    'js/main.js',
+    'js/unzip.min.js',
+    'js/vue.min.js',
+    'css/all.min.css',
+    'css/bulma.min.css',
+    'css/css.css',
+    'css/google.fonts.css',
+    'css/green.css',
+    'css/logo_48.png',
+    'css/logo.png',
+    'css/ticon_law.png',
+    'css/ticon_layer.png',
+    'css/ticon_material.png',
+    'css/ticon_parts.png',
+    'css/ticon_product.png',
+    'css/ticon_substance.png',
+    "xsl/AIS_TREE.xsl",
+    "xsl/AIS_UNIQUE.xsl",
+    "xsl/JAMA_TREE.xsl",
+    "xsl/JAMA_UNIQUE.xsl",
+    "xsl/MSDSplus_TABLE.xsl",
+    "xsl/MSDSplus_UNIQUE.xsl",
+    "xsl/IEC62474_TREE.xsl",
+    "xsl/IEC62474_UNIQUE.xsl",
+    "xsl/IEC62474_TABLE.xsl",
+    "xsl/AIS_TABLE.xsl",
+    "webfonts/fa-regular-400.ttf",
+    "webfonts/fa-regular-400.woff",
+    "webfonts/fa-regular-400.woff2",
+    "webfonts/fa-solid-900.eot",
+    "webfonts/fa-solid-900.svg",
+    "webfonts/fa-solid-900.ttf",
+    "webfonts/fa-solid-900.woff",
+    "webfonts/fa-solid-900.woff2",
+    "webfonts/fa-brands-400.eot",
+    "webfonts/fa-brands-400.svg",
+    "webfonts/fa-brands-400.ttf",
+    "webfonts/fa-brands-400.woff",
+    "webfonts/fa-brands-400.woff2",
+    "webfonts/fa-regular-400.eot",
+    "webfonts/fa-regular-400.svg"
+  ]
+});
+
 Vue.config.productionTip = true;
 
 document.addEventListener('DOMContentLoaded', function () {

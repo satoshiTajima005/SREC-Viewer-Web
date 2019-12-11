@@ -23,13 +23,22 @@
   <link rel="stylesheet" href="./css/green.css">
   <link rel="stylesheet" href="./css/css.css">
   
+  <script>
+    let isIE = (function(){
+      let userAgent = window.navigator.userAgent.toLowerCase();
+      return (userAgent.indexOf( 'msie' ) !== -1 || userAgent.indexOf( 'trident' ) !== -1);
+    })();
+    if (isIE){
+      alert('SREC-Viewer-WebはIEでは動きません\n最新のモダンブラウザ(Edge、Firefox、Google Chromeなど)をご利用ください。')
+    }
+  </script>
+
   <script src="./js/js.cookie.min.js"></script>
   <script src="./js/vue.min.js"></script>
   <!--<script src="js/vue.dev.js"></script>-->
   <script src="./js/unzip.min.js"></script>
   <script src="./upup.min.js"></script>
   <script src="./js/component.js"></script>
-  <script defer src="./js/main.js"></script>
   <title>SREC-Viewer-Web (環境負荷物質報告書ビューワ― AIS/MSDSplus/JAMA/chemSHRPA/IEC62474)</title>
 </head>
 
@@ -108,6 +117,10 @@
       </div>
     </div>
   </div>
+
+  <!--メイン処理-->
+  <script defer src="./js/main.js"></script>
+
 </body>
 
 </html>

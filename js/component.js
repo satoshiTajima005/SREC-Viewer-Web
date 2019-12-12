@@ -164,6 +164,9 @@ Vue.component('OptionDlg', {
       item : this.o
     }
   },
+  mounted: function(){
+    this.$root.isShowDropdown = false
+  },
   methods: {
     closeDlg: function(){
       Cookies.set('opt', JSON.stringify(this.item), { expires: 365 });
@@ -186,7 +189,7 @@ Vue.component('HelpDlg', {
             <img src="css/logo_48.png"/>
           </div>
           <div class="column">
-            SREC-Viewer<br/>(Substances Reports of Environmental Concern Viewer)<br/>環境負荷物質報告書ビューア Ver.7.0.0
+            SREC-Viewer<br/>(Substances Reports of Environmental Concern Viewer)<br/>環境負荷物質報告書ビューア
           </div>
         </div>
 <pre>
@@ -236,6 +239,9 @@ GitHub    <a href="https://github.com/satoshiTajima005/SREC-Viewer-Web" target="
     </div>
   </div>
   `,
+  mounted: function(){
+    this.$root.isShowDropdown = false
+  },
   methods: {
     close: function(){
       this.$root.isShowHelp=false;

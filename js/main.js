@@ -56,7 +56,7 @@ new Vue({
     isShowHelp: false,
     isShowDroper: false,
     isShowDropdown: false,
-    isIE: isIE(),
+    isIE: false, //isIE(),
     options:{
       AIS1:true,
       AIS2:true,

@@ -23,11 +23,6 @@ String.prototype.repeat = function (n) {
   return ret;
 };
 
-let isIE = function(){
-  let userAgent = window.navigator.userAgent.toLowerCase();
-  return (userAgent.indexOf( 'msie' ) !== -1 || userAgent.indexOf( 'trident' ) !== -1);
-};
-
 /*********************************************************************************************************************************
     機能：Vue　主処理
 注意事項：無し
@@ -56,7 +51,7 @@ new Vue({
     isShowHelp: false,
     isShowDroper: false,
     isShowDropdown: false,
-    isIE: false, //isIE(),
+    isIE: false, //IEだとテンプレート構文(`バッククォート括り)とアロー関数でエラーが出るので判定関数は要らない
     options:{
       AIS1:true,
       AIS2:true,

@@ -38,6 +38,28 @@ body {
   transform: translateY(-50%) translateX(-50%);
 }
 
+.isIE {
+  height: 80%;
+  width:80%;
+  position:fixed;
+  top:10%;
+  left:10%;
+}
+.isIE>.hero-body{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  width: 920px;
+  height: 150px;
+}
+.isIE>.hero-body a{
+  text-decoration: underline;
+  color:#01e1ff!important;
+}
+
 .modal-background {
   background-color:rgba(0,0,0,0.3);
 }

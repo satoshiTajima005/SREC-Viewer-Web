@@ -23,6 +23,11 @@ String.prototype.repeat = function (n) {
   return ret;
 };
 
+let isIE = function(){
+  let userAgent = window.navigator.userAgent.toLowerCase();
+  return (userAgent.indexOf( 'msie' ) !== -1 || userAgent.indexOf( 'trident' ) !== -1);
+};
+
 /*********************************************************************************************************************************
     機能：Vue　主処理
 注意事項：無し
@@ -51,6 +56,7 @@ new Vue({
     isShowHelp: false,
     isShowDroper: false,
     isShowDropdown: false,
+    isIE: isIE(),
     options:{
       AIS1:true,
       AIS2:true,
@@ -82,9 +88,6 @@ new Vue({
     }
   },
   mounted :function(){
-    //IEなど未稼働ブラウザをはじく
-
-
     //optionsをクッキーから取得
     let opt = Cookies.get('opt');
     if (opt) {

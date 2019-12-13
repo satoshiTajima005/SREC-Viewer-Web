@@ -1,7 +1,7 @@
-/*********************************************************************************************************************************
+/****************************************************************************
     機能：xml特殊文字変換
 注意事項：無し
-*********************************************************************************************************************************/
+****************************************************************************/
 String.prototype.xmlEncode = function () {
   return this
     .replace(/&/ig, "&amp;")
@@ -11,10 +11,10 @@ String.prototype.xmlEncode = function () {
     .replace(/'/ig, "&apos;");
 };
 
-/*********************************************************************************************************************************
+/****************************************************************************
     機能：文字列繰り返し
 注意事項：無し
-*********************************************************************************************************************************/
+****************************************************************************/
 String.prototype.repeat = function (n) {
   let ret = "",
     str = this;
@@ -23,10 +23,10 @@ String.prototype.repeat = function (n) {
   return ret;
 };
 
-/*********************************************************************************************************************************
+/****************************************************************************
     機能：Vue　主処理
 注意事項：無し
-*********************************************************************************************************************************/
+****************************************************************************/
 Vue.config.productionTip = true;
 new Vue({
   el: "#app",
@@ -47,61 +47,63 @@ new Vue({
       list: []
     },
     err: [], //{filename:'', msg:''}
-    isShowOption: false, 
+    isShowOption: false,
     isShowHelp: false,
     isShowDroper: false,
     isShowDropdown: false,
     isIE: false, //IEだとテンプレート構文(`バッククォート括り)とアロー関数でエラーが出るので判定関数は要らない
-    options:{
-      AIS1:true,
-      AIS2:true,
-      AIS3:true,
-      AIS4:true,
-      AIS5:true,
-      AIS6:true,
-      AIS7:true,
-      MS1:true,
-      MS2:true,
-      MS3:true,
-      MS4:true,
-      MS5:true,
-      MS6:true,
-      MS7:true,
-      JAMA:true,
-      IEC1:true,
-      IEC2:true,
-      IEC3:true,
-      IEC4:true,
-      IEC5:true,
-      IEC6:true,
-      root:true,
-      product:true,
-      layer:true,
-      parts:true,
-      material:true,
-      substance:true,
+    options: {
+      AIS1: true,
+      AIS2: true,
+      AIS3: true,
+      AIS4: true,
+      AIS5: true,
+      AIS6: true,
+      AIS7: true,
+      MS1: true,
+      MS2: true,
+      MS3: true,
+      MS4: true,
+      MS5: true,
+      MS6: true,
+      MS7: true,
+      JAMA: true,
+      IEC1: true,
+      IEC2: true,
+      IEC3: true,
+      IEC4: true,
+      IEC5: true,
+      IEC6: true,
+      root: true,
+      product: true,
+      layer: true,
+      parts: true,
+      material: true,
+      substance: true,
     }
   },
-  mounted :function(){
+  mounted: function () {
     //optionsをクッキーから取得
     let opt = Cookies.get('opt');
     if (opt) {
       this.options = JSON.parse(opt);
-    }else{
-      Cookies.set('opt', JSON.stringify(this.$root.options), { expires: 365 });
+    } else {
+      Cookies.set('opt', JSON.stringify(this.$root.options), {
+        expires: 365
+      });
     }
   },
   methods: {
-    dragover: function(e){
-      let isFiles = e.dataTransfer.types.filter(item => item=='Files').length;
+    dragover: function (e) {
+      let isFiles = e.dataTransfer.types.filter(item => item == 'Files').length;
       if (isFiles) this.isShowDroper = true;
     },
-    dragleave: function(e){
+    dragleave: function (e) {
       this.isShowDroper = false;
     },
-    ondrop: function(e){
+    ondrop: function (e) {
       this.isShowDroper = false;
-      let isFiles = e.dataTransfer.types.filter(item => item=='Files').length;
+      let isFiles = e.dataTransfer.types.filter(item => item == 'Files').length;
       if (!isFiles) return;
       this.showFile(e.dataTransfer.files);
     },
@@ -109,7 +111,7 @@ new Vue({
       if (!(window.File && window.FileReader && window.FileList && window.Blob)) return;
       this.showFile(e.target.files);
     },
-    showFile: async function(domFiles){
+    showFile: async function (domFiles) {
       let me = this;
 
       let files = [];
@@ -126,17 +128,30 @@ new Vue({
       await Promise.all(tabObject.map(async function (o, index) {
         switch (o.type) {
           case 'extErr':
-            me.err.push({filename:o.name, msg:'表示できない拡張子です'});
-            break;  
+            me.err.push({
+              filename: o.name,
+              msg: '表示できない拡張子です'
+            });
+            break;
           case 'zipErr':
-            me.err.push({filename:o.name, msg:'chemSHRPAのデータが破損しています'});
+            me.err.push({
+              filename: o.name,
+              msg: 'chemSHRPAのデータが破損しています'
+            });
             break;
           case 'xmlTypeErr':
-            me.err.push({filename:o.name, msg:'xml書式が展開できない形式です'});
+            me.err.push({
+              filename: o.name,
+              msg: 'xml書式が展開できない形式です'
+            });
             break;
           case 'AIS':
           case 'AIS-temp':
-            o.data = { unique: {}, tree: {}, table: {} };
+            o.data = {
+              unique: {},
+              tree: {},
+              table: {}
+            };
             o.txt = o.txt.replace(/&quot;/igm, '\\&quot;');
             o.data.unique = await me.xmlTransform(o.txt, 'xsl/AIS_UNIQUE.xsl');
             o.data.tree = await me.xmlTransform(o.txt, 'xsl/AIS_TREE.xsl');
@@ -144,27 +159,40 @@ new Vue({
             break;
           case 'MSDSplus':
           case 'MSDSplus-temp':
-            o.data = { unique: {}, table: {} };
+            o.data = {
+              unique: {},
+              table: {}
+            };
             o.txt = o.txt.replace(/&quot;/igm, '\\&quot;');
             o.data.unique = await me.xmlTransform(o.txt, 'xsl/MSDSplus_UNIQUE.xsl');
             o.data.table = await me.xmlTransform(o.txt, 'xsl/MSDSplus_TABLE.xsl');
             break;
           case 'IEC62474':
-            o.data = { unique: {}, tree: {}, table: {} };
+            o.data = {
+              unique: {},
+              tree: {},
+              table: {}
+            };
             o.txt = o.txt.replace(/&quot;/igm, '\\&quot;');
             o.data.unique = await me.xmlTransform(o.txt, 'xsl/IEC62474_UNIQUE.xsl');
             o.data.table = await me.xmlTransform(o.txt, 'xsl/IEC62474_TABLE.xsl');
             o.data.tree = await me.xmlTransform(o.txt, 'xsl/IEC62474_TREE.xsl');
             break;
           case 'JAMA':
-            o.data = { unique: {}, tree: {} };
+            o.data = {
+              unique: {},
+              tree: {}
+            };
             let ver = 0;
             try {
               ver = o.txt.split("\r\n")[0].split('","')[1].replace(/Ver\./, '') - 0;
-            }catch(e){}
+            } catch (e) {}
             if (!ver) {
               o.result = false;
-              me.err.push({filename:o.name, msg:'JAMAファイルと形式が異なります'});
+              me.err.push({
+                filename: o.name,
+                msg: 'JAMAファイルと形式が異なります'
+              });
               break;
             }
             o.txt = me.JamaToXML(o.txt, ver);
@@ -173,9 +201,9 @@ new Vue({
             break;
         }
       }));
-      
+
       //エラーデータを削除
-      tabObject = tabObject.filter(function(o){
+      tabObject = tabObject.filter(function (o) {
         return o.result;
       });
 
@@ -192,12 +220,12 @@ new Vue({
       });
 
       //ユニーク部 / ツリー　展開設定
-      tabObject.map(function(l){
+      tabObject.map(function (l) {
         Object.keys(l.data.unique).forEach(key => l.data.unique[key].isShow = me.options[key])
         if (l.data.tree) {
-          let spred = function(node){
+          let spred = function (node) {
             node.isOpen = me.options[node.type];
-            if (node.children) node.children.map(n => spred(n) );
+            if (node.children) node.children.map(n => spred(n));
           }
           spred(l.data.tree);
         }
@@ -328,7 +356,34 @@ new Vue({
       }
     },
     Utf8ArrayToStr: function (b) {
-      var a;var c="";var f=b.length;for(a=0;a<f;){var d=b[a++];switch(d>>4){case 0:case 1:case 2:case 3:case 4:case 5:case 6:case 7:c+=String.fromCharCode(d);break;case 12:case 13:var e=b[a++];c+=String.fromCharCode((d&31)<<6|e&63);break;case 14:e=b[a++];var g=b[a++];c+=String.fromCharCode((d&15)<<12|(e&63)<<6|(g&63)<<0)}}return c
+      var a;
+      var c = "";
+      var f = b.length;
+      for (a = 0; a < f;) {
+        var d = b[a++];
+        switch (d >> 4) {
+          case 0:
+          case 1:
+          case 2:
+          case 3:
+          case 4:
+          case 5:
+          case 6:
+          case 7:
+            c += String.fromCharCode(d);
+            break;
+          case 12:
+          case 13:
+            var e = b[a++];
+            c += String.fromCharCode((d & 31) << 6 | e & 63);
+            break;
+          case 14:
+            e = b[a++];
+            var g = b[a++];
+            c += String.fromCharCode((d & 15) << 12 | (e & 63) << 6 | (g & 63) << 0)
+        }
+      }
+      return c
     },
     xmlTransform: async function (xmlStr, xslPath) {
       if (xmlStr.charCodeAt(0) === 0xFEFF) xmlStr = xmlStr.slice(1); //BOM削除
@@ -479,11 +534,11 @@ new Vue({
   }
 });
 
-/*********************************************************************************************************************************
+/****************************************************************************
     機能：オフライン対応
 注意事項：無し
-*********************************************************************************************************************************/
-setTimeout(function(){
+****************************************************************************/
+setTimeout(function () {
   UpUp.start({
     'content-url': 'index.html',
     'assets': [

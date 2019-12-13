@@ -2,138 +2,27 @@
 <html lang="ja">
 
 <head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154153647-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-154153647-1');
-  </script>
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <meta property="og:title" content="SREC-Viewer-Web" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://satoshitajima005.github.io/SREC-Viewer-Web/index.html" />
-  <meta property="og:image" content="https://satoshitajima005.github.io/SREC-Viewer-Web/favicon.ico" />
+  <meta property="og:url" content="https://srec-viewer.github.io/online/index.html" />
+  <meta property="og:image" content="https://srec-viewer.github.io/online/favicon.ico" />
   <meta property="og:site_name" content="SREC-Viewer-Web" />
   <meta property="og:description" content="環境負荷物質報告書ビューワ― AIS/MSDSplus/JAMA/chemSHRPA/IEC62474 対応" />
 
-  <link rel="icon" href="favicon.ico">
-  <link rel="stylesheet" href="./css/bulma.min.css">
-  <link rel="stylesheet" href="./css/all.min.css">
-  <link rel="stylesheet" href="./css/google.fonts.css">
-  <link rel="stylesheet" href="./css/green.css">
-  <link rel="stylesheet" href="./css/css.css">
-
-  <script src="./js/js.cookie.min.js"></script>
-  <script src="./js/vue.min.js"></script>
-  <!--<script src="js/vue.dev.js"></script>-->
-  <script src="./js/unzip.min.js"></script>
-  <script src="./upup.min.js"></script>
-  <script src="./js/component.js"></script>
+  <script>
+    var redirect_url = "https://srec-viewer.github.io/online/index.html" + location.search;
+    if (document.referrer) {
+      var referrer = "referrer=" + encodeURIComponent(document.referrer);
+      redirect_url = redirect_url + (location.search ? '&' : '?') + referrer;
+    }
+    location.href = redirect_url;
+  </script>
   <title>SREC-Viewer-Web (環境負荷物質報告書ビューワ― AIS/MSDSplus/JAMA/chemSHRPA/IEC62474)</title>
 </head>
 
-<body>
-  <div id="app">
-    <div class="dropstarter" @dragover.prevent="dragover">
-      <div class="header columns is-mobile">
-        <div class="column is-narrow">
-          <img src="css/logo.png">
-        </div>
-        <div class="column">
-          <div class="file is-green">
-            <label class="file-label">
-              <input class="file-input" type="file" @change="openFile" accept=".xml,.csv,.shai,.shci" multiple>
-              <span class="file-cta">
-                <span class="file-icon"><i class="far fa-folder-open"></i></span>
-                <span class="file-label">{{language.openFile}}</span>
-              </span>
-            </label>
-          </div>
-        </div>
-        <div class="column">
-          <!--
-          <button type="button" class="button is-green" :class="{'is-light': langType!=='ja'}" @click="langType='ja'">Japanese</button>
-          <button type="button" class="button is-green" :class="{'is-light': langType!=='en'}" @click="langType='en'" disabled>English</button>
-          <button type="button" class="button is-green" :class="{'is-light': langType!=='zh'}" @click="langType='zh'" disabled>Chinese</button>
-          -->
-        </div>
-        <div class="column is-narrow is-hidden-mobile">
-          <button type="button" class="button is-green" @click="isShowOption=true">
-            <span class="icon"><i class="fas fa-wrench"></i></span>
-            <span>オプション</span>
-          </button>
-          <button type="button" class="button is-green" @click="isShowHelp=true">
-            <span class="icon"><i class="fas fa-question"></i></span>
-            <span>ヘルプ</span>
-          </button>
-          <a href="https://froghand0104.blogspot.com/p/blog-page.html" target="_blank" style="line-height: 40px; padding-left:30px;">
-            <span class="icon"><i class="fas fa-external-link-alt"></i></span>
-            <span>ダウンロード版はこちら</span>
-          </a>
-        </div>
-        <div class="column is-narrow is-hidden-tablet">
-          <div class="dropdown is-right" :class="{'is-active':isShowDropdown }">
-            <div class="dropdown-trigger">
-              <button class="button is-green" @click="isShowDropdown=!isShowDropdown">
-                <span class="icon"><i class="fas fa-bars"></i></span>
-              </button>
-            </div>
-            <div class="dropdown-menu">
-              <div class="dropdown-content">
-                <a href="#" class="dropdown-item" @click="isShowOption=true">
-                  <span class="icon"><i class="fas fa-wrench"></i></span>
-                  <span>オプション</span>
-                </a>
-                <a href="#" class="dropdown-item" @click="isShowHelp=true">
-                  <span class="icon"><i class="fas fa-question"></i></span>
-                  <span>ヘルプ</span>
-                </a>
-                <a href="https://froghand0104.blogspot.com/p/blog-page.html" target="_blank" class="dropdown-item" @click="isShowDropdown=false">
-                  <span class="icon"><i class="fas fa-external-link-alt"></i></span>ダウンロード版
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="viewarea columns">
-        <tabs v-if="tabLeft.list.length" :class="{half: tabRight.list.length}" :target="tabLeft" :moveto="tabRight" :language="language"></tabs>
-        <tabs v-if="tabRight.list.length" :class="{half: tabLeft.list.length}" :target="tabRight" :moveTo="tabLeft" :language="language"></tabs>
-      </div>
-      <err-msg :o="err"></err-msg>
-      <option-dlg :o="options" v-if="isShowOption"></option-dlg>
-      <Help-dlg v-if="isShowHelp"></Help-dlg>
-      <div class="droper" v-show="isShowDroper" @dragleave.prevent="dragleave" @drop.prevent="ondrop">
-        <div class="notification is-success">ドロップしてください</div>
-      </div>
-
-      <div class="hero is-info is-danger isIE" v-if="isIE">
-        <div class="hero-body">
-          <div class="container">
-            <h1 class="title">
-              SREC-Viewer-Web は[Internet Explorer]では動きません
-            </h1>
-            <h2 class="subtitle">
-              <span>最新版のモダンブラウザ</span>
-              <a href="https://www.microsoft.com/ja-jp/windows/microsoft-edge">Microsoft Edge</a>, 
-              <a href="https://www.google.com/intl/ja_jp/chrome/">Google Chrome</a>, 
-              <a href="https://www.mozilla.org/ja/firefox/new/">Mozilla Firefox</a>等でアクセスいただくか、<br/>
-              <a href="https://froghand0104.blogspot.com/p/blog-page.html">ダウンロード版</a>をご利用ください。
-            </h2>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!--メイン処理-->
-  <script defer src="./js/main.js"></script>
-
-</body>
+<body></body>
 
 </html>
